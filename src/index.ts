@@ -6,7 +6,9 @@ import {Connection, createConnection} from 'typeorm'
 
 const app = express()
 
-const db = createConnection (config.orm)
+const db = createConnection(config.orm)
+
+console.log(config)
 
 app.use(bodyParser.json())
 app.get('/', (req, res) => {
