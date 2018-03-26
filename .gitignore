@@ -56,4 +56,4 @@ typings/
 .env
 
 build
-config/config.ts
+src/config/config.ts
