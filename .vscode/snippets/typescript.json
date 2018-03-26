@@ -10,7 +10,17 @@
     "body": [
       "Entity()",
       "export class ${1:ClassName} {",
-      "  @PrimaryColumn({type: ${2:type}})",
+      "  @PrimaryColumn({type: '${2:type}'})",
+      "  ${3:fieldName}: ${4:fieldType}",
+      "}"
+    ]
+  },
+  "typeORM Entity With PrimaryGeneratedColumn": {
+    "prefix": "entitypgen",
+    "body": [
+      "Entity()",
+      "export class ${1:ClassName} {",
+      "  @PrimaryGeneratedColumn({type: '${2:type}'})",
       "  ${3:fieldName}: ${4:fieldType}",
       "}"
     ]
@@ -18,7 +28,14 @@
   "typeORM Primary Column": {
     "prefix": "primarycol",
     "body": [
-      "@PrimaryColumn({type: ${1:type}})",
+      "@PrimaryColumn({type: '${1:type}'})",
+      "${2:fieldName}: ${3:fieldType}"
+    ]
+  },
+  "typeORM VARCHAR Column": {
+    "prefix": "varcharcol",
+    "body": [
+      "@Column({type: 'varchar', length: ${1:10})",
       "${2:fieldName}: ${3:fieldType}"
     ]
   },
