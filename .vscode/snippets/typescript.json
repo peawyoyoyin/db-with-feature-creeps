@@ -42,7 +42,7 @@
   "typeORM Column": {
     "prefix": "column",
     "body": [
-      "@Column({type: ${1:type}})",
+      "@Column({type: '${1:type}'})",
       "${2:fieldName}: ${3:fieldType}"
     ]
   }
