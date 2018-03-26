@@ -2,7 +2,11 @@ import * as bodyParser from 'body-parser'
 import * as express from 'express'
 import config from './config'
 
+import {Connection, createConnection} from 'typeorm'
+
 const app = express()
+
+const db = createConnection (config.orm)
 
 app.use(bodyParser.json())
 app.get('/', (req, res) => {
