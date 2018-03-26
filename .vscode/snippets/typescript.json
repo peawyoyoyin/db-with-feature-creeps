@@ -18,7 +18,7 @@
   "typeORM Entity With PrimaryGeneratedColumn": {
     "prefix": "entitypgen",
     "body": [
-      "Entity()",
+      "@Entity()",
       "export class ${1:ClassName} {",
       "  @PrimaryGeneratedColumn({type: '${2:type}'})",
       "  ${3:fieldName}: ${4:fieldType}",

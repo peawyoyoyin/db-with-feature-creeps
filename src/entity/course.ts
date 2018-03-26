@@ -1,6 +1,6 @@
 import { Entity, PrimaryColumn, Column } from 'typeorm'
 
-Entity()
+@Entity()
 export class Course {
   @PrimaryColumn({type: 'varchar', length: 7})
   courseID: string
