@@ -1,5 +1,6 @@
 import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm'
 import { Student } from './student';
+import { Section } from './section';
 
 @Entity()
 export class Teacher {
@@ -12,7 +13,7 @@ export class Teacher {
   @Column({ type: 'varchar', length: 30 })
   lastName: string
 
-  @Column({ type: 'varchar', length: 3})
+  @Column({ type: 'varchar', length: 3 })
   abbrName: string
 
   @Column({ type: 'varchar', length: 13 })
@@ -20,4 +21,7 @@ export class Teacher {
 
   @OneToMany(type => Student, student => student.supervisor)
   studentsUnderSupervision: Student[]
+
+  @OneToMany(type => Section, section => section.teacher)
+  sectionsTeached: Section[]
 }

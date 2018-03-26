@@ -26,9 +26,9 @@ export class Student {
   @OneToMany(type => EnrollmentFeePayment, payment => payment.payer)
   payments: EnrollmentFeePayment[]
 
-  @ManyToOne(type => StudentGroup, studentGroup => studentGroup.students)
+  @ManyToOne(type => StudentGroup, studentGroup => studentGroup.students, {nullable: false})
   studentGroup: StudentGroup
 
-  @ManyToOne(type => Teacher, teacher => teacher.studentsUnderSupervision)
+  @ManyToOne(type => Teacher, teacher => teacher.studentsUnderSupervision, {nullable: false})
   supervisor: Teacher
 }
