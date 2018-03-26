@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, PrimaryColumn, Index } from 'typeorm'
 import { Faculty } from './faculty'
 
 @Entity()
+@Index((relation: Department) => [relation.departmentID, relation.faculty], {unique: true})
 export class Department {
   @PrimaryGeneratedColumn({type: 'int'})
   departmentID: number
@@ -11,5 +12,4 @@ export class Department {
 
   @Column({type: 'varchar', length: 30})
   name: string
-
 }
