@@ -1,4 +1,6 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm'
+import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm'
+
+import { CourseInstance } from './course-instance'
 
 @Entity()
 export class Course {
@@ -10,4 +12,7 @@ export class Course {
 
   @Column({type: 'int'})
   credit: number
+
+  @OneToMany(type => CourseInstance, courseInstance => courseInstance.course)
+  instances: CourseInstance[]
 }
