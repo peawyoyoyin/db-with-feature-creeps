@@ -1,6 +1,5 @@
 import { ConnectionOptions } from 'typeorm'
-
-import { ExpressConfig } from './express'
+import { ExpressConfig } from './config.d'
 
 export = {
   express: <ExpressConfig> {

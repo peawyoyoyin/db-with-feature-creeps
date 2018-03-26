@@ -1,4 +1,6 @@
-const config = (() => {
+import { ProjectConfig } from "./config.d";
+
+const config = ((): ProjectConfig => {
   try {
     return { ...require('./config.default'), ...require('./config')}
   } catch(error) {
