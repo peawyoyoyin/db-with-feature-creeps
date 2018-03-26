@@ -13,5 +13,7 @@ export = {
     username: 'root',
     password: 'password',
     database: 'db',
+    entities: ['build/entity/*.js'],
+    synchronize: true,
   }
 }
