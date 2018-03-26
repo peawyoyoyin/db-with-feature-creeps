@@ -1,4 +1,5 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm'
+import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm'
+import { Student } from './student';
 
 @Entity()
 export class Teacher {
@@ -16,4 +17,7 @@ export class Teacher {
 
   @Column({ type: 'varchar', length: 13 })
   citizenID: string
+
+  @OneToMany(type => Student, student => student.supervisor)
+  studentsUnderSupervision: Student[]
 }

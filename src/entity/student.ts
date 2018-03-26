@@ -1,6 +1,7 @@
 import { Entity, PrimaryColumn, Column, ManyToOne, OneToMany } from 'typeorm'
 import { StudentGroup } from './student-group'
 import { EnrollmentFeePayment } from './enrollment-fee-payment'
+import { Teacher } from './teacher';
 
 @Entity()
 export class Student {
@@ -27,4 +28,7 @@ export class Student {
 
   @ManyToOne(type => StudentGroup, studentGroup => studentGroup.students)
   studentGroup: StudentGroup
+
+  @ManyToOne(type => Teacher, teacher => teacher.studentsUnderSupervision)
+  supervisor: Teacher
 }
