@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, Index, ManyToOne } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, Index, ManyToOne, OneToMany } from 'typeorm'
 import { Course } from './course';
 import { Semester } from './semester';
+import { Section } from './section';
 
 /**
  * The primary, auto-generated field instanceID exists 
@@ -20,4 +21,7 @@ export class CourseInstance {
 
   @ManyToOne(type => Semester, semester => semester.courseInstances)
   semester: Semester
+
+  @OneToMany(type => Section, section => section.courseInstance)
+  sections: Section[]
 }
