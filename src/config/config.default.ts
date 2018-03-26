@@ -1,7 +1,9 @@
-import {ConnectionOptions} from 'typeorm'
+import { ConnectionOptions } from 'typeorm'
+
+import { ExpressConfig } from './express'
 
 export = {
-  express: {
+  express: <ExpressConfig> {
     port: process.env.PORT || 80,
   },
   orm: <ConnectionOptions> {
