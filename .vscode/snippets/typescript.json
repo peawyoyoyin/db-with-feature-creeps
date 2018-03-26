@@ -1,0 +1,32 @@
+{
+  "typeORM Entity Common Imports": {
+    "prefix": "ormimport",
+    "body": [
+      "import { Entity, PrimaryColumn, Column } from 'typeorm'"
+    ]
+  },
+  "typeORM Entity": {
+    "prefix": "entity",
+    "body": [
+      "Entity()",
+      "export class ${1:ClassName} {",
+      "  @PrimaryColumn({type: ${2:type}})",
+      "  ${3:fieldName}: ${4:fieldType}",
+      "}"
+    ]
+  },
+  "typeORM Primary Column": {
+    "prefix": "primarycol",
+    "body": [
+      "@PrimaryColumn({type: ${1:type}})",
+      "${2:fieldName}: ${3:fieldType}"
+    ]
+  },
+  "typeORM Column": {
+    "prefix": "column",
+    "body": [
+      "@Column({type: ${1:type}})",
+      "${2:fieldName}: ${3:fieldType}"
+    ]
+  }
+}

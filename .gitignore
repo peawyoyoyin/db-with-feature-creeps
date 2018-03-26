@@ -57,3 +57,5 @@ typings/
 
 build
 src/config/config.ts
+
+.vscode/settings.json
