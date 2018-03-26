@@ -5,10 +5,16 @@
       "import { Entity, PrimaryColumn, Column } from 'typeorm'"
     ]
   },
+  "typeORM Entity Common Imports with PrimaryGeneratedColumn": {
+    "prefix": "ormpgimport",
+    "body": [
+      "import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'"
+    ]
+  },
   "typeORM Entity": {
     "prefix": "entity",
     "body": [
-      "Entity()",
+      "@Entity()",
       "export class ${1:ClassName} {",
       "  @PrimaryColumn({type: '${2:type}'})",
       "  ${3:fieldName}: ${4:fieldType}",

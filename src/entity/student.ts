@@ -1,4 +1,6 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm'
+import { Entity, PrimaryColumn, Column, ManyToOne, OneToMany } from 'typeorm'
+import { StudentGroup } from './student-group'
+import { EnrollmentFeePayment } from './enrollment-fee-payment'
 
 @Entity()
 export class Student {
@@ -19,4 +21,10 @@ export class Student {
 
   @Column({type: 'varchar', length: 13})
   citizenID: string
+
+  @OneToMany(type => EnrollmentFeePayment, payment => payment.payer)
+  payments: EnrollmentFeePayment[]
+
+  @ManyToOne(type => StudentGroup, studentGroup => studentGroup.students)
+  studentGroup: StudentGroup
 }
