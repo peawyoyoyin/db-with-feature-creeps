@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 
-Entity()
+@Entity()
 export class SeniorProject {
   @PrimaryGeneratedColumn({type: 'int'})
   projectID: number

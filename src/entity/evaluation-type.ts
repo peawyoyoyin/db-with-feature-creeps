@@ -1,6 +1,6 @@
 import { Entity, PrimaryColumn, Column, PrimaryGeneratedColumn } from 'typeorm'
 
-Entity()
+@Entity()
 export class EvaluationType {
   @PrimaryGeneratedColumn({type: 'int'})
   typeID: number
