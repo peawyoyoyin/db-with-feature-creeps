@@ -1,12 +1,12 @@
 import { Entity, PrimaryGeneratedColumn, Column, Index, ManyToOne, OneToMany } from 'typeorm'
 import { Course } from './course';
-import { Semester } from './semester';
-import { Section } from './section';
+import { Semester } from './semester'
+import { Section } from './section'
 
 /**
- * The primary, auto-generated field instanceID exists 
+ * The primary, auto-generated field instanceID exists
  * because foreign keys as primary keys isn't supported yet in typeORM
- * 
+ *
  * Here we use Index to indicate that the FK fields will be unique
  */
 
@@ -16,10 +16,10 @@ export class CourseInstance {
   @PrimaryGeneratedColumn({type: 'int'})
   instanceID: number
 
-  @ManyToOne(type => Course, course => course.instances)
+  @ManyToOne(type => Course, course => course.instances, {onDelete: 'CASCADE', nullable: false})
   course: Course
 
-  @ManyToOne(type => Semester, semester => semester.courseInstances)
+  @ManyToOne(type => Semester, semester => semester.courseInstances, {onDelete: 'CASCADE', nullable: false})
   semester: Semester
 
   @OneToMany(type => Section, section => section.courseInstance)

@@ -1,6 +1,8 @@
-import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm'
-import { Student } from './student';
-import { Section } from './section';
+import { Entity, PrimaryColumn, Column, OneToMany, ManyToMany, ManyToOne } from 'typeorm'
+import { Student } from './student'
+import { Section } from './section'
+import { Course } from './course'
+import { Department } from './department'
 
 @Entity()
 export class Teacher {
@@ -24,4 +26,10 @@ export class Teacher {
 
   @OneToMany(type => Section, section => section.teacher)
   sectionsTeached: Section[]
+
+  @OneToMany(type => Course, course => course.owner)
+  coursesOwned: Course[]
+
+  @ManyToOne(type => Department, department => department.teachers, {onDelete: 'SET NULL'})
+  department: Department
 }

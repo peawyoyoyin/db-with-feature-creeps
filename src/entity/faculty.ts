@@ -1,4 +1,5 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm'
+import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm'
+import { Department } from './department'
 
 @Entity()
 export class Faculty {
@@ -7,4 +8,7 @@ export class Faculty {
 
   @Column({type: 'varchar'})
   name: string
+
+  @OneToMany(type => Department, department => department.faculty)
+  departments: Department[]
 }

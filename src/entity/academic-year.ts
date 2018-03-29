@@ -1,5 +1,5 @@
 import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm'
-import { Semester } from './semester';
+import { Semester } from './semester'
 
 @Entity()
 export class AcademicYear {
