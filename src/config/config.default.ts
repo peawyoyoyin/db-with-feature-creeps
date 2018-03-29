@@ -1,11 +1,8 @@
-import { ConnectionOptions } from 'typeorm'
-import { ExpressConfig } from './config.d'
-
 export = {
-  express: <ExpressConfig> {
+  express: {
     port: process.env.PORT || 80,
   },
-  orm: <ConnectionOptions> {
+  orm: {
     name: 'main',
     type: 'mysql',
     host: 'localhost',
