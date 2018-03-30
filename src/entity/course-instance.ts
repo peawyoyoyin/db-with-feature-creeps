@@ -11,15 +11,11 @@ import { Section } from './section'
  */
 
 @Entity()
-@Index((relation: CourseInstance) => [relation.course, relation.semester], {unique: true})
 export class CourseInstance {
-  @PrimaryGeneratedColumn({type: 'int'})
-  instanceID: number
-
-  @ManyToOne(type => Course, course => course.instances, {onDelete: 'CASCADE', nullable: false})
+  @ManyToOne(type => Course, course => course.instances, {onDelete: 'CASCADE', primary: true})
   course: Course
 
-  @ManyToOne(type => Semester, semester => semester.courseInstances, {onDelete: 'CASCADE', nullable: false})
+  @ManyToOne(type => Semester, semester => semester.courseInstances, {onDelete: 'CASCADE', nullable: false, primary: true})
   semester: Semester
 
   @OneToMany(type => Section, section => section.courseInstance)

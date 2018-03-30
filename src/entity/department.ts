@@ -4,15 +4,11 @@ import { Student } from './student'
 import { Teacher } from './teacher'
 
 @Entity()
-@Index((relation: Department) => [relation.departmentID, relation.faculty], {unique: true})
 export class Department {
-  @PrimaryGeneratedColumn({type: 'int'})
-  departmentID: number
-
   @Column({type: 'varchar', length: 30})
   name: string
 
-  @ManyToOne(type => Faculty, faculty => faculty.departments, {onDelete: 'CASCADE', nullable: false})
+  @ManyToOne(type => Faculty, faculty => faculty.departments, {onDelete: 'CASCADE', primary: true})
   faculty: Faculty
 
   @OneToMany(type => Student, student => student.department)
