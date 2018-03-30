@@ -4,6 +4,7 @@ import { EnrollmentFeePayment } from './enrollment-fee-payment'
 import { Teacher } from './teacher'
 import { Department } from './department'
 import { Section } from './section'
+import { Study } from './study';
 
 @Entity()
 export class Student {
@@ -39,4 +40,7 @@ export class Student {
 
   @ManyToMany(type => Section, section => section.students)
   sections: Section[]
+
+  @OneToMany(type => Study, study => study.student)
+  studies: Study[] 
 }
