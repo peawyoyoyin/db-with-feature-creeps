@@ -1,10 +1,12 @@
 import { ConnectionOptions } from 'typeorm'
 
-export interface ExpressConfig {
+interface ExpressConfig {
   port?: number,
 }
 
-export interface ProjectConfig {
+interface ProjectConfig {
   express: ExpressConfig,
   orm: ConnectionOptions,
 }
+
+export const config: ProjectConfig

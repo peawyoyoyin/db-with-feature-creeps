@@ -1,7 +1,9 @@
-import { Entity, PrimaryColumn, Column, ManyToOne, OneToMany } from 'typeorm'
+import { Entity, PrimaryColumn, Column, ManyToOne, OneToMany, ManyToMany } from 'typeorm'
 import { StudentGroup } from './student-group'
 import { EnrollmentFeePayment } from './enrollment-fee-payment'
-import { Teacher } from './teacher';
+import { Teacher } from './teacher'
+import { Department } from './department'
+import { Section } from './section'
 
 @Entity()
 export class Student {
@@ -26,9 +28,15 @@ export class Student {
   @OneToMany(type => EnrollmentFeePayment, payment => payment.payer)
   payments: EnrollmentFeePayment[]
 
-  @ManyToOne(type => StudentGroup, studentGroup => studentGroup.students, {nullable: false})
+  @ManyToOne(type => StudentGroup, studentGroup => studentGroup.students, {onDelete: 'SET NULL'})
   studentGroup: StudentGroup
 
-  @ManyToOne(type => Teacher, teacher => teacher.studentsUnderSupervision, {nullable: false})
+  @ManyToOne(type => Teacher, teacher => teacher.studentsUnderSupervision, {onDelete: 'SET NULL'})
   supervisor: Teacher
+
+  @ManyToOne(type => Department, department => department.students, {onDelete: 'SET NULL'})
+  department: Department
+
+  @ManyToMany(type => Section, section => section.students)
+  sections: Section[]
 }

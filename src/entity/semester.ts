@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, Index, ManyToOne, OneToMany } from 'typeorm'
-import { AcademicYear } from './academic-year';
-import { CourseInstance } from './course-instance';
+import { Entity, PrimaryGeneratedColumn, Column, Index, ManyToOne, OneToMany, OneToOne } from 'typeorm'
+import { AcademicYear } from './academic-year'
+import { CourseInstance } from './course-instance'
+import { EnrollmentFeePayment } from './enrollment-fee-payment'
 
 @Entity()
 @Index((relation: Semester) => [relation.semesterNumber, relation.year], {unique: true})
@@ -10,9 +11,6 @@ export class Semester {
 
   @Column({type: 'int'})
   semesterNumber: number
-
-  @ManyToOne(type => AcademicYear, academicYear => academicYear.semesters)
-  year: AcademicYear
 
   @Column({type: 'datetime'})
   startDate: Date
@@ -26,6 +24,12 @@ export class Semester {
   @Column({type: 'datetime'})
   lastWithdrawalDate: Date
 
+  @ManyToOne(type => AcademicYear, academicYear => academicYear.semesters, {onDelete: 'CASCADE', nullable: false})
+  year: AcademicYear
+
   @OneToMany(type => CourseInstance, courseInstance => courseInstance.semester)
   courseInstances: CourseInstance[]
+
+  @OneToMany(type => EnrollmentFeePayment, enrollmentFeePayment => enrollmentFeePayment.semester)
+  payments: EnrollmentFeePayment[]
 }

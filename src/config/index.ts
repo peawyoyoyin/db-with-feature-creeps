@@ -1,21 +1,10 @@
-import { ProjectConfig, ExpressConfig } from "./config.d";
-import { ConnectionOptions } from "typeorm";
+import * as extend from 'extend'
 
-const config = ((): ProjectConfig => {
+const config = (() => {
   try {
     const config = require('./config')
     const defaults = require('./config.default')
-
-    return { 
-      express: <ExpressConfig> {
-        ...defaults.express,
-        ...config.express,
-      },
-      orm: <ConnectionOptions> {
-        ...defaults.orm,
-        ...config.orm,
-      }
-     }
+    return extend(true, defaults, config)
   } catch(error) {
     console.log('unable to find "src/config/config.ts", falling back to "src/config/config.default.ts"')
     return require('./config.default')

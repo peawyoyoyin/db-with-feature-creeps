@@ -1,6 +1,7 @@
-import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm'
+import { Entity, PrimaryColumn, Column, OneToMany, ManyToOne } from 'typeorm'
 
 import { CourseInstance } from './course-instance'
+import { Teacher } from './teacher'
 
 @Entity()
 export class Course {
@@ -15,4 +16,7 @@ export class Course {
 
   @OneToMany(type => CourseInstance, courseInstance => courseInstance.course)
   instances: CourseInstance[]
+
+  @ManyToOne(type => Teacher, teacher => teacher.coursesOwned, {onDelete: 'SET NULL'})
+  owner: Teacher
 }

@@ -1,12 +1,11 @@
 import * as bodyParser from 'body-parser'
 import * as express from 'express'
 import config from './config'
+import { Connection, createConnection } from 'typeorm'
 
 import { Student } from './entity/student'
 
-import { Connection, createConnection } from 'typeorm'
-
-const app = express()
+// const app = express()
 
 ;(async () => {
   const connection: Connection = await createConnection(config.orm)
