@@ -1,5 +1,26 @@
 extends common/layout.pug
 block content
   .container
-    h2 register new student
-    
+    h3 register new student
+    hr
+    form
+      .form-row
+        .col
+          label(for="firstName") First Name
+          input.form-control(type="text" id="firstName")
+        .col  
+          label(for="firstName") Last Name
+          input.form-control(type="text" id="firstName")
+      .form-row
+        .col
+          label(for="citizenID") Citizen ID
+          input.form-control(type="text" id="citizenID")
+        .col-lg-2
+          label(for="countryCode")
+            small Nationality (Country Code)
+          input.form-control(type="text" id="countryCode" placeholder="\"TH\"")
+      .form-row
+        .col
+          label(for="department") Department
+          select.form-control(type="select" id="department" placeholder="choose department...")
+            option Engineering
