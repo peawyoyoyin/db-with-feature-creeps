@@ -1,23 +1,24 @@
 .container-fluid.p-0
   .container
-    img.mx-auto.d-block.chula-logo(src="/static/logo.png")
-    h5.mx-auto.text-center rekt chula
+    a(href="/")
+      img.mx-auto.d-block.chula-logo(src="/static/logo.png")
+      h5.mx-auto.text-center rekt chula
   hr(style="margin: 1em;")
   .container
     ul.sidebar-menu
       li
-        a(href="") new student
+        a(href="/newstudent") new student
       li
-        a(href="") enroll course
+        a(href="/course/enroll") enroll course
       li
-        a(href="") search courses
+        a(href="/course/search") search courses
       li
-        a(href="") manage courses
+        a(href="/course/manage") manage courses
       li
-        a(href="") pay fee
+        a(href="/course/pay") pay fee
       li
-        a(href="") browse senior projects
+        a(href="/seniorproj/browse") browse senior projects
       li
-        a(href="") register senior projects
+        a(href="/seniorproj/register") register senior projects
       li
-        a(href="") update senior project status
+        a(href="/seniorproj/update") update senior project status

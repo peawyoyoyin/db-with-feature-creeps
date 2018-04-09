@@ -26,9 +26,41 @@ app.use(bodyParser.json())
 app.use('/static', express.static('public'))
 
 app.get('/', (req, res) => {
-  res.render('index', { title: 'DB WITH FEATURE CREEPS', message: 'HELLO FEATURE CREEPS' })
+  res.render('index', { title: 'DB WITH FEATURE CREEPS' })
 })
-  
+
+app.get('/newstudent', (req, res) => {
+  res.render('new-student', { title: 'Register New Student '})
+})
+
+app.get('/course/enroll', (req, res) => {
+  res.render('enroll', { title: 'Enroll Course' })
+})
+
+app.get('/course/search', (req, res) => {
+  res.render('search-courses', { title: 'Search Courses' })
+})
+
+app.get('/course/manage', (req, res) => {
+  res.render('manage-courses', { title: 'Manage Courses' })
+})
+
+app.get('/course/pay', (req, res) => {
+  res.render('pay', { title: 'Pay Fee' })
+})
+
+app.get('/seniorproj/browse', (req, res) => {
+  res.render('browse-senior', { title: 'Browse Senior Projects' })
+})
+
+app.get('/seniorproj/register', (req, res) => {
+  res.render('register-senior', { title: 'Register Senior Project' })
+})
+
+app.get('/seniorproj/update', (req, res) => {
+  res.render('update-senior', { title: 'Update Senior Project Status' })
+})
+
 app.listen(config.express.port, () => {
   console.log(`listening on port ${config.express.port}`)
 })
