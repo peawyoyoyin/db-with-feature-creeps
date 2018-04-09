@@ -12,5 +12,14 @@
 }
 
 .chula-logo {
-  width: 60%;
+  width: 40%;
+}
+
+ul.sidebar-menu {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar-menu > li > * {
+  font-size: 1em;
 }
