@@ -1,4 +1,36 @@
 extends ../common/layout.pug
 block content
   .container
-    h2 search courses
+    h3 search courses
+    hr
+    form(action="/course/search")
+      .form-row.align-items-end
+        .col-lg-3
+          label(for="courseID") Course ID
+          input.form-control(type="text" name="courseID")
+        .col
+          label(for="courseName") Course Name
+          input.form-control(type="text" name="courseName")
+        .col-lg-2
+          label(for="credit") Credits
+          input.form-control(type="text" name="credit")
+        .col-lg-1
+          button.btn.btn-primary(type="submit") Submit
+    hr
+    if searchResults
+      table.table
+        thead
+          tr
+            th Course ID
+            th Course Name
+            th Credits
+        tbody
+          each course in searchResults
+              tr
+                  td #{course.courseID}
+                  td 
+                    a(href='/course/detail/' + course.courseID) #{course.courseName}
+                  td #{course.credits}
+
+    else
+      h5 Start Searching using the search bar!

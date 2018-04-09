@@ -7,7 +7,27 @@ router.get('/enroll', (req, res) => {
 })
 
 router.get('/search', (req, res) => {
-  res.render('course/search', { title: 'Search Courses' })
+  let searchResults = undefined
+  if(req.query.courseID !== undefined || req.query.courseName !== undefined || req.query.credits !== undefined) {
+    searchResults = [
+      {
+        courseID: '2110217',
+        courseName: 'SOME SUBJ',
+        credits: 3
+      },
+      {
+        courseID: '2110231',
+        courseName: 'SOME OTHER SUBJ',
+        credits: 3
+      },
+      {
+        courseID: '2110442',
+        courseName: 'SOME SUBJ LAB',
+        credits: 1
+      }
+    ]
+  }
+  res.render('course/search', { title: 'Search Courses', searchResults })
 })
 
 router.get('/manage', (req, res) => {

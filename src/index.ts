@@ -32,7 +32,6 @@ app.use('/static', express.static('public'))
 app.use('/course', courseRouter)
 app.use('/seniorproj', seniorProjectRouter)
 
-
 app.get('/newstudent', (req, res) => {
   // query for all departments?
   res.render('new-student', { 
