@@ -30,6 +30,10 @@ router.get('/search', (req, res) => {
   res.render('course/search', { title: 'Search Courses', searchResults })
 })
 
+router.get('/detail/:id', (req, res) => {
+  res.send('haha!')
+})
+
 router.get('/manage', (req, res) => {
   res.render('course/manage', { title: 'Manage Courses' })
 })
