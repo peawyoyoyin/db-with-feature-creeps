@@ -30,7 +30,14 @@ app.get('/', (req, res) => {
 })
 
 app.get('/newstudent', (req, res) => {
-  res.render('new-student', { title: 'Register New Student '})
+  // query for all departments?
+  res.render('new-student', { 
+    title: 'Register New Student',
+    departments: [
+      'Computer Engineering',
+      'Chemical Engineering'
+    ]
+  })
 })
 
 app.get('/course/enroll', (req, res) => {

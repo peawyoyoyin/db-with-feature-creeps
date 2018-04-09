@@ -3,7 +3,17 @@ block content
   .container
     h3 register new student
     hr
-    form
+    form.p-3
+      .form-row
+        .col
+          label(for="studentID") Student ID
+          input.form-control(type="text" id="studentID")
+        .col-lg-2
+          label(for="year") Year
+          select.form-control(id="year")
+            option(selected value="61") 61
+            each year in [60, 59, 58]
+              option(value=year)= year
       .form-row
         .col
           label(for="firstName") First Name
@@ -22,5 +32,11 @@ block content
       .form-row
         .col
           label(for="department") Department
-          select.form-control(type="select" id="department" placeholder="choose department...")
-            option Engineering
+          select.form-control(id="department")
+            option(selected value="none") Choose Department...
+            each department in departments
+              option(value=department) #{department}
+      hr
+      .form-row
+        .col
+          button(type="submit" href="").btn.btn-primary.mx-auto.d-block Submit
