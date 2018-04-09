@@ -34,31 +34,31 @@ app.get('/newstudent', (req, res) => {
 })
 
 app.get('/course/enroll', (req, res) => {
-  res.render('enroll', { title: 'Enroll Course' })
+  res.render('courses/enroll', { title: 'Enroll Course' })
 })
 
 app.get('/course/search', (req, res) => {
-  res.render('search-courses', { title: 'Search Courses' })
+  res.render('courses/search', { title: 'Search Courses' })
 })
 
 app.get('/course/manage', (req, res) => {
-  res.render('manage-courses', { title: 'Manage Courses' })
+  res.render('courses/manage', { title: 'Manage Courses' })
 })
 
 app.get('/course/pay', (req, res) => {
-  res.render('pay', { title: 'Pay Fee' })
+  res.render('course/pay', { title: 'Pay Fee' })
 })
 
 app.get('/seniorproj/browse', (req, res) => {
-  res.render('browse-senior', { title: 'Browse Senior Projects' })
+  res.render('seniorproj/browse', { title: 'Browse Senior Projects' })
 })
 
 app.get('/seniorproj/register', (req, res) => {
-  res.render('register-senior', { title: 'Register Senior Project' })
+  res.render('seniorproj/register', { title: 'Register Senior Project' })
 })
 
 app.get('/seniorproj/update', (req, res) => {
-  res.render('update-senior', { title: 'Update Senior Project Status' })
+  res.render('seniorproj/update', { title: 'Update Senior Project Status' })
 })
 
 app.listen(config.express.port, () => {
