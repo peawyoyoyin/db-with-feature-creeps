@@ -34,15 +34,15 @@ app.get('/newstudent', (req, res) => {
 })
 
 app.get('/course/enroll', (req, res) => {
-  res.render('courses/enroll', { title: 'Enroll Course' })
+  res.render('course/enroll', { title: 'Enroll Course' })
 })
 
 app.get('/course/search', (req, res) => {
-  res.render('courses/search', { title: 'Search Courses' })
+  res.render('course/search', { title: 'Search Courses' })
 })
 
 app.get('/course/manage', (req, res) => {
-  res.render('courses/manage', { title: 'Manage Courses' })
+  res.render('course/manage', { title: 'Manage Courses' })
 })
 
 app.get('/course/pay', (req, res) => {
