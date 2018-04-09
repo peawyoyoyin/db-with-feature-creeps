@@ -5,6 +5,9 @@ import { Connection, createConnection } from 'typeorm'
 
 import { Student } from './entity/student'
 
+import courseRouter from './routes/course'
+import seniorProjectRouter from './routes/seniorproj'
+
 // ;(async () => {
 //   const connection: Connection = await createConnection(config.orm)
 //   const repo = connection.getRepository(Student)
@@ -26,9 +29,9 @@ app.use(bodyParser.urlencoded())
 
 app.use('/static', express.static('public'))
 
-app.get('/', (req, res) => {
-  res.render('index', { title: 'DB WITH FEATURE CREEPS' })
-})
+app.use('/course', courseRouter)
+app.use('/seniorproj', seniorProjectRouter)
+
 
 app.get('/newstudent', (req, res) => {
   // query for all departments?
@@ -46,32 +49,8 @@ app.post('/newstudent', (req, res) => {
   res.redirect('/')
 })
 
-app.get('/course/enroll', (req, res) => {
-  res.render('course/enroll', { title: 'Enroll Course' })
-})
-
-app.get('/course/search', (req, res) => {
-  res.render('course/search', { title: 'Search Courses' })
-})
-
-app.get('/course/manage', (req, res) => {
-  res.render('course/manage', { title: 'Manage Courses' })
-})
-
-app.get('/course/pay', (req, res) => {
-  res.render('course/pay', { title: 'Pay Fee' })
-})
-
-app.get('/seniorproj/browse', (req, res) => {
-  res.render('seniorproj/browse', { title: 'Browse Senior Projects' })
-})
-
-app.get('/seniorproj/register', (req, res) => {
-  res.render('seniorproj/register', { title: 'Register Senior Project' })
-})
-
-app.get('/seniorproj/update', (req, res) => {
-  res.render('seniorproj/update', { title: 'Update Senior Project Status' })
+app.get('/', (req, res) => {
+  res.render('index', { title: 'DB WITH FEATURE CREEPS' })
 })
 
 app.listen(config.express.port, () => {
