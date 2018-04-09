@@ -1,5 +1,6 @@
 import * as bodyParser from 'body-parser'
 import * as express from 'express'
+import * as morgan from 'morgan'
 import config from './config'
 import { Connection, createConnection } from 'typeorm'
 
@@ -7,6 +8,7 @@ import { Student } from './entity/student'
 
 import courseRouter from './routes/course'
 import seniorProjectRouter from './routes/seniorproj'
+
 
 // ;(async () => {
 //   const connection: Connection = await createConnection(config.orm)
@@ -21,11 +23,15 @@ import seniorProjectRouter from './routes/seniorproj'
 //     // })
 //     // repo.save(test)
 //   })()
-  
+
 const app = express()
 app.set('view engine', 'pug')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded())
+
+app.use(morgan(':status :method\t:url', {
+  skip: (req, res) => req.baseUrl.startsWith('/static')
+}))
 
 app.use('/static', express.static('public'))
 
