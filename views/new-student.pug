@@ -3,11 +3,11 @@ block content
   .container
     h3 register new student
     hr
-    form.p-3
+    form.p-3(action="/newstudent" method="POST")
       .form-row
         .col
           label(for="studentID") Student ID
-          input.form-control(type="text" id="studentID")
+          input.form-control(type="text" name="studentID")
         .col-lg-2
           label(for="year") Year
           select.form-control(id="year")
@@ -17,26 +17,26 @@ block content
       .form-row
         .col
           label(for="firstName") First Name
-          input.form-control(type="text" id="firstName")
+          input.form-control(type="text" name="firstName")
         .col  
           label(for="firstName") Last Name
-          input.form-control(type="text" id="firstName")
+          input.form-control(type="text" name="lastName")
       .form-row
         .col
           label(for="citizenID") Citizen ID
-          input.form-control(type="text" id="citizenID")
+          input.form-control(type="text" name="citizenID")
         .col-lg-2
           label(for="countryCode")
             small Nationality (Country Code)
-          input.form-control(type="text" id="countryCode" placeholder="\"TH\"")
+          input.form-control(type="text" name="countryCode" placeholder="\"TH\"")
       .form-row
         .col
           label(for="department") Department
-          select.form-control(id="department")
+          select.form-control(name="department")
             option(selected value="none") Choose Department...
             each department in departments
               option(value=department) #{department}
       hr
       .form-row
         .col
-          button(type="submit" href="").btn.btn-primary.mx-auto.d-block Submit
+          button(type="submit").btn.btn-primary.mx-auto.d-block Submit

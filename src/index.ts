@@ -22,6 +22,7 @@ import { Student } from './entity/student'
 const app = express()
 app.set('view engine', 'pug')
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded())
 
 app.use('/static', express.static('public'))
 
@@ -38,6 +39,11 @@ app.get('/newstudent', (req, res) => {
       'Chemical Engineering'
     ]
   })
+})
+
+app.post('/newstudent', (req, res) => {
+  console.log(req.body)
+  res.redirect('/')
 })
 
 app.get('/course/enroll', (req, res) => {
