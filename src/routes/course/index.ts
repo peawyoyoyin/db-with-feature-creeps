@@ -31,7 +31,7 @@ router.get('/search', (req, res) => {
 })
 
 router.get('/detail/:id', (req, res) => {
-  res.send('haha!')
+  res.render('course/detail', { title: req.params.id })
 })
 
 router.get('/manage', (req, res) => {
