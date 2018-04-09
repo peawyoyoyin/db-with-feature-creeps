@@ -4,7 +4,11 @@
     "module": "commonjs",
     "target": "es6",
     "sourceMap": true,
-    "outDir": "build"
+    "outDir": "build",
+    "baseUrl": "./",
+    "paths": {
+      "~/*": [ "./src/*" ],
+    }
   },
   "include": [
     "src/**/*"
