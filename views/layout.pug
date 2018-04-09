@@ -4,12 +4,13 @@ html
     title= title
     meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css")
+    link(rel="shortcut icon" href="/static/favicon.ico")
     style
       include styles/index.css
   body
     .container-fluid.root
       .row.full-height
-        .col-2.p-0.d-none.d-sm-block.sidebar
+        .col-3.p-0.d-none.d-sm-block.sidebar
           include sidebar.pug
-        .col-10
+        .col-9
           block content
