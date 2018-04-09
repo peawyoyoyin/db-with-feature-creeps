@@ -1,4 +1,26 @@
 extends ../common/layout.pug
 block content
   .container
-    h2 course detail
+    h3 Course Details
+    hr
+    h3.text-center #{course.courseID} - #{course.courseName}
+    br
+    br
+  .container
+    .row.align-items-center.d-flex.flex-column
+      .col-lg-6
+        h5.text-center Sections
+        table.table
+          thead
+            tr
+              th #
+              th Time
+              th.text-center Capacity
+              th.text-center Teacher
+          tbody
+            each section in course.sections
+              tr
+                td #{section.sectionNumber}
+                td TIME?
+                td.text-center #{section.capacity}
+                td.text-center(title=section.teacher.firstName + ' ' + section.teacher.lastName) #{section.teacher.abbrName}

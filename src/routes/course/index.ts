@@ -31,7 +31,34 @@ router.get('/search', (req, res) => {
 })
 
 router.get('/detail/:id', (req, res) => {
-  res.render('course/detail', { title: req.params.id })
+  res.render('course/detail', { 
+    title: req.params.id, 
+    course: {
+      courseID: '2110117',
+      courseName: 'SOME SUBJ',
+      credits: 3,
+      sections: [
+        {
+          sectionNumber: 1,
+          capacity: 40,
+          teacher: {
+            firstName: 'John',
+            lastName: 'Snoe',
+            abbrName: 'JSN'
+          }
+        },
+        {
+          sectionNumber: 2,
+          capacity: 20,
+          teacher: {
+            firstName: 'Jorn',
+            lastName: 'Though',
+            abbrName: 'JTH'
+          }
+        }
+      ]
+    }
+  })
 })
 
 router.get('/manage', (req, res) => {
