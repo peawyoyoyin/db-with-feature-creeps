@@ -9,7 +9,6 @@ import { Student } from './entity/student'
 import courseRouter from './routes/course'
 import seniorProjectRouter from './routes/seniorproj'
 
-
 // ;(async () => {
 //   const connection: Connection = await createConnection(config.orm)
 //   const repo = connection.getRepository(Student)
@@ -28,7 +27,6 @@ const app = express()
 app.set('view engine', 'pug')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded())
-
 
 app.use('/static', express.static('public'))
 app.use(morgan(':status :method\t:url'))

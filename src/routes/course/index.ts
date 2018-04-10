@@ -6,6 +6,11 @@ router.get('/enroll', (req, res) => {
   res.render('course/enroll', { title: 'Enroll Course' })
 })
 
+router.post('/enroll', (req, res) => {
+  console.log(req.body)
+  res.redirect('/')
+})
+
 router.get('/search', (req, res) => {
   let searchResults = undefined
   if(req.query.courseID !== undefined || req.query.courseName !== undefined || req.query.credits !== undefined) {
@@ -31,33 +36,35 @@ router.get('/search', (req, res) => {
 })
 
 router.get('/detail/:id', (req, res) => {
+  let course = {
+    courseID: '2110117',
+    courseName: 'SOME SUBJ',
+    credits: 3,
+    sections: [
+      {
+        sectionNumber: 1,
+        capacity: 40,
+        teacher: {
+          firstName: 'John',
+          lastName: 'Snoe',
+          abbrName: 'JSN'
+        }
+      },
+      {
+        sectionNumber: 2,
+        capacity: 20,
+        teacher: {
+          firstName: 'Jorn',
+          lastName: 'Though',
+          abbrName: 'JTH'
+        }
+      }
+    ]
+  }
+  
   res.render('course/detail', { 
     title: req.params.id, 
-    course: {
-      courseID: '2110117',
-      courseName: 'SOME SUBJ',
-      credits: 3,
-      sections: [
-        {
-          sectionNumber: 1,
-          capacity: 40,
-          teacher: {
-            firstName: 'John',
-            lastName: 'Snoe',
-            abbrName: 'JSN'
-          }
-        },
-        {
-          sectionNumber: 2,
-          capacity: 20,
-          teacher: {
-            firstName: 'Jorn',
-            lastName: 'Though',
-            abbrName: 'JTH'
-          }
-        }
-      ]
-    }
+    course
   })
 })
 

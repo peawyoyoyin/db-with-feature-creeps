@@ -7,10 +7,10 @@ function addRow() {
   courses += 1
   var newRow = tableRow.cloneNode(true)
   newRow.removeAttribute('id')
-  newRow.children[0].children[0].setAttribute('name', 'course'+courses+'-ID')
-  newRow.children[1].children[0].children[0].setAttribute('name', 'course'+courses+'-field1')
-  newRow.children[1].children[0].children[1].setAttribute('name', 'course'+courses+'-field1')
-  newRow.children[1].children[0].children[2].setAttribute('name', 'course'+courses+'-field2')
+  newRow.children[0].children[0].setAttribute('name', 'course'+courses+'ID')
+  newRow.children[1].children[0].children[0].setAttribute('name', 'course'+courses+'sectOption')
+  newRow.children[1].children[0].children[1].setAttribute('name', 'course'+courses+'sectOption')
+  newRow.children[1].children[0].children[2].setAttribute('name', 'course'+courses+'sectOption')
   tableBody.appendChild(newRow)
 }
 

@@ -18,15 +18,16 @@ block content
         tbody#table-body
           tr#course-row
             td.w-50
-              input.form-control.col(id="courseID" type="text" name="course1-ID")
+              input.form-control.col(id="courseID" type="text" name="course1ID")
             td
+              form(name="h")
               .form-row
-                input.form-control.col(id="field1" type="text" name="course1-field1")
-                select.col.mx-4(id="enrollType" name="course1-type")
+                input.form-control.col(id="field1" type="text" name="course1sectOption")
+                select.col.mx-4(id="enrollType" name="course1sectOption")
                   option(value="only") only
                   option(value="to") to
                   option(value="or") or
-                input.form-control.col(id="field2" type="text" name="course1-field2")
+                input.form-control.col(id="field2" type="text" name="course1sectOption")
     .row
       .col
         button#add-course.btn.btn-primary add course
