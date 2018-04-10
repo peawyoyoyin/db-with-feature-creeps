@@ -29,11 +29,9 @@ app.set('view engine', 'pug')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded())
 
-app.use(morgan(':status :method\t:url', {
-  skip: (req, res) => req.baseUrl.startsWith('/static')
-}))
 
 app.use('/static', express.static('public'))
+app.use(morgan(':status :method\t:url'))
 
 app.use('/course', courseRouter)
 app.use('/seniorproj', seniorProjectRouter)
