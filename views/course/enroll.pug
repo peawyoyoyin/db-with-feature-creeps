@@ -1,4 +1,35 @@
 extends ../common/layout.pug
 block content
   .container
-    h2 enroll courses
+    h3 Enroll Courses
+    hr
+  .container
+    form#enroll(method="POST")
+      .form-inline
+        .form-group
+          label.col-form-label.col(for="studentID") Student ID
+          input.form-control(type="text" name="studentID")
+      br
+      table.table
+        thead
+          tr
+            th Course ID
+            th Section
+        tbody#table-body
+          tr#course-row
+            td.w-50
+              input.form-control.col(id="courseID" type="text" name="course1-ID")
+            td
+              .form-row
+                input.form-control.col(id="field1" type="text" name="course1-field1")
+                select.col.mx-4(id="enrollType" name="course1-type")
+                  option(value="only") only
+                  option(value="to") to
+                  option(value="or") or
+                input.form-control.col(id="field2" type="text" name="course1-field2")
+    .row
+      .col
+        button#add-course.btn.btn-primary add course
+      .col
+        button.btn.btn-primary(type="submit" form="enroll") submit
+    script(src="/static/js/enroll.js")
