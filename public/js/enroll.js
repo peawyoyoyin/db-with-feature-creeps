@@ -3,7 +3,8 @@ var tableBody = document.getElementById('table-body')
 var tableRow = document.getElementById('course-row')
 var courses = 1
 
-function addRow() {
+function addRow(e) {
+  e.preventDefault();
   courses += 1
   var newRow = tableRow.cloneNode(true)
   newRow.removeAttribute('id')
