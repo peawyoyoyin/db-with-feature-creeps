@@ -4,6 +4,7 @@ import { Section } from './section'
 import { Course } from './course'
 import { Department } from './department'
 import { SeniorProject } from '~/entity/senior-project';
+import { Evaluation } from '~/entity/evaluation';
 
 @Entity()
 export class Teacher {
@@ -36,4 +37,7 @@ export class Teacher {
 
   @ManyToOne(type => Department, department => department.teachers, {onDelete: 'SET NULL'})
   department: Department
+
+  @ManyToMany(type => Evaluation, evaluation => evaluation.evaluators)
+  projectEvaluations: Evaluation[]
 }

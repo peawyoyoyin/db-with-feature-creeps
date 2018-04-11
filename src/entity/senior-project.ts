@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne, OneToMany } from 'typeorm'
 import { Teacher } from './teacher'
 import { Student } from './student'
+import { Evaluation } from './evaluation'
 
 @Entity()
 export class SeniorProject {
@@ -18,4 +19,7 @@ export class SeniorProject {
 
   @ManyToOne(type => Teacher, teacher => teacher.seniorProjectsUnderSupervision)
   supervisor: Teacher
+
+  @OneToMany(type => Evaluation, evaluation => evaluation.project)
+  evaluations: Evaluation[]
 }
