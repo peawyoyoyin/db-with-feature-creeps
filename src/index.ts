@@ -3,16 +3,16 @@ import * as express from 'express'
 import * as morgan from 'morgan'
 import config from './config'
 import { Connection, createConnection } from 'typeorm'
-
-import { Student } from './entity/student'
-
-import courseRouter from './routes/course'
-import seniorProjectRouter from './routes/seniorproj'
-
 //this fixes path aliases
 import 'module-alias/register'
 
+
+import courseRouter from './routes/course'
+import seniorProjectRouter from './routes/seniorproj'
 import db from './db'
+
+import { Student } from './entity/student'
+
 
 (async () => {
   await db.init(config.orm)
