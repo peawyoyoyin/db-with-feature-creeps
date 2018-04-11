@@ -3,6 +3,7 @@ import { Student } from './student'
 import { Section } from './section'
 import { Course } from './course'
 import { Department } from './department'
+import { SeniorProject } from '~/entity/senior-project';
 
 @Entity()
 export class Teacher {
@@ -23,6 +24,9 @@ export class Teacher {
 
   @OneToMany(type => Student, student => student.supervisor)
   studentsUnderSupervision: Student[]
+
+  @OneToMany(type => SeniorProject, seniorProject => seniorProject.supervisor)
+  seniorProjectsUnderSupervision: SeniorProject[]
 
   @OneToMany(type => Section, section => section.teacher)
   sectionsTeached: Section[]

@@ -64,7 +64,6 @@ router.get('/detail/:id', (req, res) => {
   })
 })
 
-
 router.get('/pay', (req, res) => {
   res.render('course/pay', { title: 'Pay Fee' })
 })

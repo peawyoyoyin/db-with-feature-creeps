@@ -1,10 +1,11 @@
-import { Entity, PrimaryColumn, Column, ManyToOne, OneToMany, ManyToMany } from 'typeorm'
+import { Entity, PrimaryColumn, Column, ManyToOne, OneToMany, ManyToMany, OneToOne } from 'typeorm'
 import { StudentGroup } from './student-group'
 import { EnrollmentFeePayment } from './enrollment-fee-payment'
 import { Teacher } from './teacher'
 import { Department } from './department'
 import { Section } from './section'
-import { Study } from './study';
+import { Study } from './study'
+import { SeniorProject } from './senior-project'
 
 @Entity()
 export class Student {
@@ -37,6 +38,9 @@ export class Student {
 
   @ManyToOne(type => Department, department => department.students, {onDelete: 'SET NULL'})
   department: Department
+  
+  @OneToOne(type => SeniorProject)
+  seniorProject: SeniorProject
 
   @ManyToMany(type => Section, section => section.students)
   sections: Section[]
