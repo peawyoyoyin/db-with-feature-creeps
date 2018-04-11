@@ -14,7 +14,7 @@ block content
   .container
     if studentData
       h5 #{studentData.info.studentID} - #{studentData.info.firstName} #{studentData.info.lastName}
-      form(action="/course/remove" method="POST")
+      form(method="POST")
         input.invisible(type="text" name="studentID" value=studentData.info.studentID)
         table.table
           thead

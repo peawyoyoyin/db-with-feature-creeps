@@ -1,15 +1,11 @@
 import * as express from 'express'
+import manage from './manage'
+import enroll from './enroll'
 
 const router = express.Router()
 
-router.get('/enroll', (req, res) => {
-  res.render('course/enroll', { title: 'Enroll Course' })
-})
-
-router.post('/enroll', (req, res) => {
-  console.log(req.body)
-  res.redirect('/')
-})
+router.use('/enroll', enroll)
+router.use('/manage', manage)
 
 router.get('/search', (req, res) => {
   let searchResults = undefined
@@ -68,36 +64,6 @@ router.get('/detail/:id', (req, res) => {
   })
 })
 
-router.get('/manage', (req, res) => {
-  let studentData
-  if(req.query.studentID !== undefined && req.query.studentID !== '') {
-    studentData = {
-      info: {
-        studentID: '5891031221',
-        firstName: 'Joe',
-        lastName: 'Snorn'
-      },
-      subjects: [
-        {
-          courseID: '2110217',
-          courseName: 'SOME SUBJ',
-          section: 1
-        },
-        {
-          courseID: '2110224',
-          courseName: 'SOME SUBJ LAB',
-          section: 33
-        } 
-      ]
-    }
-  }
-  res.render('course/manage', { title: 'Manage Courses', studentData })
-})
-
-router.post('/remove', (req, res) => {
-  console.log(req.body)
-  res.redirect('/')
-})
 
 router.get('/pay', (req, res) => {
   res.render('course/pay', { title: 'Pay Fee' })
