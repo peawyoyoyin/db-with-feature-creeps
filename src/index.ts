@@ -26,7 +26,7 @@ import seniorProjectRouter from './routes/seniorproj'
 const app = express()
 app.set('view engine', 'pug')
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/static', express.static('public'))
 app.use(morgan(':status :method\t:url'))

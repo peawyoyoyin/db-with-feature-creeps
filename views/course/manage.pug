@@ -14,19 +14,23 @@ block content
   .container
     if studentData
       h5 #{studentData.info.studentID} - #{studentData.info.firstName} #{studentData.info.lastName}
-      table.table
-        thead
-          th SubjectID
-          th Subject Name
-          th Section
-          th Remove
-        tbody
-          each subject in studentData.subjects
-            tr
-              td #{subject.courseID}
-              td #{subject.courseName}
-              td #{subject.section}
-              td
-                a(href="#") remove
+      form(action="/course/remove" method="POST")
+        input.invisible(type="text" name="studentID" value=studentData.info.studentID)
+        table.table
+          thead
+            th SubjectID
+            th Subject Name
+            th Section
+            th Remove
+          tbody
+            each subject in studentData.subjects
+              tr
+                td #{subject.courseID}
+                td #{subject.courseName}
+                td #{subject.section}
+                td
+                  .form-check.form-check-inline
+                    input.form-check-input(type="checkbox" name="remove" value=subject.courseID)
+        button.btn.btn-primary(type="submit") Submit
     else
-      h5 Input student ID...  
+      h5 Input student ID...

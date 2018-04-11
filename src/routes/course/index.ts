@@ -73,7 +73,7 @@ router.get('/manage', (req, res) => {
   if(req.query.studentID !== undefined && req.query.studentID !== '') {
     studentData = {
       info: {
-        studentID: '58910312121',
+        studentID: '5891031221',
         firstName: 'Joe',
         lastName: 'Snorn'
       },
@@ -92,6 +92,11 @@ router.get('/manage', (req, res) => {
     }
   }
   res.render('course/manage', { title: 'Manage Courses', studentData })
+})
+
+router.post('/remove', (req, res) => {
+  console.log(req.body)
+  res.redirect('/')
 })
 
 router.get('/pay', (req, res) => {
