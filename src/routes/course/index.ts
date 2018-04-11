@@ -69,7 +69,29 @@ router.get('/detail/:id', (req, res) => {
 })
 
 router.get('/manage', (req, res) => {
-  res.render('course/manage', { title: 'Manage Courses' })
+  let studentData
+  if(req.query.studentID !== undefined && req.query.studentID !== '') {
+    studentData = {
+      info: {
+        studentID: '58910312121',
+        firstName: 'Joe',
+        lastName: 'Snorn'
+      },
+      subjects: [
+        {
+          courseID: '2110217',
+          courseName: 'SOME SUBJ',
+          section: 1
+        },
+        {
+          courseID: '2110224',
+          courseName: 'SOME SUBJ LAB',
+          section: 33
+        } 
+      ]
+    }
+  }
+  res.render('course/manage', { title: 'Manage Courses', studentData })
 })
 
 router.get('/pay', (req, res) => {

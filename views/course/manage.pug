@@ -1,4 +1,32 @@
 extends ../common/layout.pug
 block content
   .container
-    h2 manage courses
+    h3 Manage Courses
+  hr
+  .container
+    form#enroll
+      .form-inline
+        .form-group.mr-4
+          label.col-form-label.col(for="studentID") Student ID
+          input.form-control(type="text" name="studentID")
+        button.btn.btn-primary(type="sutmit") submit
+  hr
+  .container
+    if studentData
+      h5 #{studentData.info.studentID} - #{studentData.info.firstName} #{studentData.info.lastName}
+      table.table
+        thead
+          th SubjectID
+          th Subject Name
+          th Section
+          th Remove
+        tbody
+          each subject in studentData.subjects
+            tr
+              td #{subject.courseID}
+              td #{subject.courseName}
+              td #{subject.section}
+              td
+                a(href="#") remove
+    else
+      h5 Input student ID...
