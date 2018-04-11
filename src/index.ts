@@ -6,8 +6,8 @@ import { Connection, createConnection } from 'typeorm'
 //this fixes path aliases
 import 'module-alias/register'
 
-import courseRouter from './routes/course'
-import seniorProjectRouter from './routes/seniorproj'
+import course from './routes/course'
+import seniorProject from './routes/seniorproj'
 import db from './db'
 
 import { Student } from './entity/student'
@@ -33,8 +33,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/static', express.static('public'))
 app.use(morgan(':status :method\t:url'))
 
-app.use('/course', courseRouter)
-app.use('/seniorproj', seniorProjectRouter)
+app.use('/course', course)
+app.use('/seniorproj', seniorProject)
 
 app.get('/newstudent', (req, res) => {
   // query for all departments?
