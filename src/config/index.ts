@@ -1,6 +1,16 @@
+import { ConnectionOptions } from 'typeorm'
 import * as extend from 'extend'
 
-const config = (() => {
+export interface ExpressConfig {
+  port?: number,
+}
+
+export interface ProjectConfig {
+  express: ExpressConfig,
+  orm: ConnectionOptions
+}
+
+const config: ProjectConfig = (() => {
   try {
     const config = require('./config')
     const defaults = require('./config.default')

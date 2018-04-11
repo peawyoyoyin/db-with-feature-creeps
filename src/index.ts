@@ -6,13 +6,11 @@ import { Connection, createConnection } from 'typeorm'
 //this fixes path aliases
 import 'module-alias/register'
 
-
 import courseRouter from './routes/course'
 import seniorProjectRouter from './routes/seniorproj'
 import db from './db'
 
 import { Student } from './entity/student'
-
 
 (async () => {
   await db.init(config.orm)
