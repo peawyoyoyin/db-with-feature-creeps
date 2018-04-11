@@ -9,19 +9,23 @@ import { Student } from './entity/student'
 import courseRouter from './routes/course'
 import seniorProjectRouter from './routes/seniorproj'
 
-// ;(async () => {
-//   const connection: Connection = await createConnection(config.orm)
-//   const repo = connection.getRepository(Student)
-//   // const test = repo.create({
-//     //   studentID: '5834515112',
-//     //   firstName: 'John',
-//     //   lastName: 'Doe',
-//     //   citizenID: '1579900777777',
-//     //   year: 2558,
-//     //   nationality: 'TH'
-//     // })
-//     // repo.save(test)
-//   })()
+//this fixes path aliases
+import 'module-alias/register'
+
+import db from './db'
+
+(async () => {
+  await db.init(config.orm)
+  await db.student.insert({
+    studentID: '610123421',
+    firstName: 'John',
+    lastName: 'Slow',
+    nationality: 'TH',
+    year: 2561,
+    citizenID: '0123456789012'
+  })
+  console.log('inserted student')
+})()
 
 const app = express()
 app.set('view engine', 'pug')
