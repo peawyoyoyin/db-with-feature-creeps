@@ -12,18 +12,18 @@ import db from './db'
 
 import { Student } from './entity/student'
 
-(async () => {
-  await db.init(config.orm)
-  await db.student.insert({
-    studentID: '610123421',
-    firstName: 'John',
-    lastName: 'Slow',
-    nationality: 'TH',
-    year: 2561,
-    citizenID: '0123456789012'
-  })
-  console.log('inserted student')
-})()
+// (async () => {
+//   await db.init(config.orm)
+//   await db.student.insert({
+//     studentID: '610123421',
+//     firstName: 'John',
+//     lastName: 'Slow',
+//     nationality: 'TH',
+//     year: 2561,
+//     citizenID: '0123456789012'
+//   })
+//   console.log('inserted student')
+// })()
 
 const app = express()
 app.set('view engine', 'pug')
@@ -48,7 +48,16 @@ app.get('/newstudent', (req, res) => {
 })
 
 app.post('/newstudent', (req, res) => {
-  console.log(req.body)
+  console.log('createStudent', req.body)
+  const { studentID, firstName, lastName, citizenID, countryCode: nationality, year } = req.body
+  db.student.insert({
+    studentID,
+    firstName,
+    lastName,
+    citizenID,
+    nationality,
+    year
+  })
   res.redirect('/')
 })
 

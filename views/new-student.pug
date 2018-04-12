@@ -10,7 +10,7 @@ block content
           input.form-control(type="text" name="studentID")
         .col-lg-2
           label(for="year") Year
-          select.form-control(id="year")
+          select.form-control(id="year" name="year")
             option(selected value="61") 61
             each year in [60, 59, 58]
               option(value=year)= year
