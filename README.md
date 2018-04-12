@@ -2,9 +2,9 @@
 
 ```mermaid
 graph LR
-Trying to do Project --> Not sure about the scope
-Not sure about the scope --> Ask teacher
-Ask teacher --> Feature creeps
+A[Trying to do Project] --> B[Not sure about the scope]
+B --> C[Ask teacher]
+C --> D[Feature creeps]
 ```
 
 ## Development
