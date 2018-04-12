@@ -1,5 +1,12 @@
 # [DB MGT SYS Project] Reg with Feature Creeps (and Senior Projects)
 
+```mermaid
+graph LR
+Trying to do Project --> Not sure about the scope
+Not sure about the scope --> Ask teacher
+Ask teacher --> Feature creeps
+```
+
 ## Development
 
 1. Clone the repository
