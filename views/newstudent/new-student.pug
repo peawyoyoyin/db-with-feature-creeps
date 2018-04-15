@@ -37,8 +37,9 @@ block content
             each department in departments
               option(value=department) #{department}
       hr
-      .form-row
-        .container #{error}
+      each error in errors
+        .form-row
+          .container=error
       .form-row
         .col
           button(type="submit").btn.btn-primary.mx-auto.d-block Submit

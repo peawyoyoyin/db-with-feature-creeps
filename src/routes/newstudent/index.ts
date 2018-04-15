@@ -9,7 +9,8 @@ router.get('/', async (req, res) => {
   // query for all departments?
   res.render('newstudent/new-student', {
     title: 'Register New Student',
-    departments: ['Computer Engineering', 'Chemical Engineering']
+    departments: ['Computer Engineering', 'Chemical Engineering'],
+    errors: []
   })
 })
 
@@ -35,11 +36,10 @@ router.post('/', async (req, res) => {
     await db.student.save(newStudent)
     res.redirect('/')
   } catch (e) {
-    // console.log(e)
     res.render('newstudent/new-student', {
       title: 'Register New Student',
       departments: ['Computer Engineering', 'Chemical Engineering'],
-      error: e.message
+      errors: e
     })
   }
 })
