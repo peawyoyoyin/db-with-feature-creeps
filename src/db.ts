@@ -24,4 +24,35 @@ export default class DB {
     DB.seniorProject = DB._connection.getRepository(SeniorProject)
     DB.courseInstance = DB._connection.getRepository(CourseInstance)
   }
+
+  static async seed() {
+    async function deleteAll<T>(repository: Repository<T>) {
+      await repository.createQueryBuilder().delete().execute()
+    }
+    await deleteAll(DB.faculty)
+    const fc1 = new Faculty('1234', 'Engineer')
+    const fc2 = new Faculty('5678', 'Accounting')
+    await DB.faculty.save(fc1)
+    await DB.faculty.save(fc2)
+
+    await deleteAll(DB.departments)
+    const dp1 = new Department('Computer Engineering', fc1)
+    const dp2 = new Department('Electrical Engineering', fc1)
+    const dp3 = new Department('Civil Engineering', fc1)
+    await DB.departments.save(dp1)
+    await DB.departments.save(dp2)
+    await DB.departments.save(dp3)
+
+    await deleteAll(DB.student)
+    const std1 = new Student(
+      '61567821',
+      'Jame',
+      'Fast',
+      2561,
+      'TH',
+      '9876543210123',
+    );
+    std1.department = dp1
+    await DB.student.save(std1)
+  }
 }

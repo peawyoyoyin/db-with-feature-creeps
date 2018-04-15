@@ -3,6 +3,11 @@ import { Department } from './department'
 
 @Entity()
 export class Faculty {
+  constructor(facultyID: string, name: string) {
+    this.facultyID = facultyID
+    this.name = name
+  }
+
   @PrimaryColumn({type: 'varchar'})
   facultyID: string
 

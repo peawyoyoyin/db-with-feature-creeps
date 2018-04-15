@@ -5,12 +5,17 @@ import { Teacher } from './teacher'
 
 @Entity()
 export class Department {
-  @Column({type: 'varchar', length: 30})
+  constructor(name: string, faculty: Faculty) {
+    this.name = name
+    this.faculty = faculty
+  }
+
+  @Column({type: 'varchar', length: 30, primary: true})
   name: string
 
   @ManyToOne(type => Faculty, faculty => faculty.departments, {onDelete: 'CASCADE', primary: true})
-  faculty: Faculty
 
+  faculty: Faculty
   @OneToMany(type => Student, student => student.department)
   students: Student[]
 

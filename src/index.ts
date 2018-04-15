@@ -13,18 +13,11 @@ import db from './db'
 
 import { Student } from './entity/student'
 
-// (async () => {
-//   await db.init(config.orm)
-//   await db.student.insert({
-//     studentID: '610123421',
-//     firstName: 'John',
-//     lastName: 'Slow',
-//     nationality: 'TH',
-//     year: 2561,
-//     citizenID: '0123456789012'
-//   })
-//   console.log('inserted student')
-// })()
+(async () => {
+  await db.init(config.orm)
+  await db.seed()
+  console.log('=========================', db.student)
+})()
 
 const app = express()
 app.set('view engine', 'pug')

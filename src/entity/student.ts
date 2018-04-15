@@ -9,6 +9,22 @@ import { SeniorProject } from './senior-project'
 
 @Entity()
 export class Student {
+  constructor(
+    studentID: string,
+    firstName: string,
+    lastName: string,
+    year: number,
+    nationality: string,
+    citizenID: string
+  ) {
+    this.studentID = studentID
+    this.firstName = firstName
+    this.lastName = lastName
+    this.year = year
+    this.nationality = nationality
+    this.citizenID = citizenID
+  }
+
   @PrimaryColumn({type: 'varchar', length: 10})
   studentID: string
 
