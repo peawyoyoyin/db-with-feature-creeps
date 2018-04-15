@@ -2,12 +2,16 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, PrimaryColumn, Index
 import { Faculty } from './faculty'
 import { Student } from './student'
 import { Teacher } from './teacher'
-
+interface DepartmentArgs {
+  name: string,
+  faculty: Faculty
+}
 @Entity()
 export class Department {
-  constructor(name: string, faculty: Faculty) {
-    this.name = name
-    this.faculty = faculty
+  constructor(args: DepartmentArgs) {
+    if (args === undefined) return
+    this.name = args.name
+    this.faculty = args.faculty
   }
 
   @Column({type: 'varchar', length: 30, primary: true})

@@ -1,4 +1,9 @@
-import { Connection, createConnection, ConnectionOptions, Repository } from 'typeorm'
+import {
+  Connection,
+  createConnection,
+  ConnectionOptions,
+  Repository
+} from 'typeorm'
 import { Student } from '~/entity/student'
 import { Course } from '~/entity/course'
 import { Faculty } from '~/entity/faculty'
@@ -7,7 +12,7 @@ import { SeniorProject } from '~/entity/senior-project'
 import { CourseInstance } from '~/entity/course-instance'
 
 export default class DB {
-  static _connection : Connection
+  static _connection: Connection
   static student: Repository<Student>
   static course: Repository<Course>
   static faculty: Repository<Faculty>
@@ -27,31 +32,50 @@ export default class DB {
 
   static async seed() {
     async function deleteAll<T>(repository: Repository<T>) {
-      await repository.createQueryBuilder().delete().execute()
+      await repository
+        .createQueryBuilder()
+        .delete()
+        .execute()
     }
+
     await deleteAll(DB.faculty)
-    const fc1 = new Faculty('1234', 'Engineer')
-    const fc2 = new Faculty('5678', 'Accounting')
+    const fc1 = new Faculty({
+      facultyID: '1234',
+      name: 'Engineer'
+    })
+    const fc2 = new Faculty({
+      facultyID: '5678',
+      name: 'Accounting'
+    })
     await DB.faculty.save(fc1)
     await DB.faculty.save(fc2)
 
     await deleteAll(DB.departments)
-    const dp1 = new Department('Computer Engineering', fc1)
-    const dp2 = new Department('Electrical Engineering', fc1)
-    const dp3 = new Department('Civil Engineering', fc1)
+    const dp1 = new Department({
+      name: 'Computer Engineering',
+      faculty: fc1
+    })
+    const dp2 = new Department({
+      name: 'Electrical Engineering',
+      faculty: fc1
+    })
+    const dp3 = new Department({
+      name: 'Civil Engineering',
+      faculty: fc1
+    })
     await DB.departments.save(dp1)
     await DB.departments.save(dp2)
     await DB.departments.save(dp3)
 
     await deleteAll(DB.student)
-    const std1 = new Student(
-      '61567821',
-      'Jame',
-      'Fast',
-      2561,
-      'TH',
-      '9876543210123',
-    );
+    const std1 = new Student({
+      studentID: '6156789021',
+      firstName: 'Jame',
+      lastName: 'Fast',
+      year: 2561,
+      citizenID: '9876543210123',
+      nationality: 'TH'
+    })
     std1.department = dp1
     await DB.student.save(std1)
   }

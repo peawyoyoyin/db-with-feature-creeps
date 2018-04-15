@@ -1,11 +1,16 @@
 import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm'
 import { Department } from './department'
 
+interface FacultyArgs {
+  facultyID: string,
+  name: string
+}
 @Entity()
 export class Faculty {
-  constructor(facultyID: string, name: string) {
-    this.facultyID = facultyID
-    this.name = name
+  constructor(args: FacultyArgs) {
+    if (args === undefined) return
+    this.facultyID = args.facultyID
+    this.name = args.name
   }
 
   @PrimaryColumn({type: 'varchar'})
