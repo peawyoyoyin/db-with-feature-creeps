@@ -8,6 +8,7 @@ import 'module-alias/register'
 
 import course from './routes/course'
 import seniorProject from './routes/seniorproj'
+import newStudent from './routes/newstudent'
 import db from './db'
 
 import { Student } from './entity/student'
@@ -35,31 +36,7 @@ app.use(morgan(':status :method\t:url'))
 
 app.use('/course', course)
 app.use('/seniorproj', seniorProject)
-
-app.get('/newstudent', (req, res) => {
-  // query for all departments?
-  res.render('new-student', { 
-    title: 'Register New Student',
-    departments: [
-      'Computer Engineering',
-      'Chemical Engineering'
-    ]
-  })
-})
-
-app.post('/newstudent', (req, res) => {
-  console.log('createStudent', req.body)
-  const { studentID, firstName, lastName, citizenID, countryCode: nationality, year } = req.body
-  db.student.insert({
-    studentID,
-    firstName,
-    lastName,
-    citizenID,
-    nationality,
-    year
-  })
-  res.redirect('/')
-})
+app.use('/newstudent', newStudent)
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'DB WITH FEATURE CREEPS' })
