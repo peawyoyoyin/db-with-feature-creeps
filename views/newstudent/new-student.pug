@@ -11,7 +11,7 @@ block content
         .col-lg-2
           label(for="year") Year
           select.form-control(id="year" name="year")
-            option(selected value="61") 61
+            option(selected value=61) 61
             each year in [60, 59, 58]
               option(value=year)= year
       .form-row
@@ -35,11 +35,11 @@ block content
           select.form-control(name="department")
             option(selected value="none") Choose Department...
             each department in departments
-              option(value=department) #{department}
+              option(value=department) #{department.name}
       hr
       each error in errors
         .form-row
-          .container=error
+          .alert.alert-danger #{error}
       .form-row
         .col
           button(type="submit").btn.btn-primary.mx-auto.d-block Submit

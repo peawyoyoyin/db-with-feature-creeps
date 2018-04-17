@@ -18,8 +18,8 @@ export class Department {
   name: string
 
   @ManyToOne(type => Faculty, faculty => faculty.departments, {onDelete: 'CASCADE', primary: true})
-
   faculty: Faculty
+
   @OneToMany(type => Student, student => student.department)
   students: Student[]
 

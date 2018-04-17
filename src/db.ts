@@ -67,16 +67,16 @@ export default class DB {
     await DB.departments.save(dp2)
     await DB.departments.save(dp3)
 
-    await deleteAll(DB.student)
-    const std1 = new Student({
-      studentID: '6156789021',
-      firstName: 'Jame',
-      lastName: 'Fast',
-      year: 2561,
-      citizenID: '9876543210123',
-      nationality: 'TH'
-    })
-    std1.department = dp1
-    await DB.student.save(std1)
+    // await deleteAll(DB.student)
+    // const std1 = new Student({
+    //   studentID: '6156789021',
+    //   firstName: 'Jame',
+    //   lastName: 'Fast',
+    //   year: 2561,
+    //   citizenID: '9876543210123',
+    //   nationality: 'TH'
+    // })
+    // std1.department = dp1
+    // await DB.student.save(std1)
   }
 }

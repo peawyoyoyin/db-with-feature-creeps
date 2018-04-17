@@ -16,7 +16,6 @@ import { Student } from './entity/student'
 (async () => {
   await db.init(config.orm)
   await db.seed()
-  console.log('=========================', db.student)
 })()
 
 const app = express()

@@ -9,7 +9,24 @@ router.use('/manage', manage)
 
 router.get('/search', (req, res) => {
   let searchResults = undefined
-  if(req.query.courseID !== undefined || req.query.courseName !== undefined || req.query.credits !== undefined) {
+  const {courseID, courseName, credits} = req.query;
+  const queries = [
+    {name: 'courseID', value: courseID},
+    {name: 'courseName', value: courseName},
+    {name: 'credits', value: credits}
+  ]
+  const findOptions = 
+    queries
+      .filter(query => query.value !== undefined && query.value.length > 0)
+      .reduce((acc, query) => {
+        const {name, value} = query
+        return {
+          ...acc,
+          [name]: value
+        }
+      }, {})
+  console.log(findOptions)
+  if(courseID !== undefined || courseName !== undefined || credits !== undefined) {
     searchResults = [
       {
         courseID: '2110217',
