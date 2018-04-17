@@ -18,7 +18,4 @@ export class AcademicYear {
 
   @OneToMany(type => Semester, semester => semester.year)
   semesters: Semester[]
-
-  @OneToMany(type => CourseInstance, courseInstance => courseInstance.year)
-  courseInstances: CourseInstance[]
 }

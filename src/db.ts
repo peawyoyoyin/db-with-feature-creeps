@@ -165,27 +165,27 @@ export default class DB {
     await DB.semester.save(semester1)
     await DB.semester.save(semester2)
     await DB.semester.save(semester3)
+    await DB.semester.save(semester4)
+    console.log(">> semesterid1 : " + semester1.id)
 
     await deleteAll(DB.courseInstance)
     const courseInstance1 = new CourseInstance({
-      year:year3,
       semester:semester1,
       course: course1,
     })
     const courseInstance2 = new CourseInstance({
-      year:year3,
       semester:semester2,
       course: course1,
     })
     const courseInstance3 = new CourseInstance({
-      year:year2,
       semester:semester4,
       course: course1,
     })
-    console.log(semester4.year.year)
+    console.log(courseInstance1.semester)
     await DB.courseInstance.save(courseInstance1)
     await DB.courseInstance.save(courseInstance2)
     await DB.courseInstance.save(courseInstance3)
+    
     
     await deleteAll(DB.studentGroup)
     const studentGroup1 = new StudentGroup({

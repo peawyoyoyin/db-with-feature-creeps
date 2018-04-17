@@ -1,4 +1,4 @@
-import { Entity, PrimaryColumn, Column, Index, ManyToOne, OneToMany, OneToOne } from 'typeorm'
+import { Entity, PrimaryColumn, Column, Index, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { AcademicYear } from './academic-year'
 import { CourseInstance } from './course-instance'
 import { EnrollmentFeePayment } from './enrollment-fee-payment'
@@ -27,8 +27,11 @@ export class Semester {
     this.year = args.year
     validate(this)
   }
-  
-  @Column({type: 'int',primary:true})
+  @PrimaryGeneratedColumn()
+  id: number
+
+  // @Column({type: 'int',primary:true})
+  @Column({type: 'int'})
   semesterNumber: number
 
   @Column({type: 'datetime'})
@@ -43,7 +46,8 @@ export class Semester {
   @Column({type: 'datetime'})
   lastWithdrawalDate: Date
 
-  @ManyToOne(type => AcademicYear, academicYear => academicYear.semesters, {onDelete: 'CASCADE', nullable: false, primary: true})
+  // @ManyToOne(type => AcademicYear, academicYear => academicYear.semesters, {onDelete: 'CASCADE', nullable: false, primary: true})
+  @ManyToOne(type => AcademicYear, academicYear => academicYear.semesters, {onDelete: 'CASCADE', nullable: false})
   year: AcademicYear
 
   @OneToMany(type => CourseInstance, courseInstance => courseInstance.semester)

@@ -7,7 +7,6 @@ import { AcademicYear } from '~/entity/academic-year';
 interface CourseInstanceArgs {
   course: Course
   semester: Semester
-  year: AcademicYear
 }
 
 @Entity()
@@ -16,7 +15,6 @@ export class CourseInstance {
     if (args === undefined) return
     this.course = args.course
     this.semester = args.semester
-    this.year = args.year
   }
 
   @ManyToOne(type => Course, course => course.instances, { onDelete: 'CASCADE', primary: true })
@@ -24,9 +22,6 @@ export class CourseInstance {
 
   @ManyToOne(type => Semester, semester => semester.courseInstances, { onDelete: 'CASCADE', nullable: false, primary: true })
   semester: Semester
-
-  @ManyToOne(type => AcademicYear, academicYear => academicYear.courseInstances, { onDelete: 'CASCADE', nullable: false, primary: true })
-  year: AcademicYear
 
   @OneToMany(type => Section, section => section.courseInstance)
   sections: Section[]
