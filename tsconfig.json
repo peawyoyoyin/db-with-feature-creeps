@@ -7,10 +7,9 @@
     "outDir": "build",
     "baseUrl": "./",
     "paths": {
-      "~/*": [ "./src/*" ],
-    }
+      "~/*": ["./src/*"]
+    },
+    "lib": ["es2017"]
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src/**/*"]
 }

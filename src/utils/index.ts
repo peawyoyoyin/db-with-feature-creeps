@@ -3,7 +3,7 @@ export function validate(obj) {
   const errors = validateSync(obj)
   if (errors.length > 0) {
     const allMsg = errors.map(error => {
-      const msg = JSON.stringify(error.constraints)
+      const msg = Object.values(error.constraints).join(', ')
       return msg
     })
     throw allMsg
