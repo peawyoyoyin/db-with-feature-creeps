@@ -28,7 +28,7 @@ export class Semester {
     validate(this)
   }
   
-  @Column({type: 'int',primary: true})
+  @Column({type: 'int',primary:true})
   semesterNumber: number
 
   @Column({type: 'datetime'})

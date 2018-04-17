@@ -148,20 +148,41 @@ export default class DB {
       lastSubjectRemovalDate: new Date(),
       lastWithdrawalDate: new Date()
     })
+    const semester4 = new Semester({
+      semesterNumber:1,
+      startDate: new Date(2561,6,3),
+      endDate: new Date(2561,8,9),
+      year: year2,
+      lastSubjectRemovalDate: new Date(),
+      lastWithdrawalDate: new Date()
+    })
     await DB.semester.save(semester1)
     await DB.semester.save(semester2)
     await DB.semester.save(semester3)
 
     await deleteAll(DB.courseInstance)
     const courseInstance1 = new CourseInstance({
+      year:year3,
       semester:semester1,
       course: course1,
     })
     const courseInstance2 = new CourseInstance({
+      year:year3,
       semester:semester2,
       course: course1,
     })
+    const courseInstance3 = new CourseInstance({
+      year:year2,
+      semester:semester4,
+      course: course1,
+    })
+    console.log(semester4.year.year)
     await DB.courseInstance.save(courseInstance1)
     await DB.courseInstance.save(courseInstance2)
+    await DB.courseInstance.save(courseInstance3)
+    
+    console.log(courseInstance1.semester.year.year)
+    console.log(courseInstance1)
+    console.log(courseInstance3)
   }
 }

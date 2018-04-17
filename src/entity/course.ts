@@ -25,7 +25,7 @@ export class Course {
     this.name = args.name
     this.credit = args.credit
   }
-  @PrimaryColumn({type: 'varchar', length: 7})
+  @Column({type: 'varchar', length: 7,primary:true})
   @IsNumberString()
   courseID: string
 
