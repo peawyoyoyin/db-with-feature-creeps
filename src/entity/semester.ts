@@ -3,9 +3,32 @@ import { AcademicYear } from './academic-year'
 import { CourseInstance } from './course-instance'
 import { EnrollmentFeePayment } from './enrollment-fee-payment'
 
+import {Length} from 'class-validator'
+import {validate} from '~/utils'
+
+interface SemesterArgs{
+  semesterNumber:number
+  startDate:Date
+  endDate:Date
+  lastSubjectRemovalDate: Date
+  lastWithdrawalDate: Date
+  year: AcademicYear
+}
+
 @Entity()
 export class Semester {
-  @PrimaryColumn({type: 'int'})
+  constructor(args: SemesterArgs){
+    if(args === undefined) return
+    this.semesterNumber = args.semesterNumber
+    this.startDate = args.startDate
+    this.endDate = args.endDate
+    this.lastSubjectRemovalDate = args.lastSubjectRemovalDate
+    this.lastWithdrawalDate = args.lastWithdrawalDate
+    this.year = args.year
+    validate(this)
+  }
+  
+  @Column({type: 'int',primary: true})
   semesterNumber: number
 
   @Column({type: 'datetime'})

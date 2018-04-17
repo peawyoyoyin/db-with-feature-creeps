@@ -3,8 +3,19 @@ import { Course } from './course';
 import { Semester } from './semester'
 import { Section } from './section'
 
+interface CourseInstanceArgs{
+  course:Course
+  semester:Semester
+}
+
 @Entity()
 export class CourseInstance {
+  constructor(args: CourseInstanceArgs){
+    if(args === undefined) return
+    this.course = args.course
+    this.semester = args.semester
+  }
+
   @ManyToOne(type => Course, course => course.instances, {onDelete: 'CASCADE', primary: true})
   course: Course
 

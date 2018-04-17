@@ -10,6 +10,9 @@ import { Faculty } from '~/entity/faculty'
 import { Department } from '~/entity/department'
 import { SeniorProject } from '~/entity/senior-project'
 import { CourseInstance } from '~/entity/course-instance'
+import { Section } from '~/entity/section';
+import { AcademicYear } from '~/entity/academic-year';
+import { Semester } from '~/entity/semester';
 
 export default class DB {
   static _connection: Connection
@@ -19,6 +22,8 @@ export default class DB {
   static departments: Repository<Department>
   static seniorProject: Repository<SeniorProject>
   static courseInstance: Repository<CourseInstance>
+  static academicYear: Repository<AcademicYear>
+  static semester: Repository<Semester>
 
   static async init(config: ConnectionOptions) {
     DB._connection = await createConnection(config)
@@ -28,6 +33,8 @@ export default class DB {
     DB.departments = DB._connection.getRepository(Department)
     DB.seniorProject = DB._connection.getRepository(SeniorProject)
     DB.courseInstance = DB._connection.getRepository(CourseInstance)
+    DB.academicYear = DB._connection.getRepository(AcademicYear)
+    DB.semester = DB._connection.getRepository(Semester)
   }
 
   static async seed() {
@@ -78,5 +85,83 @@ export default class DB {
     // })
     // std1.department = dp1
     // await DB.student.save(std1)
+
+    await deleteAll(DB.course)
+    const course1 = new Course({
+      courseID:'2110201',
+      credit:3,
+      abbreviate:'COMP ENG MATH',
+      name:'COMPUTER ENGINEERING MATHEMATICS'
+    })
+    const course2 = new Course({
+      courseID:'2110332',
+      credit:3,
+      abbreviate:'SYS ANALYSIS DSGN',
+      name:'SYSTEMS ANALYSIS AND DESIGN'
+    })
+    const course3 = new Course({
+      courseID:'3108406',
+      credit:1,
+      abbreviate:'LAB DOG CAT REPROD',
+      name:'LABORATORY IN DOG AND CAT REPRODUCTION'
+    })
+    await DB.course.save(course1)
+    await DB.course.save(course2)
+    await DB.course.save(course3)
+
+    await deleteAll(DB.academicYear)
+    const year1 = new AcademicYear({
+      year: 2559
+    })
+    const year2 = new AcademicYear({
+      year: 2560
+    })
+    const year3 = new AcademicYear({
+      year: 2561
+    })
+    await DB.academicYear.save(year1)
+    await DB.academicYear.save(year2)
+    await DB.academicYear.save(year3)
+
+    await deleteAll(DB.semester)
+    const semester1 = new Semester({
+      semesterNumber:1,
+      startDate: new Date(2561,8,14),
+      endDate: new Date(2561,12,19),
+      year: year3,
+      lastSubjectRemovalDate: new Date(),
+      lastWithdrawalDate: new Date()
+    })
+    const semester2 = new Semester({
+      semesterNumber:2,
+      startDate: new Date(2562,1,7),
+      endDate: new Date(2562,5,22),
+      year: year3,
+      lastSubjectRemovalDate: new Date(),
+      lastWithdrawalDate: new Date()
+    })
+    const semester3 = new Semester({
+      semesterNumber:3,
+      startDate: new Date(2562,6,3),
+      endDate: new Date(2562,8,9),
+      year: year3,
+      lastSubjectRemovalDate: new Date(),
+      lastWithdrawalDate: new Date()
+    })
+    await DB.semester.save(semester1)
+    await DB.semester.save(semester2)
+    await DB.semester.save(semester3)
+
+    await deleteAll(DB.courseInstance)
+    const courseInstance1 = new CourseInstance({
+      semester:semester1,
+      course: course1,
+    })
+    const courseInstance2 = new CourseInstance({
+      semester:semester2,
+      course: course1,
+    })
+    await DB.courseInstance.save(courseInstance1)
+    await DB.courseInstance.save(courseInstance2)
   }
 }
