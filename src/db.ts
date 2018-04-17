@@ -14,6 +14,7 @@ import { Section } from '~/entity/section'
 import { AcademicYear } from '~/entity/academic-year'
 import { Semester } from '~/entity/semester'
 import { Teacher } from '~/entity/teacher'
+import { StudentGroup } from '~/entity/student-group'
 
 export default class DB {
   static _connection: Connection
@@ -26,6 +27,7 @@ export default class DB {
   static academicYear: Repository<AcademicYear>
   static semester: Repository<Semester>
   static teacher: Repository<Teacher>
+  static studentGroup: Repository<StudentGroup>
 
   static async init(config: ConnectionOptions) {
     DB._connection = await createConnection(config)
@@ -38,6 +40,7 @@ export default class DB {
     DB.academicYear = DB._connection.getRepository(AcademicYear)
     DB.semester = DB._connection.getRepository(Semester)
     DB.teacher = DB._connection.getRepository(Teacher)
+    DB.studentGroup = DB._connection.getRepository(StudentGroup)
   }
 
   static async seed() {
@@ -166,6 +169,20 @@ export default class DB {
     })
     await DB.courseInstance.save(courseInstance1)
     await DB.courseInstance.save(courseInstance2)
+
+    await deleteAll(DB.studentGroup)
+    const studentGroup1 = new StudentGroup({
+      groupID: 1
+    })
+    const studentGroup2 = new StudentGroup({
+      groupID: 2
+    })
+    const studentGroup3 = new StudentGroup({
+      groupID: 3
+    })
+    await DB.studentGroup.save(studentGroup1)
+    await DB.studentGroup.save(studentGroup2)
+    await DB.studentGroup.save(studentGroup3)
 
     await deleteAll(DB.teacher)
     const teacher1 = new Teacher({

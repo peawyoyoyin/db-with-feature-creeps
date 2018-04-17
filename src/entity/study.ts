@@ -1,15 +1,33 @@
 import { Entity, PrimaryColumn, Column, ManyToOne } from 'typeorm'
 import { Student } from './student'
 import { Section } from './section'
+import { Length, Min, IsNumberString, Matches } from 'class-validator'
+import { validate } from '~/utils'
 
+interface StudentArgs {
+  gradeLetter: string
+  student: Student
+  section: Section
+}
 @Entity()
 export class Study {
+  constructor(args: StudentArgs) {
+    if (args === undefined) return
+    this.gradeLetter = args.gradeLetter
+    this.student = args.student
+    this.section = args.section
+    validate(this)
+  }
+
   @ManyToOne(type => Student, student => student.studies, {primary: true})
   student: Student
 
   @ManyToOne(type => Section, section => section.studies, {primary: true})
   section: Section
 
-  @Column({type: 'varchar', length: 1})
+  @Column({type: 'varchar', length: 2})
+  @Length(1, 2)
+  @IsNumberString()
+  @Matches(new RegExp('A|B\+|B|C\+|C|D\+|D|F|W|S|U'))
   gradeLetter: string
 }
