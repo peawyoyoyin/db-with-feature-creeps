@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
           courseID: '2110224',
           courseName: 'SOME SUBJ LAB',
           section: 33
-        } 
+        }
       ]
     }
   }
