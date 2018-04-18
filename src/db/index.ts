@@ -15,6 +15,7 @@ import { AcademicYear } from '~/entity/academic-year'
 import { Semester } from '~/entity/semester'
 import { Teacher } from '~/entity/teacher'
 import { StudentGroup } from '~/entity/student-group'
+import seedFunction from './seed'
 
 export default class DB {
   static _connection: Connection
@@ -43,7 +44,9 @@ export default class DB {
     DB.studentGroup = DB._connection.getRepository(StudentGroup)
   }
 
-  static async seed() {
+  static seed = seedFunction
+
+  static async _seed() {
     async function deleteAll<T>(repository: Repository<T>) {
       await repository
         .createQueryBuilder()
