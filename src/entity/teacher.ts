@@ -13,7 +13,7 @@ import { Section } from './section'
 import { Course } from './course'
 import { Department } from './department'
 import { SeniorProject } from '~/entity/senior-project'
-import { Evaluation } from '~/entity/evaluation'
+import { Evaluation } from '~/entity/evaluation.relation'
 
 interface TeacherArgs {
   teacherID: string

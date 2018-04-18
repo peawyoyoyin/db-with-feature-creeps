@@ -14,7 +14,7 @@ import { EnrollmentFeePayment } from './enrollment-fee-payment'
 import { Teacher } from './teacher'
 import { Department } from './department'
 import { Section } from './section'
-import { Study } from './study'
+import { Study } from './study.relation'
 import { SeniorProject } from './senior-project'
 
 interface StudentArgs {

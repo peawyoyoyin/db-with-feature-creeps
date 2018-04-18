@@ -1,7 +1,8 @@
-import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm'
+import { Entity, PrimaryColumn, Column, OneToMany, ManyToOne } from 'typeorm'
 import { Semester } from './semester'
 import { Min } from 'class-validator'
 import { CourseInstance } from '~/entity/course-instance';
+import { GroupYearRelation } from '~/entity/group-year.relation';
 
 interface AcademicYearArgs {
   year: number
@@ -18,4 +19,7 @@ export class AcademicYear {
 
   @OneToMany(type => Semester, semester => semester.year)
   semesters: Semester[]
+
+  @ManyToOne(type => GroupYearRelation, groupYearRelation => groupYearRelation.year)
+  groupYearRelations: GroupYearRelation[]
 }
