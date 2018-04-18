@@ -233,28 +233,32 @@ const seed = async () => {
     id: 1,
     capacity: 40,
     sectionNumber: 1,
-    courseInstance: courseInstance1
+    courseInstance: courseInstance1,
+    time: 'MO 9:00-12:00'
   })
   section1.teacher = teacher1
   const section2 = new Section({
     id: 2,
     capacity: 30,
     sectionNumber: 2,
-    courseInstance: courseInstance1
+    courseInstance: courseInstance1,
+    time: 'TU 13:00-16:00'
   })
   section2.teacher = teacher2
   const section3 = new Section({
     id: 3,
     capacity: 40,
     sectionNumber: 33,
-    courseInstance: courseInstance1
+    courseInstance: courseInstance1,
+    time: 'WE 13:00-16:00'
   })
   section3.teacher = teacher1
   const section4 = new Section({
     id: 4,
     capacity: 40,
     sectionNumber: 1,
-    courseInstance: courseInstance2
+    courseInstance: courseInstance2,
+    time: 'TH 13:00-16:00'
   })
   section4.teacher = teacher1
   await DB.section.save(section1)
