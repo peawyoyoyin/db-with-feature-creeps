@@ -9,6 +9,7 @@ import { Semester } from '~/entity/semester'
 import { StudentGroup } from '~/entity/student-group'
 import { CourseInstance } from '~/entity/course-instance'
 import { Teacher } from '~/entity/teacher'
+import { Section } from '~/entity/section'
 
 const seed = async () => {
   async function deleteAll<T>(repository: Repository<T>) {
@@ -226,5 +227,39 @@ const seed = async () => {
   await DB.teacher.save(teacher1)
   await DB.teacher.save(teacher2)
   await DB.teacher.save(teacher3)
+
+  await deleteAll(DB.section)
+  const section1 = new Section({
+    id: 1,
+    capacity: 40,
+    sectionNumber: 1,
+    courseInstance: courseInstance1
+  })
+  section1.teacher = teacher1
+  const section2 = new Section({
+    id: 2,
+    capacity: 30,
+    sectionNumber: 2,
+    courseInstance: courseInstance1
+  })
+  section2.teacher = teacher2
+  const section3 = new Section({
+    id: 3,
+    capacity: 40,
+    sectionNumber: 33,
+    courseInstance: courseInstance1
+  })
+  section3.teacher = teacher1
+  const section4 = new Section({
+    id: 4,
+    capacity: 40,
+    sectionNumber: 1,
+    courseInstance: courseInstance2
+  })
+  section4.teacher = teacher1
+  await DB.section.save(section1)
+  await DB.section.save(section2)
+  await DB.section.save(section3)
+  await DB.section.save(section4)
 }
 export default seed

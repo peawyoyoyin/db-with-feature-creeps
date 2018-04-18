@@ -19,6 +19,7 @@ interface SectionArgs {
   id: number
   sectionNumber: number
   capacity: number
+  courseInstance: CourseInstance
 }
 
 @Entity()
@@ -28,6 +29,7 @@ export class Section {
     this.id = args.id
     this.sectionNumber = args.sectionNumber
     this.capacity = args.capacity
+    this.courseInstance = args.courseInstance
     validate(this)
   }
   @PrimaryGeneratedColumn({ type: 'int' })
@@ -42,7 +44,10 @@ export class Section {
   @ManyToOne(
     type => CourseInstance,
     courseInstance => courseInstance.sections,
-    { onDelete: 'CASCADE' }
+    {
+      onDelete: 'CASCADE',
+      nullable: false
+    }
   )
   courseInstance: CourseInstance
 
