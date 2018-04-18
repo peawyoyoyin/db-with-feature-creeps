@@ -13,9 +13,9 @@ block content
   hr
   .container
     if studentData
-      h5 #{studentData.info.studentID} - #{studentData.info.firstName} #{studentData.info.lastName}
+      h5.mb-3 #{studentData.info.studentID} - #{studentData.info.firstName} #{studentData.info.lastName}
       form(method="POST")
-        input.invisible(type="text" name="studentID" value=studentData.info.studentID)
+        input.d-none(type="text" name="studentID" value=studentData.info.studentID)
         table.table
           thead
             th SubjectID

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from 'typeorm'
 import { Student } from './student'
 import {
   Length,
@@ -8,6 +8,7 @@ import {
   IsPositive
 } from 'class-validator'
 import { validate } from '~/utils'
+import { GroupYearRelation } from '~/entity/group-year.relation';
 
 interface StudentGroupArgs {
   groupID: number
@@ -26,4 +27,7 @@ export class StudentGroup {
 
   @OneToMany(type => Student, student => student.studentGroup)
   students: Student[]
+
+  @ManyToOne(type => GroupYearRelation, groupYearRelation => groupYearRelation.studentGroup)
+  groupYearRelations: GroupYearRelation[]
 }
