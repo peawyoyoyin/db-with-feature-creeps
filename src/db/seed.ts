@@ -136,6 +136,7 @@ const seed = async () => {
   console.log(">> semesterid1 : " + semester1.id)
 
   await deleteAll(DB.courseInstance)
+  //Course1
   const courseInstance1 = new CourseInstance({
     semester:semester1,
     course: course1,
@@ -148,10 +149,42 @@ const seed = async () => {
     semester:semester4,
     course: course1,
   })
+  //Course2
+  const courseInstance4 = new CourseInstance({
+    semester:semester1,
+    course: course2,
+  })
+  const courseInstance5 = new CourseInstance({
+    semester:semester2,
+    course: course2,
+  })
+  const courseInstance6 = new CourseInstance({
+    semester:semester3,
+    course: course2,
+  })
+  const courseInstance7 = new CourseInstance({
+    semester:semester4,
+    course: course2,
+  })
+  //Course3
+  const courseInstance8 = new CourseInstance({
+    semester:semester3,
+    course: course3,
+  })
+  const courseInstance9 = new CourseInstance({
+    semester:semester4,
+    course: course3,
+  })
   console.log(courseInstance1.semester)
   await DB.courseInstance.save(courseInstance1)
   await DB.courseInstance.save(courseInstance2)
   await DB.courseInstance.save(courseInstance3)
+  await DB.courseInstance.save(courseInstance4)
+  await DB.courseInstance.save(courseInstance5)
+  await DB.courseInstance.save(courseInstance6)
+  await DB.courseInstance.save(courseInstance7)
+  await DB.courseInstance.save(courseInstance8)
+  await DB.courseInstance.save(courseInstance9)
   
   
   await deleteAll(DB.studentGroup)

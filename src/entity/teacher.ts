@@ -15,7 +15,7 @@ import { Department } from './department'
 import { SeniorProject } from '~/entity/senior-project'
 import { Evaluation } from '~/entity/evaluation'
 
-interface StudentArgs {
+interface TeacherArgs {
   teacherID: string
   firstName: string
   lastName: string
@@ -24,7 +24,7 @@ interface StudentArgs {
 }
 @Entity()
 export class Teacher {
-  constructor(args: StudentArgs) {
+  constructor(args: TeacherArgs) {
     if (args === undefined) return
     this.teacherID = args.teacherID
     this.firstName = args.firstName

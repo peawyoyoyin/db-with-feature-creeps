@@ -9,12 +9,12 @@ import {
 } from 'class-validator'
 import { validate } from '~/utils'
 
-interface StudentArgs {
+interface StudentGroupArgs {
   groupID: number
 }
 @Entity()
 export class StudentGroup {
-  constructor(args: StudentArgs) {
+  constructor(args: StudentGroupArgs) {
     if (args === undefined) return
     this.groupID = args.groupID
     validate(this)
