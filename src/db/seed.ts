@@ -10,7 +10,7 @@ import { StudentGroup } from '~/entity/student-group'
 import { CourseInstance } from '~/entity/course-instance'
 import { Teacher } from '~/entity/teacher'
 
-const seed = async() => {
+const seed = async () => {
   async function deleteAll<T>(repository: Repository<T>) {
     await repository
       .createQueryBuilder()
@@ -194,5 +194,3 @@ const seed = async() => {
   await DB.teacher.save(teacher2)
   await DB.teacher.save(teacher3)
 }
-
-export default seed

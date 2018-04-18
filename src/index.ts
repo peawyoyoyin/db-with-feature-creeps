@@ -9,7 +9,8 @@ import 'module-alias/register'
 import course from './routes/course'
 import seniorProject from './routes/seniorproj'
 import newStudent from './routes/newstudent'
-import db, { seed } from './db'
+import db from './db'
+import seed from './db/seed'
 
 import { Student } from './entity/student'
 
