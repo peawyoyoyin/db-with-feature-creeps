@@ -3,6 +3,7 @@ import {
   PrimaryColumn,
   Column,
   ManyToOne,
+  Index,
   PrimaryGeneratedColumn
 } from 'typeorm'
 import { Student } from './student'
@@ -16,6 +17,7 @@ interface StudyArgs {
   section: Section
 }
 @Entity()
+@Index("student, section", (study: Study) => [study.student, study.section], { unique: true })
 export class Study {
   constructor(args: StudyArgs) {
     if (args === undefined) return
