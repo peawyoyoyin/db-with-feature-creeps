@@ -143,11 +143,11 @@ const seed = async () => {
   })
   const courseInstance2 = new CourseInstance({
     semester:semester2,
-    course: course2,
+    course: course1,
   })
   const courseInstance3 = new CourseInstance({
     semester:semester4,
-    course: course3,
+    course: course1,
   })
   //Course2
   const courseInstance4 = new CourseInstance({
