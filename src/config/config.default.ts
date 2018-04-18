@@ -10,7 +10,7 @@ export = {
     username: 'root',
     password: 'password',
     database: 'db',
-    entities: ['build/entity/*.js'],
+    entities: ['build/entity/**/*.js'],
     synchronize: true,
     logging: process.env.NODE_ENV !== 'production'
   }
