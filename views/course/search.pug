@@ -7,10 +7,16 @@ block content
       .form-row.align-items-end
         .col-lg-3
           label(for="courseID") Course ID
-          input.form-control(type="text" name="courseID")
+          if searchCourseID
+            input.form-control(type="text" name="courseID" value=searchCourseID)
+          else
+            input.form-control(type="text" name="courseID")
         .col-lg-4
           label(for="courseName") Course Name
-          input.form-control(type="text" name="courseName")
+          if searchCourseName
+            input.form-control(type="text" name="courseName" value=searchCourseName)
+          else
+            input.form-control(type="text" name="courseName")
         .col-lg-2
           label(for="semester") Semester
           select.form-control(name="semester")
@@ -21,24 +27,31 @@ block content
                 option(value=semester.value) #{semester.text}
         .col-lg-2
           label(for="credits") Credits
-          input.form-control(type="text" name="credits")
+          if searchCredits
+            input.form-control(type="text" name="credits" value=searchCredits)
+          else
+            input.form-control(type="text" name="credits")
+
         .col-lg-1
           button.btn.btn-primary(type="submit") Submit
     hr
     if searchResults
-      table.table
-        thead
-          tr
-            th Course ID
-            th Course Name
-            th Credits
-        tbody
-          each course in searchResults
-              tr
-                  td #{course.courseID}
-                  td 
-                    a(href='/course/detail/' + course.courseID) #{course.courseName}
-                  td #{course.credits}
+      if searchResults.length == 0
+        h3.text-center.text-danger Course Not Found
+      else 
+        table.table
+          thead
+            tr
+              th Course ID
+              th Course Name
+              th Credits
+          tbody
+            each course in searchResults
+                tr
+                    td #{course.courseID}
+                    td 
+                      a(href='/course/detail/' + course.courseID) #{course.courseName}
+                    td #{course.credits}
 
     else
       h5 Start Searching using the search bar!
