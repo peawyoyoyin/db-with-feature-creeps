@@ -8,7 +8,7 @@ import {
 } from 'typeorm'
 import { Teacher } from './teacher'
 import { Student } from './student'
-import { Evaluation } from './evaluation'
+import { Evaluation } from './evaluation.relation'
 import { Length, IsPositive } from 'class-validator'
 import { validate } from '~/utils'
 

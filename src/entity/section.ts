@@ -11,7 +11,7 @@ import {
 import { CourseInstance } from './course-instance'
 import { Teacher } from './teacher'
 import { Student } from './student'
-import { Study } from './study'
+import { Study } from './study.relation'
 import { Length, IsPositive } from 'class-validator'
 import { validate } from '~/utils'
 
