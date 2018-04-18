@@ -21,6 +21,6 @@ block content
             each section in course.sections
               tr
                 td #{section.sectionNumber}
-                td TIME?
+                td #{section.time || 'null'}
                 td.text-center #{section.capacity}
                 td.text-center(title=section.teacher.firstName + ' ' + section.teacher.lastName) #{section.teacher.abbrName}
