@@ -1,6 +1,12 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
 import { Student } from './student'
-import { Length, Min, IsNumberString, Matches, IsPositive } from 'class-validator'
+import {
+  Length,
+  Min,
+  IsNumberString,
+  Matches,
+  IsPositive
+} from 'class-validator'
 import { validate } from '~/utils'
 
 interface StudentArgs {
@@ -14,7 +20,7 @@ export class StudentGroup {
     validate(this)
   }
 
-  @PrimaryGeneratedColumn({type: 'int'})
+  @PrimaryGeneratedColumn({ type: 'int' })
   @IsPositive()
   groupID: number
 
