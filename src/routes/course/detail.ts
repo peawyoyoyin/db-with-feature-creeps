@@ -20,13 +20,14 @@ router.get('/:id', async (req, res) => {
     const { course, sections: rawSections } = instance
     const { courseID, name: courseName, credit: credits } = course
     const sections = rawSections.map(section => {
-      const { sectionNumber, capacity, teacher: rawTeacher } = section
+      const { sectionNumber, capacity, teacher: rawTeacher, time } = section
       const { firstName, lastName, abbrName } = rawTeacher
       const teacher = { firstName, lastName, abbrName }
       return {
         sectionNumber,
         capacity,
-        teacher
+        teacher,
+        time
       }
     })
     return {
@@ -64,7 +65,7 @@ router.get('/:id', async (req, res) => {
   // }
 
   res.render('course/detail', {
-    title: req.params.id,
+    title: course.courseName,
     course
   })
 })
