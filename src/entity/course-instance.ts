@@ -17,6 +17,7 @@ interface CourseInstanceArgs {
 }
 
 @Entity()
+@Index("course, semester", (courseInstance: CourseInstance) => [courseInstance.course, courseInstance.semester], { unique: true })
 export class CourseInstance {
   constructor(args: CourseInstanceArgs) {
     if (args === undefined) return

@@ -15,6 +15,7 @@ interface DepartmentArgs {
   faculty: Faculty
 }
 @Entity()
+@Index("name, faculty", (department: Department) => [department.name, department.faculty], { unique: true })
 export class Department {
   constructor(args: DepartmentArgs) {
     if (args === undefined) return
