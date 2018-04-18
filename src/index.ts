@@ -9,13 +9,13 @@ import 'module-alias/register'
 import course from './routes/course'
 import seniorProject from './routes/seniorproj'
 import newStudent from './routes/newstudent'
-import db from './db'
+import db, { seed } from './db'
 
 import { Student } from './entity/student'
 
 (async () => {
   await db.init(config.orm)
-  await db.seed()
+  await seed()
 })()
 
 const app = express()
