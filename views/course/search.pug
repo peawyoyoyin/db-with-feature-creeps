@@ -8,9 +8,17 @@ block content
         .col-lg-3
           label(for="courseID") Course ID
           input.form-control(type="text" name="courseID")
-        .col
+        .col-lg-4
           label(for="courseName") Course Name
           input.form-control(type="text" name="courseName")
+        .col-lg-2
+          label(for="semester") Semester
+          select.form-control(name="semester")
+            each semester in semesters
+              if semester.value == selectedSemester
+                option(value=semester.value selected) #{semester.text}
+              else
+                option(value=semester.value) #{semester.text}
         .col-lg-2
           label(for="credits") Credits
           input.form-control(type="text" name="credits")
