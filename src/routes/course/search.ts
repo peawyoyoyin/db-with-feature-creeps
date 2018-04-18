@@ -61,12 +61,13 @@ router.get('/', async (req, res) => {
       const {
         abbreviate: courseName,
         courseID,
-        credit: credits
+        credit: credits,
       } = instance.course
       return {
         courseID,
         courseName,
-        credits
+        credits,
+        instanceID: instance.id
       }
     })
   }
