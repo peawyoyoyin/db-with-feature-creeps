@@ -1,5 +1,4 @@
 import * as express from 'express'
-import { validate } from 'class-validator'
 import db from '~/db'
 import { Student } from '~/entity/student'
 
