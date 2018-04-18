@@ -36,19 +36,22 @@ block content
           button.btn.btn-primary(type="submit") Submit
     hr
     if searchResults
-      table.table
-        thead
-          tr
-            th Course ID
-            th Course Name
-            th Credits
-        tbody
-          each course in searchResults
-              tr
-                  td #{course.courseID}
-                  td 
-                    a(href='/course/detail/' + course.courseID) #{course.courseName}
-                  td #{course.credits}
+      if searchResults.length == 0
+        h3.text-center.text-danger Course Not Found
+      else 
+        table.table
+          thead
+            tr
+              th Course ID
+              th Course Name
+              th Credits
+          tbody
+            each course in searchResults
+                tr
+                    td #{course.courseID}
+                    td 
+                      a(href='/course/detail/' + course.courseID) #{course.courseName}
+                    td #{course.credits}
 
     else
       h5 Start Searching using the search bar!
