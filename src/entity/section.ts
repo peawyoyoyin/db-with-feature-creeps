@@ -24,7 +24,7 @@ interface SectionArgs {
 @Entity()
 export class Section {
   constructor(args: SectionArgs) {
-    if (args = undefined) return
+    if (args === undefined) return
     this.id = args.id
     this.sectionNumber = args.sectionNumber
     this.capacity = args.capacity
