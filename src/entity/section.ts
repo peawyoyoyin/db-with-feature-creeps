@@ -23,6 +23,7 @@ interface SectionArgs {
 }
 
 @Entity()
+@Index("sectionNumber, courseInstance", (section: Section) => [section.courseInstance, section.sectionNumber], { unique: true })
 export class Section {
   constructor(args: SectionArgs) {
     if (args === undefined) return
