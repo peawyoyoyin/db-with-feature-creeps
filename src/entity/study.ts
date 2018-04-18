@@ -10,14 +10,14 @@ import { Section } from './section'
 import { Length, Min, IsNumberString, Matches } from 'class-validator'
 import { validate } from '~/utils'
 
-interface StudentArgs {
+interface StudyArgs {
   gradeLetter: string
   student: Student
   section: Section
 }
 @Entity()
 export class Study {
-  constructor(args: StudentArgs) {
+  constructor(args: StudyArgs) {
     if (args === undefined) return
     this.gradeLetter = args.gradeLetter
     this.student = args.student

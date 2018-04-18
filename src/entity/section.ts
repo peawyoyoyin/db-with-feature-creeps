@@ -12,9 +12,24 @@ import { CourseInstance } from './course-instance'
 import { Teacher } from './teacher'
 import { Student } from './student'
 import { Study } from './study'
+import { Length, IsPositive } from 'class-validator'
+import { validate } from '~/utils'
+
+interface SectionArgs {
+  id: number
+  sectionNumber: number
+  capacity: number
+}
 
 @Entity()
 export class Section {
+  constructor(args: SectionArgs) {
+    if (args = undefined) return
+    this.id = args.id
+    this.sectionNumber = args.sectionNumber
+    this.capacity = args.capacity
+    validate(this)
+  }
   @PrimaryGeneratedColumn({ type: 'int' })
   id: number
 
