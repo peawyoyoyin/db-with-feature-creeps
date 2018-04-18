@@ -3,6 +3,7 @@ import manage from './manage'
 import enroll from './enroll'
 import search from './search'
 import detail from './detail'
+import pay from './pay'
 import db from '~/db'
 import { AdvancedConsoleLogger } from 'typeorm'
 
@@ -12,9 +13,6 @@ router.use('/enroll', enroll)
 router.use('/manage', manage)
 router.use('/search', search)
 router.use('/detail', detail)
-
-router.get('/pay', (req, res) => {
-  res.render('course/pay', { title: 'Pay Fee' })
-})
+router.use('/pay', pay)
 
 export default router
