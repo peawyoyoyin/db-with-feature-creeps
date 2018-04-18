@@ -2,7 +2,7 @@ import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm'
 import { Department } from './department'
 
 interface FacultyArgs {
-  facultyID: string,
+  facultyID: string
   name: string
 }
 @Entity()
@@ -13,10 +13,10 @@ export class Faculty {
     this.name = args.name
   }
 
-  @PrimaryColumn({type: 'varchar'})
+  @PrimaryColumn({ type: 'varchar' })
   facultyID: string
 
-  @Column({type: 'varchar'})
+  @Column({ type: 'varchar' })
   name: string
 
   @OneToMany(type => Department, department => department.faculty)

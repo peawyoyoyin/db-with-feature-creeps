@@ -1,22 +1,32 @@
-import { Entity, PrimaryColumn, Column, ManyToOne, ManyToMany } from 'typeorm'
+import {
+  Entity,
+  PrimaryColumn,
+  Column,
+  ManyToOne,
+  ManyToMany,
+  PrimaryGeneratedColumn
+} from 'typeorm'
 import { SeniorProject } from './senior-project'
 import { EvaluationType } from './evaluation-type'
-import { Teacher } from './teacher';
+import { Teacher } from './teacher'
 
 @Entity()
 export class Evaluation {
-  @ManyToOne(type => SeniorProject, seniorProject => seniorProject.evaluations, { primary: true })
+  @PrimaryGeneratedColumn({ type: 'int' })
+  id: number
+
+  @ManyToOne(type => SeniorProject, seniorProject => seniorProject.evaluations)
   project: SeniorProject
 
-  @ManyToOne(type => EvaluationType, { primary: true })
+  @ManyToOne(type => EvaluationType)
   evaluationType: EvaluationType
 
   @ManyToMany(type => Teacher, teacher => teacher.projectEvaluations)
   evaluators: Teacher[]
 
-  @Column({type: 'varchar', length: 300})
+  @Column({ type: 'varchar', length: 300 })
   comment: string
 
-  @Column({type: 'int'})
+  @Column({ type: 'int' })
   grade: number
 }

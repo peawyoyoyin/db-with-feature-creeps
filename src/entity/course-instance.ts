@@ -1,8 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, Column, Index, ManyToOne, OneToMany } from 'typeorm'
-import { Course } from './course';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  Index,
+  ManyToOne,
+  OneToMany
+} from 'typeorm'
+import { Course } from './course'
 import { Semester } from './semester'
 import { Section } from './section'
-import { AcademicYear } from '~/entity/academic-year';
+import { AcademicYear } from '~/entity/academic-year'
 
 interface CourseInstanceArgs {
   course: Course
@@ -17,10 +24,17 @@ export class CourseInstance {
     this.semester = args.semester
   }
 
-  @ManyToOne(type => Course, course => course.instances, { onDelete: 'CASCADE', primary: true })
+  @PrimaryGeneratedColumn({type: 'int'}) id: number
+
+  @ManyToOne(type => Course, course => course.instances, {
+    onDelete: 'CASCADE'
+  })
   course: Course
 
-  @ManyToOne(type => Semester, semester => semester.courseInstances, { onDelete: 'CASCADE', nullable: false, primary: true })
+  @ManyToOne(type => Semester, semester => semester.courseInstances, {
+    onDelete: 'CASCADE',
+    nullable: false
+  })
   semester: Semester
 
   @OneToMany(type => Section, section => section.courseInstance)

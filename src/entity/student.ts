@@ -39,7 +39,7 @@ export class Student {
   }
 
   @PrimaryColumn({ type: 'char', length: 10 })
-  @Length(10, 10, {message: 'studentID length must be 10 characters'})
+  @Length(10, 10, { message: 'studentID length must be 10 characters' })
   @IsNumberString()
   studentID: string
 
@@ -60,7 +60,7 @@ export class Student {
   nationality: string
 
   @Column({ type: 'char', length: 13 })
-  @Length(13, 13, {message: 'citizenID length must be 13 characters'})
+  @Length(13, 13, { message: 'citizenID length must be 13 characters' })
   @IsNumberString()
   citizenID: string
 
