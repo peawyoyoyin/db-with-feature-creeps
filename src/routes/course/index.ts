@@ -32,28 +32,29 @@ router.get('/search', async (req, res) => {
   if (
     courseID !== undefined ||
     courseName !== undefined ||
+    semester !== undefined ||
     credits !== undefined
   ) {
-    searchResults = [
-      {
-        courseID: '2110217',
-        courseName: 'SOME SUBJ',
-        credits: 3
-      },
-      {
-        courseID: '2110231',
-        courseName: 'SOME OTHER SUBJ',
-        credits: 3
-      },
-      {
-        courseID: '2110442',
-        courseName: 'SOME SUBJ LAB',
-        credits: 1
+    const rawSearchResults = await db.courseInstance
+      .createQueryBuilder('instance')
+      .leftJoinAndSelect('instance.course', 'course')
+      .where('course.name like :name', {name: `${courseName}%`})
+      .getMany()
+    console.log(rawSearchResults)
+    searchResults = rawSearchResults.map(instance => {
+      const {abbreviate: courseName, courseID, credit: credits} = instance.course
+      return {
+        courseID,
+        courseName,
+        credits
       }
-    ]
+    })
   }
   res.render('course/search', {
     title: 'Search Courses',
+    searchCourseID: courseID,
+    searchCourseName: courseName,
+    searchCredits: credits,
     searchResults,
     semesters,
     selectedSemester: semester
