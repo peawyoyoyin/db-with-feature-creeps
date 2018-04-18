@@ -15,7 +15,6 @@ import { AcademicYear } from '~/entity/academic-year'
 import { Semester } from '~/entity/semester'
 import { Teacher } from '~/entity/teacher'
 import { StudentGroup } from '~/entity/student-group'
-import seedFunction from './seed'
 
 export default class DB {
   static _connection: Connection
@@ -43,6 +42,4 @@ export default class DB {
     DB.teacher = DB._connection.getRepository(Teacher)
     DB.studentGroup = DB._connection.getRepository(StudentGroup)
   }
-
-  static seed = seedFunction
 }
