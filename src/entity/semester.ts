@@ -25,6 +25,7 @@ interface SemesterArgs {
 }
 
 @Entity()
+@Index("semesterNumber, year", (semester: Semester) => [semester.semesterNumber, semester.year], { unique: true })
 export class Semester {
   constructor(args: SemesterArgs) {
     if (args === undefined) return
