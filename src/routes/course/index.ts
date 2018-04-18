@@ -35,14 +35,31 @@ router.get('/search', async (req, res) => {
     semester !== undefined ||
     credits !== undefined
   ) {
-    const rawSearchResults = await db.courseInstance
+    let rawSearchResults = db.courseInstance
       .createQueryBuilder('instance')
       .leftJoinAndSelect('instance.course', 'course')
-      .where('course.name like :name', {name: `${courseName}%`})
-      .getMany()
+    if (courseID !== undefined) {
+      rawSearchResults = rawSearchResults.andWhere('course.courseID like :id', {
+        id: `${courseID}%`
+      })
+    }
+    if (courseName !== undefined) {
+      rawSearchResults = rawSearchResults.andWhere('course.name like :name', {
+        name: `${courseName}%`
+      })
+    }
+    if (credits !== undefined && credits !== '') {
+      rawSearchResults = rawSearchResults.andWhere('course.credit = :credit', {
+        credit: credits
+      })
+    }
     console.log(rawSearchResults)
-    searchResults = rawSearchResults.map(instance => {
-      const {abbreviate: courseName, courseID, credit: credits} = instance.course
+    searchResults = (await rawSearchResults.getMany()).map(instance => {
+      const {
+        abbreviate: courseName,
+        courseID,
+        credit: credits
+      } = instance.course
       return {
         courseID,
         courseName,
