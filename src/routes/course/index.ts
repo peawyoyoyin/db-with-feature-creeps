@@ -1,32 +1,39 @@
 import * as express from 'express'
 import manage from './manage'
 import enroll from './enroll'
+import db from '~/db'
+import { AdvancedConsoleLogger } from 'typeorm'
 
 const router = express.Router()
 
 router.use('/enroll', enroll)
 router.use('/manage', manage)
 
-router.get('/search', (req, res) => {
+router.get('/search', async (req, res) => {
   let searchResults = undefined
-  const {courseID, courseName, credits} = req.query;
-  const queries = [
-    {name: 'courseID', value: courseID},
-    {name: 'courseName', value: courseName},
-    {name: 'credits', value: credits}
-  ]
-  const findOptions = 
-    queries
-      .filter(query => query.value !== undefined && query.value.length > 0)
-      .reduce((acc, query) => {
-        const {name, value} = query
-        return {
-          ...acc,
-          [name]: value
-        }
-      }, {})
-  console.log(findOptions)
-  if(courseID !== undefined || courseName !== undefined || credits !== undefined) {
+  const { courseID, courseName, semester, credits } = req.query
+  const rawSemester = await db.semester
+    .createQueryBuilder('semester')
+    .leftJoinAndSelect('semester.year', 'year')
+    .orderBy('year.year', 'DESC')
+    .addOrderBy('semester.semesterNumber', 'DESC')
+    .getMany()
+  const semesters = rawSemester.map(semester => {
+    const semesterId = semester.id
+    const semesterNumber = semester.semesterNumber
+    const yearNumber = semester.year.year
+    const text = `${yearNumber}/${semesterNumber}`
+    return {
+      value: semesterId,
+      text
+    }
+  })
+  console.log(rawSemester)
+  if (
+    courseID !== undefined ||
+    courseName !== undefined ||
+    credits !== undefined
+  ) {
     searchResults = [
       {
         courseID: '2110217',
@@ -45,7 +52,12 @@ router.get('/search', (req, res) => {
       }
     ]
   }
-  res.render('course/search', { title: 'Search Courses', searchResults })
+  res.render('course/search', {
+    title: 'Search Courses',
+    searchResults,
+    semesters,
+    selectedSemester: semester
+  })
 })
 
 router.get('/detail/:id', (req, res) => {
@@ -74,9 +86,9 @@ router.get('/detail/:id', (req, res) => {
       }
     ]
   }
-  
-  res.render('course/detail', { 
-    title: req.params.id, 
+
+  res.render('course/detail', {
+    title: req.params.id,
     course
   })
 })
