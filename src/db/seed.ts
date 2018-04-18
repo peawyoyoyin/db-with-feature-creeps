@@ -194,3 +194,4 @@ const seed = async () => {
   await DB.teacher.save(teacher2)
   await DB.teacher.save(teacher3)
 }
+export default seed
