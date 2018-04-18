@@ -6,7 +6,8 @@ import {
   OneToMany,
   ManyToMany,
   PrimaryColumn,
-  PrimaryGeneratedColumn
+  PrimaryGeneratedColumn,
+  Timestamp
 } from 'typeorm'
 import { CourseInstance } from './course-instance'
 import { Teacher } from './teacher'
@@ -20,6 +21,7 @@ interface SectionArgs {
   sectionNumber: number
   capacity: number
   courseInstance: CourseInstance
+  time?: string
 }
 
 @Entity()
@@ -30,6 +32,7 @@ export class Section {
     this.sectionNumber = args.sectionNumber
     this.capacity = args.capacity
     this.courseInstance = args.courseInstance
+    this.time = args.time || 'TDF'
     validate(this)
   }
   @PrimaryGeneratedColumn({ type: 'int' })
@@ -40,6 +43,9 @@ export class Section {
 
   @Column({ type: 'int' })
   capacity: number
+
+  @Column({type: 'varchar', default: 'TDF'})
+  time: string
 
   @ManyToOne(
     type => CourseInstance,
