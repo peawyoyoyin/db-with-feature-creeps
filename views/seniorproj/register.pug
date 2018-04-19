@@ -1,4 +1,17 @@
 extends ../common/layout.pug
 block content
   .container
-    h2 register senior project
+    h3 register senior project
+    hr
+    form.p-3(action="")
+      .form-row
+        .col
+          label Project Topic
+          input.form-control(type="text")
+        .col-lg-4
+          label Supervisor
+          select.form-control(name="")
+      .form-row
+        .col 
+          label Student ID
+          input.form-control(type="text")
