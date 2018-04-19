@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, Index, OneToMany } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, Index, OneToMany, ManyToOne } from 'typeorm'
 import { AcademicYear } from './academic-year'
 import { StudentGroup } from './student-group'
 import { Length, IsPositive } from 'class-validator'
@@ -13,6 +13,7 @@ interface GroupYearRelationArgs {
 }
 
 @Entity()
+@Index("year, studentGroup", (groupYearRelations: GroupYearRelation) => [groupYearRelations.year, groupYearRelations.studentGroup], { unique: true })
 export class GroupYearRelation {
   constructor(args: GroupYearRelationArgs) {
     if (args === undefined) return
@@ -32,9 +33,9 @@ export class GroupYearRelation {
   @Column({type: 'decimal'})
   summerFee: number
 
-  @OneToMany(type => AcademicYear, academicYear => academicYear.groupYearRelations, {nullable: false})
+  @ManyToOne(type => AcademicYear, academicYear => academicYear.groupYearRelations, {nullable: false})
   year: AcademicYear
 
-  @OneToMany(type => StudentGroup, studentGroup => studentGroup.groupYearRelations, {nullable: false})
+  @ManyToOne(type => StudentGroup, studentGroup => studentGroup.groupYearRelations, {nullable: false})
   studentGroup: StudentGroup
 }
