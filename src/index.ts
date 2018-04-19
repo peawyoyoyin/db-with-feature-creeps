@@ -6,6 +6,7 @@ import { Connection, createConnection } from 'typeorm'
 //this fixes path aliases
 import 'module-alias/register'
 
+import login from './routes/login'
 import course from './routes/course'
 import seniorProject from './routes/seniorproj'
 import newStudent from './routes/newstudent'
@@ -29,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/static', express.static('public'))
 app.use(morgan(':status :method\t:url'))
 
+app.use('/login', login)
 app.use('/course', course)
 app.use('/seniorproj', seniorProject)
 app.use('/newstudent', newStudent)
