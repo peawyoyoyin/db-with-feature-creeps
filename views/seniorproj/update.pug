@@ -2,3 +2,24 @@ extends ../common/layout.pug
 block content
   .container
     h2 update senior project status
+    hr
+    form(action="/seniorproj/update")
+      .form-row.align-items-end
+        .col-lg-5
+          label(for="projectID") Project ID
+          input.form-control(type="text" name="projectID")
+        .col-lg-5
+          label(for="teacherID") Teacher ID
+          input.form-control(type="text" name="teacherID")
+        .col-lg-2
+          label(for="grade") Grade
+          select.form-control(name="grade")
+            each grade in grades
+              option(value=grade) #{grade}
+      .form-row.align-items-end
+        .col-lg-12
+          label(for="comment") Comment
+          textarea.form-control(rows=5 name="comment")
+      .form-row.mt-2.float-right
+        button.btn.btn-primary submit
+        

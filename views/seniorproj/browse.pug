@@ -3,56 +3,33 @@ block content
   .container
     h3 Browse Senior Projects
     hr
-    form(action="")
+    form(action="/seniorproj/browse")
       .form-row.align-items-end
         .col-lg-3
-          label(for="courseID") Course ID
-          if searchCourseID
-            input.form-control(type="text" name="courseID" value=searchCourseID)
-          else
-            input.form-control(type="text" name="courseID")
-        .col-lg-4
-          label(for="courseName") Course Name
-          if searchCourseName
-            input.form-control(type="text" name="courseName" value=searchCourseName)
-          else
-            input.form-control(type="text" name="courseName")
+          label(for="projectID") Project ID
+          input.form-control(type="text" name="projectID" 
+          value=searchProjectID placeholder="example: 4562xxx")
+        .col-lg-3
+          label(for="topic") Topic
+          input.form-control(type="text" name="topic"
+          value=searchTopic placeholder="example: Computer")
         .col-lg-2
-          label(for="semester") Semester
-          select.form-control(name="semester")
-            each semester in semesters
-              if semester.value == selectedSemester
-                option(value=semester.value selected) #{semester.text}
+          label(for="year") Year
+          select.form-control(name="year")
+            each year in years
+              if year == searchYear
+                option(value=year selected) #{year}
               else
-                option(value=semester.value) #{semester.text}
-        .col-lg-2
-          label(for="credits") Credits
-          if searchCredits
-            input.form-control(type="text" name="credits" value=searchCredits)
-          else
-            input.form-control(type="text" name="credits")
-
+                option(value=year) #{year}
+        .col-lg-3
+          label(for="superVisorTeacherID") SuperVisor Teacher ID
+          input.form-control(type="text" name="superVisorTeacherID"
+          value=searchSuperVisorTeacherID placeholder="jantaratit")
+        
         .col-lg-1
           button.btn.btn-primary(type="submit") Submit
     hr
-    if searchResults
-      if searchResults.length == 0
-        h3.text-center.text-danger Course Not Found
-      else 
-        table.table
-          thead
-            tr
-              th Course ID
-              th Course Name
-              th Credits
-          tbody
-            each course in searchResults
-                tr
-                    td #{course.courseID}
-                    td 
-                      a(href='/course/detail/' + course.instanceID) #{course.courseName}
-                    td #{course.credits}
+    h3 course not found
 
-    else
-      h5 Start Searching using the search bar!
+        
 
