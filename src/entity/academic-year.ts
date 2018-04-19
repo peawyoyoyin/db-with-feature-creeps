@@ -3,6 +3,7 @@ import { Semester } from './semester'
 import { Min } from 'class-validator'
 import { CourseInstance } from '~/entity/course-instance';
 import { GroupYearRelation } from '~/entity/group-year.relation';
+import { SeniorProject } from '~/entity/senior-project';
 
 interface AcademicYearArgs {
   year: number
@@ -22,4 +23,7 @@ export class AcademicYear {
 
   @ManyToOne(type => GroupYearRelation, groupYearRelation => groupYearRelation.year)
   groupYearRelations: GroupYearRelation[]
+
+  // @OneToMany(type => SeniorProject, seniorProject => seniorProject.year)
+  // seniorProjects: SeniorProject[]
 }

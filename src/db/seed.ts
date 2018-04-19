@@ -10,6 +10,7 @@ import { StudentGroup } from '~/entity/student-group'
 import { CourseInstance } from '~/entity/course-instance'
 import { Teacher } from '~/entity/teacher'
 import { Section } from '~/entity/section'
+import { SeniorProject } from '~/entity/senior-project'
 
 const seed = async () => {
   async function deleteAll<T>(repository: Repository<T>) {
@@ -123,9 +124,9 @@ const seed = async () => {
     lastWithdrawalDate: new Date()
   })
   const semester4 = new Semester({
-    semesterNumber:1,
-    startDate: new Date(2561,6,3),
-    endDate: new Date(2561,8,9),
+    semesterNumber: 1,
+    startDate: new Date(2561, 6, 3),
+    endDate: new Date(2561, 8, 9),
     year: year2,
     lastSubjectRemovalDate: new Date(),
     lastWithdrawalDate: new Date()
@@ -139,41 +140,41 @@ const seed = async () => {
   await deleteAll(DB.courseInstance)
   //Course1
   const courseInstance1 = new CourseInstance({
-    semester:semester1,
+    semester: semester1,
     course: course1,
   })
   const courseInstance2 = new CourseInstance({
-    semester:semester2,
+    semester: semester2,
     course: course1,
   })
   const courseInstance3 = new CourseInstance({
-    semester:semester4,
+    semester: semester4,
     course: course1,
   })
   //Course2
   const courseInstance4 = new CourseInstance({
-    semester:semester1,
+    semester: semester1,
     course: course2,
   })
   const courseInstance5 = new CourseInstance({
-    semester:semester2,
+    semester: semester2,
     course: course2,
   })
   const courseInstance6 = new CourseInstance({
-    semester:semester3,
+    semester: semester3,
     course: course2,
   })
   const courseInstance7 = new CourseInstance({
-    semester:semester4,
+    semester: semester4,
     course: course2,
   })
   //Course3
   const courseInstance8 = new CourseInstance({
-    semester:semester3,
+    semester: semester3,
     course: course3,
   })
   const courseInstance9 = new CourseInstance({
-    semester:semester4,
+    semester: semester4,
     course: course3,
   })
   console.log(courseInstance1.semester)
@@ -186,8 +187,8 @@ const seed = async () => {
   await DB.courseInstance.save(courseInstance7)
   await DB.courseInstance.save(courseInstance8)
   await DB.courseInstance.save(courseInstance9)
-  
-  
+
+
   await deleteAll(DB.studentGroup)
   const studentGroup1 = new StudentGroup({
     groupID: 1
@@ -265,5 +266,23 @@ const seed = async () => {
   await DB.section.save(section2)
   await DB.section.save(section3)
   await DB.section.save(section4)
+
+  await deleteAll(DB.seniorProject)
+  const seniorProject1 = new SeniorProject({
+    topic: "Computer",
+    year: 2560
+  })
+  const seniorProject2 = new SeniorProject({
+    topic: "Electronic",
+    year: 2561
+  })
+  const seniorProject3 = new SeniorProject({
+    topic: "Electronic",
+    year: 2561
+  })
+  await DB.seniorProject.save(seniorProject1)
+  await DB.seniorProject.save(seniorProject2)
+  await DB.seniorProject.save(seniorProject3)
+  
 }
 export default seed

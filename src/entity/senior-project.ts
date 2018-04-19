@@ -13,7 +13,6 @@ import { Length, IsPositive } from 'class-validator'
 import { validate } from '~/utils'
 
 interface SeniorProjectArgs {
-  projectID: number
   topic: string
   year: number
 }
@@ -22,13 +21,11 @@ interface SeniorProjectArgs {
 export class SeniorProject {
   constructor(args: SeniorProjectArgs) {
     if (args === undefined) return
-    this.projectID = args.projectID
     this.topic = args.topic
     this.year = args.year
     validate(this)
   }
   @PrimaryGeneratedColumn({ type: 'int' })
-  @IsPositive()
   projectID: number
 
   @Column({ type: 'varchar', length: 100 })
