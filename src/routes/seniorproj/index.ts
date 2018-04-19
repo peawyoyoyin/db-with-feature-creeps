@@ -25,7 +25,8 @@ router.get('/register', (req, res) => {
 router.get('/update', (req, res) => {
   res.render('seniorproj/update', { 
     title: 'Update Senior Project Status',
-    grades:["A","B+","B","C+","C","D+","D","F"]
+    grades:["A","B+","B","C+","C","D+","D","F"],
+    types:["mid-term presentation","final presentation","minor update"]
   })
 })
 
