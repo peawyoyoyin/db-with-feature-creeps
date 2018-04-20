@@ -38,13 +38,8 @@ router.post('/', async (req, res) => {
       lastName,
       citizenID,
       nationality,
-<<<<<<< HEAD
       department,
       year: parseInt(year)
-=======
-      year: parseInt(year),
-      department
->>>>>>> eae5c0fb4aab02d0ed86fc13251b0937bce300cb
     })
     await db.student.save(newStudent)
     res.redirect('/')
