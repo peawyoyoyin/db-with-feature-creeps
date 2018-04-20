@@ -7,7 +7,7 @@ import {
   ManyToMany,
   OneToOne
 } from 'typeorm'
-import { Length, Min, IsNumberString } from 'class-validator'
+import { Length, Min, IsNumberString, NotEquals} from 'class-validator'
 import { validate } from '~/utils'
 import { StudentGroup } from './student-group'
 import { EnrollmentFeePayment } from './enrollment-fee-payment'
@@ -82,6 +82,7 @@ export class Student {
   @ManyToOne(type => Department, department => department.students, {
     nullable: false
   })
+  @NotEquals('none')
   department: Department
 
   @OneToOne(type => SeniorProject)

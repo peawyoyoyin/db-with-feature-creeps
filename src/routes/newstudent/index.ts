@@ -38,9 +38,9 @@ router.post('/', async (req, res) => {
       lastName,
       citizenID,
       nationality,
+      department,
       year: parseInt(year)
     })
-    if (department !== 'none') newStudent.department = JSON.parse(department)
     await db.student.save(newStudent)
     res.redirect('/')
   } catch (e) {
