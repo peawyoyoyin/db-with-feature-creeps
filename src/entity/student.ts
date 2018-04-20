@@ -24,6 +24,7 @@ interface StudentArgs {
   year: number
   nationality: string
   citizenID: string
+  department: Department
 }
 @Entity()
 export class Student {
@@ -35,6 +36,7 @@ export class Student {
     this.year = args.year
     this.nationality = args.nationality
     this.citizenID = args.citizenID
+    this.department = args.department
     validate(this)
   }
 
@@ -78,7 +80,7 @@ export class Student {
   supervisor: Teacher
 
   @ManyToOne(type => Department, department => department.students, {
-    onDelete: 'SET NULL'
+    nullable: false
   })
   department: Department
 

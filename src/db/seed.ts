@@ -11,6 +11,7 @@ import { CourseInstance } from '~/entity/course-instance'
 import { Teacher } from '~/entity/teacher'
 import { Section } from '~/entity/section'
 import { SeniorProject } from '~/entity/senior-project'
+import { Student } from '~/entity/student'
 
 const seed = async () => {
   async function deleteAll<T>(repository: Repository<T>) {
@@ -49,17 +50,57 @@ const seed = async () => {
   await DB.departments.save(dp2)
   await DB.departments.save(dp3)
 
-  // await deleteAll(DB.student)
-  // const std1 = new Student({
-  //   studentID: '6156789021',
-  //   firstName: 'Jame',
-  //   lastName: 'Fast',
-  //   year: 2561,
-  //   citizenID: '9876543210123',
-  //   nationality: 'TH'
-  // })
-  // std1.department = dp1
-  // await DB.student.save(std1)
+  await deleteAll(DB.student)
+  const std1 = new Student({
+    studentID: '6156789021',
+    firstName: 'Jame',
+    lastName: 'Fast',
+    year: 2561,
+    citizenID: '9871234560123',
+    nationality: 'TH',
+    department: dp1
+  })
+  const std2 = new Student({
+    studentID: '5831645895',
+    firstName: 'Un',
+    lastName: 'Kim-Jong',
+    year: 2558,
+    citizenID: '9876543210123',
+    nationality: 'KR',
+    department: dp1
+  })
+  const std3 = new Student({
+    studentID: '5984651325',
+    firstName: 'Mark',
+    lastName: 'Antony',
+    year: 2559,
+    citizenID: '9816483210123',
+    nationality: 'IT',
+    department: dp2
+  })
+  const std4 = new Student({
+    studentID: '6012535648',
+    firstName: 'Julius',
+    lastName: 'Caesar',
+    year: 2560,
+    citizenID: '9875846910123',
+    nationality: 'IT',
+    department: dp2
+  })
+  const std5 = new Student({
+    studentID: '6154489021',
+    firstName: 'Dick',
+    lastName: 'Johnson',
+    year: 2561,
+    citizenID: '9876541234563',
+    nationality: 'US',
+    department: dp2
+  })
+  await DB.student.save(std1)
+  await DB.student.save(std2)
+  await DB.student.save(std3)
+  await DB.student.save(std4)
+  await DB.student.save(std5)
 
   await deleteAll(DB.course)
   const course1 = new Course({
