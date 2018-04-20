@@ -35,7 +35,7 @@ block content
           select.form-control(name="department")
             option(selected value="none") Choose Department...
             each department in departments
-              option(value=department) #{department.name}
+              option(value=department.id) #{department.name}
       hr
       each error in errors
         .form-row
