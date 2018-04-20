@@ -82,7 +82,7 @@ export class Student {
   @ManyToOne(type => Department, department => department.students, {
     nullable: false
   })
-  @IsNumberString()
+  @NotEquals('none')
   department: Department
 
   @OneToOne(type => SeniorProject)
