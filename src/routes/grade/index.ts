@@ -3,10 +3,34 @@ import db from '~/db'
 
 const router = express.Router()
 
-router.get('/', (req, res) => {
-  let gradeData
+router.get('/', async (req, res) => {
   const { sid } = req.query
-  res.render('grade/grade', { gradeData })
+  let gradeData = {};
+  let gradeDataRaw = await db._connection.manager.query(
+    `
+      SELECT abbreviate, courseCourseID, gradeLetter, semesterNumber, yearYear FROM study 
+      LEFT JOIN section ON (study.sectionId = section.id) 
+      LEFT JOIN course_instance ON (section.courseInstanceId = course_instance.id) 
+      LEFT JOIN semester ON (course_instance.semesterId = semester.id) 
+      LEFT JOIN course ON (course_instance.courseCourseID = course.courseID)
+      WHERE studentStudentID = ?
+    `,
+    [sid]
+  )
+  if (gradeDataRaw.length === 0) gradeData = undefined
+  else {
+    for (let i = 0; i < gradeDataRaw.length; i++) {
+      let semesterString = gradeDataRaw[i].yearYear.toString() + " semester " + gradeDataRaw[i].semesterNumber.toString()
+      if(gradeData[semesterString]) {
+        gradeData[semesterString].push(gradeDataRaw[i])
+      }
+      else {
+        gradeData[semesterString] = [gradeDataRaw[i]]
+      }
+    }
+  }
+  res.render('grade/grade', { gradeData, sid })
+  console.log(gradeData)
 })
 
 export default router

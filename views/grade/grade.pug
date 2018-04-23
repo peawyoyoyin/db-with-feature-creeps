@@ -8,8 +8,22 @@ block content
       .form-inline
         .form-group.mr-4
           label.col-form-label.col Student ID
-          input.form-control(type="text" name="sid")
+          input.form-control(type="text" name="sid" value=sid)
         button.btn.btn-primary(type="submit") Submit
   hr
+  .container
+    if gradeData
+      table.table
+        thead
+          th Subject ID
+          th Subject Name
+          th Grade
+        tbody
+          each subject in gradeData
+            tr
+              td #{subject.courseCourseID}
+              td #{subject.abbreviate}
+              td #{subject.gradeLetter}
+    
   
   
