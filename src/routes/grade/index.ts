@@ -22,10 +22,12 @@ router.get('/', async (req, res) => {
     for (let i = 0; i < gradeDataRaw.length; i++) {
       let semesterString = gradeDataRaw[i].yearYear.toString() + " semester " + gradeDataRaw[i].semesterNumber.toString()
       if(gradeData[semesterString]) {
-        gradeData[semesterString].push(gradeDataRaw[i])
+        gradeData[semesterString].courses.push(gradeDataRaw[i])
       }
       else {
-        gradeData[semesterString] = [gradeDataRaw[i]]
+        gradeData[semesterString] = {}
+        gradeData[semesterString].semester = semesterString
+        gradeData[semesterString].courses = [gradeDataRaw[i]]
       }
     }
   }

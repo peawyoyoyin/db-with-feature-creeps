@@ -13,17 +13,20 @@ block content
   hr
   .container
     if gradeData
-      table.table
-        thead
-          th Subject ID
-          th Subject Name
-          th Grade
-        tbody
-          each subject in gradeData
-            tr
-              td #{subject.courseCourseID}
-              td #{subject.abbreviate}
-              td #{subject.gradeLetter}
+      each semester in gradeData
+        h5 #{semester.semester} 
+        table.table 
+          thead
+            th Subject ID
+            th Subject Name
+            th Grade
+          tbody
+            each subject in semester.courses
+              tr
+                td #{subject.courseCourseID}
+                td #{subject.abbreviate}
+                td #{subject.gradeLetter}
+                
     
   
   
