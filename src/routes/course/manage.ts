@@ -1,15 +1,27 @@
 import * as express from 'express'
+import db from '~/db'
 
 const router = express.Router()
 
-router.get('/', (req, res) => {
-  let studentData
-  if(req.query.studentID !== undefined && req.query.studentID !== '') {
+router.get('/', async (req, res) => {
+  const { studentID } = req.query
+  let studentData = undefined
+  const studentRows = await db.student.query(
+    `
+      SELECT studentID, firstName, lastName FROM student 
+      WHERE studentID = ? 
+    `,
+    [studentID]
+  )
+  if (studentRows.length === 1) {
+    const student = studentRows[0]
+    console.log(student)
+    const { studentID, firstName, lastName } = student
     studentData = {
       info: {
-        studentID: '5891031221',
-        firstName: 'Joe',
-        lastName: 'Snorn'
+        studentID,
+        firstName,
+        lastName,
       },
       subjects: [
         {
@@ -25,9 +37,8 @@ router.get('/', (req, res) => {
       ]
     }
   }
-  res.render('course/manage', { title: 'Manage Courses', studentData })
+  res.render('course/manage', { title: 'Manage Courses', studentData, studentID })
 })
-
 
 router.post('/', (req, res) => {
   console.log(req.body)
