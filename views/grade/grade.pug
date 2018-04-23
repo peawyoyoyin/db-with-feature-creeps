@@ -1,0 +1,15 @@
+extends ../common/layout.pug
+block content
+  .container
+    h3 View grade
+  hr
+  .container
+    form(action="/grade")
+      .form-inline
+        .form-group.mr-4
+          label.col-form-label.col Student ID
+          input.form-control(type="text" name="sid")
+        button.btn.btn-primary(type="submit") Submit
+  hr
+  
+  

@@ -8,6 +8,7 @@ import 'module-alias/register'
 
 import login from './routes/login'
 import course from './routes/course'
+import grade from './routes/grade'
 import seniorProject from './routes/seniorproj'
 import newStudent from './routes/newstudent'
 import db from './db'
@@ -34,6 +35,7 @@ app.use('/login', login)
 app.use('/course', course)
 app.use('/seniorproj', seniorProject)
 app.use('/newstudent', newStudent)
+app.use('/grade', grade)
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'DB WITH FEATURE CREEPS' })
