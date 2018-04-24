@@ -10,8 +10,6 @@ function addRow(e) {
   newRow.removeAttribute('id')
   newRow.children[0].children[0].setAttribute('name', 'courseID')
   newRow.children[1].children[0].children[0].setAttribute('name', 'courseSectNum')
-  newRow.children[1].children[0].children[1].setAttribute('name', 'courseSectOption')
-  newRow.children[1].children[0].children[2].setAttribute('name', 'courseSectNum2')
   tableBody.appendChild(newRow)
 }
 
