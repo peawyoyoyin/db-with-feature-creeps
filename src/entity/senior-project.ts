@@ -36,7 +36,7 @@ export class SeniorProject {
   @IsPositive()
   year: number
 
-  @OneToOne(type => Student)
+  @OneToOne(type => Student, student => student.seniorProject,{onDelete: 'CASCADE'})
   author: Student
 
   @ManyToOne(type => Teacher, teacher => teacher.seniorProjectsUnderSupervision)

@@ -2,37 +2,50 @@ extends ../common/layout.pug
 block content
   .container
     h2 Register senior project
-    form(action="seniorproj/register")
+    form(action="register"  method="POST")
       .form-row
         .col-lg-6
           label(for="sid") Student ID
           input.form-control(type="text" name="sid")
         .col-lg-6
-          label(for="projectID") Project ID
-          input.form-control(type="text" name="projectID" 
-          value=searchProjectID placeholder="example: 4562xxx")
+          label(for="year") Year
+          select.form-control(name="year")
+            each year in years
+              option(value=year) #{year}
       .form-row.align-items-end.mt-2
         .col-lg-6
           label(for="topic") Topic
           input.form-control(type="text" name="topic"
-          value=searchTopic placeholder="example: Computer")
+          placeholder="example: Computer")
         .col-lg-6
-          label(for="superVisorTeacherID") SuperVisor Teacher ID
-          input.form-control(type="text" name="superVisorTeacherID"
-          value=searchSuperVisorTeacherID placeholder="jantaratit")
+          label(for="supervisorTeacherID") Supervisor Teacher ID
+          input.form-control(type="text" name="supervisorTeacherID"
+          placeholder="jantaratit")
       .form-row.mt-2.float-right
         .col-lg-1
           button.btn.btn-primary(type="submit") Submit
     hr.mt-5
     h2.mt-2 Register to an existing Project?
-    form(action="seniorproj/register")
+    form(action="register"  method="POST")
       .form-row
-        .col-lg-6
+        .col-lg-4
           label(for="sid") Student ID
           input.form-control(type="text" name="sid")
-        .col-lg-6
+        .col-lg-4
+          label(for="supervisorTeacherID") Teacher ID
+          input.form-control(type="text" name="supervisorTeacherID")
+        .col-lg-4
           label(for="projectID") Project ID
-          input.form-control(type="text" name="projectID" 
-          value=searchProjectID placeholder="example: 4562xxx")
+          input.form-control(type="text" name="projectID")
       .form-row.mt-2.float-right
-        button.btn.btn-primary find
+        button.btn.btn-primary register
+    br
+    each i in result
+      .form-row
+        .col
+          .alert.alert-success #{i}
+    each error in errors
+      .form-row
+          .col
+            .alert.alert-danger #{error}
+
