@@ -8,6 +8,7 @@ import {
 } from 'typeorm'
 import { Student } from './student'
 import { Section } from './section'
+import { CourseInstance } from './course-instance'
 import { Length, Min, IsNumberString, Matches } from 'class-validator'
 import { validate } from '~/utils'
 
@@ -34,6 +35,9 @@ export class Study {
 
   @ManyToOne(type => Section, section => section.studies)
   section: Section
+
+  @ManyToOne(type => CourseInstance, instance => instance.studies)
+  instance: CourseInstance
 
   @Column({ type: 'varchar', length: 2 })
   @Length(1, 2)

@@ -182,7 +182,7 @@ const seed = async () => {
   await deleteAll(DB.courseInstance)
   //Course1
   const courseInstance1 = new CourseInstance({
-    semester: semester1,
+    semester: semester3,
     course: course1,
   })
   const courseInstance2 = new CourseInstance({

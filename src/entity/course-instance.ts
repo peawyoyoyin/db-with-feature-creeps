@@ -10,6 +10,7 @@ import { Course } from './course'
 import { Semester } from './semester'
 import { Section } from './section'
 import { AcademicYear } from '~/entity/academic-year'
+import { Study } from '~/entity/study.relation';
 
 interface CourseInstanceArgs {
   course: Course
@@ -40,4 +41,7 @@ export class CourseInstance {
 
   @OneToMany(type => Section, section => section.courseInstance)
   sections: Section[]
+
+  @OneToMany(type => Study, study => study.instance)
+  studies: Study
 }
