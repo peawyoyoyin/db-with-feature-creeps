@@ -14,8 +14,8 @@ block content
   .container
     if gradeData
       each semester in gradeData
-        h5 #{semester.semester} 
-        table.table 
+        h4 #{semester.semester} 
+        table.table
           thead
             th Subject ID
             th Subject Name
@@ -26,6 +26,9 @@ block content
                 td #{subject.courseCourseID}
                 td #{subject.abbreviate}
                 td #{subject.gradeLetter}
+        br
+    else
+      h5 Input student ID...
                 
     
   

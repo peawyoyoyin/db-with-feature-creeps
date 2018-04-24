@@ -37,7 +37,6 @@ export class Study {
 
   @Column({ type: 'varchar', length: 2 })
   @Length(1, 2)
-  @IsNumberString()
   @Matches(new RegExp('A|B+|B|C+|C|D+|D|F|W|S|U'))
   gradeLetter: string
 }

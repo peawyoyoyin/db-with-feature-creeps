@@ -14,6 +14,7 @@ router.get('/', async (req, res) => {
       LEFT JOIN semester ON (course_instance.semesterId = semester.id) 
       LEFT JOIN course ON (course_instance.courseCourseID = course.courseID)
       WHERE studentStudentID = ?
+      ORDER BY yearYear, semesterNumber
     `,
     [sid]
   )
