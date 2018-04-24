@@ -9,8 +9,7 @@ router.get('/', async (req, res) => {
   let gradeDataRaw = await db._connection.manager.query(
     `
       SELECT abbreviate, courseCourseID, gradeLetter, semesterNumber, yearYear FROM study 
-      LEFT JOIN section ON (study.sectionId = section.id) 
-      LEFT JOIN course_instance ON (section.courseInstanceId = course_instance.id) 
+      LEFT JOIN course_instance ON (study.sectionID = course_instance.id) 
       LEFT JOIN semester ON (course_instance.semesterId = semester.id) 
       LEFT JOIN course ON (course_instance.courseCourseID = course.courseID)
       WHERE studentStudentID = ?

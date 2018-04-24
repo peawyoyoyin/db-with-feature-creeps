@@ -262,6 +262,7 @@ const seed = async () => {
   await DB.teacher.save(teacher)
 
   await deleteAll(DB.section)
+<<<<<<< HEAD
   const section = [
     new Section({
       id: 1,
@@ -305,6 +306,53 @@ const seed = async () => {
     }),
   ]
   await DB.section.save(section)
+=======
+  const section1 = new Section({
+    id: 1,
+    capacity: 40,
+    sectionNumber: 1,
+    courseInstance: courseInstance1,
+    time: 'MO 9:00-12:00',
+  })
+  section1.teacher = teacher1
+  const section2 = new Section({
+    id: 2,
+    capacity: 30,
+    sectionNumber: 2,
+    courseInstance: courseInstance1,
+    time: 'TU 13:00-16:00'
+  })
+  section2.teacher = teacher2
+  const section3 = new Section({
+    id: 3,
+    capacity: 40,
+    sectionNumber: 33,
+    courseInstance: courseInstance1,
+    time: 'WE 13:00-16:00'
+  })
+  section3.teacher = teacher1
+  const section4 = new Section({
+    id: 4,
+    capacity: 40,
+    sectionNumber: 1,
+    courseInstance: courseInstance6,
+    time: 'TH 13:00-16:00'
+  })
+  section4.teacher = teacher1
+  const section5 = new Section({
+    id: 5,
+    capacity: 50,
+    sectionNumber: 2,
+    courseInstance: courseInstance6,
+    time: 'FR 09:00-12:00'
+  })
+  section5.teacher = teacher2
+  await DB.section.save(section1)
+  await DB.section.save(section2)
+  await DB.section.save(section3)
+  await DB.section.save(section4)
+  await DB.section.save(section5)
+>>>>>>> 23eac7eec5936acaf227f61a5ce0364db6717289
 
   await deleteAll(DB.seniorProject)
   const seniorProject = [
@@ -324,6 +372,7 @@ const seed = async () => {
   await DB.seniorProject.save(seniorProject)
 
   await deleteAll(DB.study)
+<<<<<<< HEAD
   const study = [
     new Study({
       section: section[0], 
@@ -363,5 +412,28 @@ const seed = async () => {
     })
   ]
   await DB.groupYearRelation.save(gyr)
+=======
+  const study1 = new Study({
+    sectionSection: section1, 
+    gradeLetter: 'A', 
+    student: std1,
+    section: courseInstance1
+  })
+  const study3 = new Study({
+    sectionSection: section4, 
+    gradeLetter: 'W', 
+    student: std1,
+    section: courseInstance6
+  })
+  const study5 = new Study({
+    sectionSection: section2, 
+    gradeLetter: 'C+', 
+    student: std5,
+    section: courseInstance1
+  })
+  await DB.study.save(study1)
+  await DB.study.save(study3)
+  await DB.study.save(study5)
+>>>>>>> 23eac7eec5936acaf227f61a5ce0364db6717289
 }
 export default seed
