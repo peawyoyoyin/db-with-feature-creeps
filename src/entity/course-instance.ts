@@ -42,6 +42,6 @@ export class CourseInstance {
   @OneToMany(type => Section, section => section.courseInstance)
   sections: Section[]
 
-  @OneToMany(type => Study, study => study.instance)
+  @OneToMany(type => Study, study => study.section)
   studies: Study
 }
