@@ -28,18 +28,28 @@ async function handleEnrolls(body: EnrollData) {
     if (course instanceof Error) {
       return [course.message]
     }
-    const {id: courseInstanceID} = course
-    const section = await getSectionPromise(courseInstanceID, <string>courseSectNum, courseID)
+    const { id: courseInstanceID } = course
+    const section = await getSectionPromise(
+      courseInstanceID,
+      <string>courseSectNum,
+      courseID
+    )
     if (section instanceof Error) {
       return [section.message]
     }
-    const {id: sectionID, courseInstanceId} = section
-    const result = await insertStudyPromise(studentID, sectionID, courseInstanceId)
+    const { id: sectionID, courseInstanceId } = section
+    const result = await insertStudyPromise(
+      studentID,
+      sectionID,
+      courseInstanceId
+    )
     if (result instanceof Error) {
       return [result.message]
     }
   } else {
-    const coursePromises = courseID.map(id => getCourseInstancePromise(id, semesterId))
+    const coursePromises = courseID.map(id =>
+      getCourseInstancePromise(id, semesterId)
+    )
 
     const courses = await Promise.all(coursePromises)
 
@@ -49,7 +59,7 @@ async function handleEnrolls(body: EnrollData) {
     const sectionPromises = courses.map((course, index) => {
       const { id } = course
       const sectionNumber = courseSectNum[index]
-      return getSectionPromise(id, sectionNumber, courseID)
+      return getSectionPromise(id, sectionNumber, courseID[index])
     })
 
     const sections = await Promise.all(sectionPromises)
@@ -57,7 +67,7 @@ async function handleEnrolls(body: EnrollData) {
     if (e2.length > 0) return e2
 
     const insertPromises = sections.map(section => {
-      const {id: sectionID, courseInstanceId} = section
+      const { id: sectionID, courseInstanceId } = section
       return insertStudyPromise(studentID, sectionID, courseInstanceId)
     })
     const results = await Promise.all(insertPromises)
@@ -85,7 +95,7 @@ async function getCourseInstancePromise(courseID: string, semesterId: number) {
 async function getSectionPromise(
   courseInstanceID: string,
   sectionNumber: string,
-  courseID
+  courseID: string
 ) {
   const rows = await db.section.query(
     `
@@ -95,8 +105,9 @@ async function getSectionPromise(
     [courseInstanceID, sectionNumber]
   )
   if (rows.length === 0) {
-    if (sectionNumber.length === 0)
+    if (sectionNumber.length === 0) {
       return new Error(`Section number cannot be empty`)
+    }
     return new Error(
       `Cannot find section ${sectionNumber} of course ${courseID}`
     )
