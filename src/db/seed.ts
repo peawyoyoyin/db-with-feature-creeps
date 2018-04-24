@@ -256,7 +256,7 @@ const seed = async () => {
     teacherID: '0000000000',
     firstName: 'ATTAWITH',
     lastName: 'SUDSANG',
-    abbrName: 'ASS',
+    abbrName: 'ATS',
     citizenID: '0000000000000'
   })
   const teacher3 = new Teacher({
@@ -299,14 +299,23 @@ const seed = async () => {
     id: 4,
     capacity: 40,
     sectionNumber: 1,
-    courseInstance: courseInstance2,
+    courseInstance: courseInstance6,
     time: 'TH 13:00-16:00'
   })
   section4.teacher = teacher1
+  const section5 = new Section({
+    id: 5,
+    capacity: 50,
+    sectionNumber: 2,
+    courseInstance: courseInstance6,
+    time: 'FR 09:00-12:00'
+  })
+  section5.teacher = teacher2
   await DB.section.save(section1)
   await DB.section.save(section2)
   await DB.section.save(section3)
   await DB.section.save(section4)
+  await DB.section.save(section5)
 
   await deleteAll(DB.seniorProject)
   const seniorProject1 = new SeniorProject({

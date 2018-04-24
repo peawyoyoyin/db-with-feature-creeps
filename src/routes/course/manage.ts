@@ -3,9 +3,7 @@ import db from '~/db'
 
 const router = express.Router()
 
-router.get('/', async (req, res) => {
-  const { studentID } = req.query
-  let studentData = undefined
+async function getStudent(studentID) {
   const studentRows = await db.student.query(
     `
       SELECT studentID, firstName, lastName FROM student 
@@ -13,36 +11,50 @@ router.get('/', async (req, res) => {
     `,
     [studentID]
   )
+  if (studentRows.length === 1) {
+    return studentRows[0]
+  }
+  throw new Error('Student not found')
+}
+
+async function getSectionEnrolled() {
+  const sectionRows = await db.section.query(
+    `
+      SELECT courseID, name as courseName, sectionNumber as section FROM study
+      JOIN section ON study.sectionId = section.id
+      JOIN course_instance ON section.courseInstanceId = course_instance.id
+      JOIN course ON course_instance.courseCourseID = course.courseID
+    `
+  )
+  if (sectionRows.length === 0) {
+    throw new Error('Cannot found section enrolled')
+  }
+  return sectionRows
+}
+
+router.get('/', async (req, res) => {
+  const { studentID } = req.query
+  let studentData = undefined
   if (studentID === undefined || studentID === '') studentData = null
   else {
-    if (studentRows.length === 1) {
-      const student = studentRows[0]
+    try {
+      const student = await getStudent(studentID)
       console.log(student)
-      const { studentID, firstName, lastName } = student
+      const subjects = await getSectionEnrolled()
+      const { firstName, lastName } = student
       studentData = {
         info: {
           studentID,
           firstName,
           lastName
         },
-        subjects: [
-          {
-            courseID: '2110217',
-            courseName: 'SOME SUBJ',
-            section: 1
-          },
-          {
-            courseID: '2110224',
-            courseName: 'SOME SUBJ LAB',
-            section: 33
-          }
-        ]
+        subjects
       }
-    } else {
+    } catch (e) {
       studentData = {
         info: {
           studentID,
-          notFound: true
+          notFound: e.message
         }
       }
     }
@@ -58,6 +70,16 @@ router.get('/', async (req, res) => {
 router.post('/', (req, res) => {
   console.log(req.body)
   res.redirect('/')
+  db.study.query(
+    `
+    DELETE S FROM study S
+    JOIN section ON S.sectionId = section.id
+    JOIN course_instance ON section.courseInstanceId = course_instance.id
+    JOIN course ON course_instance.courseCourseID = course.courseID
+    WHERE courseID = ? AND S.studentStudentID = ?;
+  `,
+    [2110201, 5831645895]
+  )
 })
 
 export default router

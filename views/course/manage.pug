@@ -15,7 +15,7 @@ block content
     if studentData == null
       h5 Input student ID...
     else if studentData.info.notFound
-      h5 Cannot Find Student with ID: #{studentData.info.studentID}
+      h5 #{studentData.info.notFound}
     else if studentData
       h5.mb-3 #{studentData.info.studentID} - #{studentData.info.firstName} #{studentData.info.lastName}
       form(method="POST")
