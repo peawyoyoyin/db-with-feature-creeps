@@ -31,6 +31,7 @@ export default class DB {
   static studentGroup: Repository<StudentGroup>
   static study: Repository<Study>
   static section: Repository<Section>
+  static study: Repository<Study>
 
   static async init(config: ConnectionOptions) {
     DB._connection = await createConnection(config)
@@ -46,5 +47,6 @@ export default class DB {
     DB.studentGroup = DB._connection.getRepository(StudentGroup)
     DB.study = DB._connection.getRepository(Study)
     DB.section = DB._connection.getRepository(Section)
+    DB.study = DB._connection.getRepository(Study)
   }
 }

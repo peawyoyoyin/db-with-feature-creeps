@@ -1,0 +1,32 @@
+extends ../common/layout.pug
+block content
+  .container
+    h3 View grade
+  hr
+  .container
+    form(action="/grade")
+      .form-inline
+        .form-group.mr-4
+          label.col-form-label.col Student ID
+          input.form-control(type="text" name="sid" value=sid)
+        button.btn.btn-primary(type="submit") Submit
+  hr
+  .container
+    if gradeData
+      each semester in gradeData
+        h5 #{semester.semester} 
+        table.table 
+          thead
+            th Subject ID
+            th Subject Name
+            th Grade
+          tbody
+            each subject in semester.courses
+              tr
+                td #{subject.courseCourseID}
+                td #{subject.abbreviate}
+                td #{subject.gradeLetter}
+                
+    
+  
+  
