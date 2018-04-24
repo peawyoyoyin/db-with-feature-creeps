@@ -22,10 +22,8 @@ import { Student } from './entity/student'
     await setTimeout(() => (0), 500)
     await require('./init')
   }
-  // await db.init(config.orm)
-  // console.log('DB initialization complete!')
-  // await seed()
-  // console.log('seed complete')
+  await db.init(config.orm)
+  console.log('DB initialization complete!')
 })()
 
 const app = express()
