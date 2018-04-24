@@ -17,10 +17,15 @@ import seed from './db/seed'
 import { Student } from './entity/student'
 
 (async () => {
-  await db.init(config.orm)
-  console.log('DB initialization complete!')
-  await seed()
-  console.log('seed complete')
+  if(config.autoSeed) {
+    console.log('config.autoSeed is true, commencing seed...')
+    await setTimeout(() => (0), 500)
+    await require('./init')
+  }
+  // await db.init(config.orm)
+  // console.log('DB initialization complete!')
+  // await seed()
+  // console.log('seed complete')
 })()
 
 const app = express()

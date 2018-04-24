@@ -13,5 +13,6 @@ export = {
     entities: ['build/entity/**/*.js'],
     synchronize: true,
     logging: process.env.NODE_ENV !== 'production'
-  }
+  },
+  autoSeed: true
 }

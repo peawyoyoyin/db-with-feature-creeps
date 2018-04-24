@@ -7,7 +7,8 @@ export interface ExpressConfig {
 
 export interface ProjectConfig {
   express: ExpressConfig,
-  orm: ConnectionOptions
+  orm: ConnectionOptions,
+  autoSeed: boolean
 }
 
 const config: ProjectConfig = (() => {
