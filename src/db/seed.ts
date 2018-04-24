@@ -277,7 +277,7 @@ const seed = async () => {
     capacity: 40,
     sectionNumber: 1,
     courseInstance: courseInstance1,
-    time: 'MO 9:00-12:00'
+    time: 'MO 9:00-12:00',
   })
   section1.teacher = teacher1
   const section2 = new Section({
@@ -337,34 +337,25 @@ const seed = async () => {
   
   await deleteAll(DB.study)
   const study1 = new Study({
-    section: section1, 
+    sectionSection: section1, 
     gradeLetter: 'A', 
-    student: std1
-  })
-  const study2 = new Study({
-    section: section3, 
-    gradeLetter: 'B+', 
-    student: std1
+    student: std1,
+    section: courseInstance1
   })
   const study3 = new Study({
-    section: section4, 
+    sectionSection: section4, 
     gradeLetter: 'W', 
-    student: std1
-  })
-  const study4 = new Study({
-    section: section1, 
-    gradeLetter: 'C', 
-    student: std5
+    student: std1,
+    section: courseInstance6
   })
   const study5 = new Study({
-    section: section2, 
+    sectionSection: section2, 
     gradeLetter: 'C+', 
-    student: std5
+    student: std5,
+    section: courseInstance1
   })
   await DB.study.save(study1)
-  await DB.study.save(study2)
   await DB.study.save(study3)
-  await DB.study.save(study4)
   await DB.study.save(study5)
 }
 export default seed
