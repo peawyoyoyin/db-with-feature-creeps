@@ -39,7 +39,8 @@ block content
       hr
       each error in errors
         .form-row
-          .alert.alert-danger #{error}
+          .col
+            .alert.alert-danger #{error}
       .form-row
         .col
           button(type="submit").btn.btn-primary.mx-auto.d-block Submit

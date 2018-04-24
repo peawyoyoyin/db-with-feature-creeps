@@ -28,7 +28,11 @@ block content
                   option(value="to") to
                   option(value="or") or
                 input.form-control.col(id="field2" type="text" name="courseSectNum2")
-    .row
+    each error in errors
+      .form-row
+        .col
+          .alert.alert-danger #{error}
+    .form-row
       .col
         button#add-course.btn.btn-primary add course
       .col
