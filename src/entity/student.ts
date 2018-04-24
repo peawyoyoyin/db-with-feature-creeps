@@ -5,7 +5,8 @@ import {
   ManyToOne,
   OneToMany,
   ManyToMany,
-  OneToOne
+  OneToOne,
+  JoinColumn
 } from 'typeorm'
 import { Length, Min, IsNumberString, NotEquals} from 'class-validator'
 import { validate } from '~/utils'
@@ -86,6 +87,7 @@ export class Student {
   department: Department
 
   @OneToOne(type => SeniorProject)
+  @JoinColumn()
   seniorProject: SeniorProject
 
   @ManyToMany(type => Section, section => section.students)

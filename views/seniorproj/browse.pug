@@ -8,28 +8,44 @@ block content
         .col-lg-3
           label(for="projectID") Project ID
           input.form-control(type="text" name="projectID" 
-          value=searchProjectID placeholder="example: 4562xxx")
+          value=projectID placeholder="example: 4562xxx")
         .col-lg-3
           label(for="topic") Topic
           input.form-control(type="text" name="topic"
-          value=searchTopic placeholder="example: Computer")
+          value=topic placeholder="example: Computer")
         .col-lg-2
           label(for="year") Year
           select.form-control(name="year")
-            each year in years
-              if year == searchYear
-                option(value=year selected) #{year}
+            option(value='') 
+            each y in years
+              if y == year
+                option(value=year selected) #{y}
               else
-                option(value=year) #{year}
+                option(value=y) #{y}
         .col-lg-3
-          label(for="superVisorTeacherID") SuperVisor Teacher ID
+          label(for="superVisorTeacherID") Supervisor Teacher ID
           input.form-control(type="text" name="superVisorTeacherID"
-          value=searchSuperVisorTeacherID placeholder="jantaratit")
+          value=superVisorTeacherID placeholder="jantaratit")
         
         .col-lg-1
           button.btn.btn-primary(type="submit") Submit
     hr
-    h3 course not found
+    table.table.table-striped
+      thead
+        tr
+          th Project ID
+          th Topic
+          th Year
+          th SupervisorTeacher ID
+      tbody
+        for i in data
+          tr
+            th #{i.projectID}
+            td #{i.topic}
+            td #{i.year}
+            td #{i.supervisorTeacherID}
+          
+
 
         
 
