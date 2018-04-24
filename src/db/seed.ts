@@ -21,9 +21,21 @@ const seed = async () => {
       .createQueryBuilder()
       .delete()
       .execute()
-  }
-
+    }
+    
   await deleteAll(DB.faculty)
+  await deleteAll(DB.departments)
+  await deleteAll(DB.student)
+  await deleteAll(DB.course)
+  await deleteAll(DB.courseInstance)
+  await deleteAll(DB.academicYear)
+  await deleteAll(DB.study)
+  await deleteAll(DB.semester)
+  await deleteAll(DB.section)
+  await deleteAll(DB.teacher)
+  await deleteAll(DB.seniorProject)
+  await deleteAll(DB.studentGroup)
+
   const faculty = [
     new Faculty({
       facultyID: '1234',
@@ -34,9 +46,7 @@ const seed = async () => {
       name: 'Accounting'
     })
   ]
-  await DB.faculty.save(faculty)
 
-  await deleteAll(DB.departments)
   const department = [
     new Department({
       name: 'Computer Engineering',
@@ -51,9 +61,7 @@ const seed = async () => {
       faculty: faculty[0]
     })
   ]
-  await DB.departments.save(department)
 
-  await deleteAll(DB.student)
   const student = [
     new Student({
       studentID: '6156789021',
@@ -101,9 +109,7 @@ const seed = async () => {
       department: department[1]
     })
   ]
-  await DB.student.save(student)
 
-  await deleteAll(DB.course)
   const course = [
     new Course({
       courseID: '2110201',
@@ -124,9 +130,7 @@ const seed = async () => {
       name: 'LABORATORY IN DOG AND CAT REPRODUCTION'
     })
   ]
-  await DB.course.save(course)
 
-  await deleteAll(DB.academicYear)
   const academicYear = [
     new AcademicYear({
       year: 2559
@@ -138,9 +142,7 @@ const seed = async () => {
       year: 2561
     })
   ]
-  await DB.academicYear.save(academicYear)
 
-  await deleteAll(DB.semester)
   const semester = [
     new Semester({
       semesterNumber: 1,
@@ -175,10 +177,7 @@ const seed = async () => {
       lastWithdrawalDate: new Date()
     })
   ]
-  await DB.semester.save(semester)
-  console.log(">> semesterid1 : " + semester[0].id)
 
-  await deleteAll(DB.courseInstance)
   const courseInstance = [
     new CourseInstance({
       semester: semester[2],
@@ -218,10 +217,7 @@ const seed = async () => {
     }),
   ]
   console.log(courseInstance[0].semester)
-  await DB.courseInstance.save(courseInstance)
-
-
-  await deleteAll(DB.studentGroup)
+  
   const studentGroup = [
     new StudentGroup({
       groupID: 1
@@ -233,9 +229,8 @@ const seed = async () => {
       groupID: 3
     }),
   ]
-  await DB.studentGroup.save(studentGroup)
+  student[0].studentGroup = studentGroup[0]
 
-  await deleteAll(DB.teacher)
   const teacher = [
     new Teacher({
       teacherID: '1234567890',
@@ -259,9 +254,7 @@ const seed = async () => {
       citizenID: '1111111111111'
     })
   ]
-  await DB.teacher.save(teacher)
 
-  await deleteAll(DB.section)
   const section = [
     new Section({
       id: 1,
@@ -304,9 +297,7 @@ const seed = async () => {
       teacher: teacher[1],
     }),
   ]
-  await DB.section.save(section)
 
-  await deleteAll(DB.seniorProject)
   const seniorProject = [
     new SeniorProject({
       topic: "Computer",
@@ -321,9 +312,7 @@ const seed = async () => {
       year: 2561
     }),
   ]
-  await DB.seniorProject.save(seniorProject)
 
-  await deleteAll(DB.study)
   const study = [
     new Study({
       sectionSection: section[0], 
@@ -340,21 +329,40 @@ const seed = async () => {
     new Study({
       sectionSection: section[1], 
       gradeLetter: 'C+', 
-      student: student[5],
+      student: student[4],
       section: courseInstance[0]
     })
   ]
-  await DB.study.save(study)
 
-const gyr = [
-  new GroupYearRelation({
-    studentGroup: studentGroup[0],
-    fee: 200,
-    relationID: 1,
-    summerFee: 300,
-    year: academicYear[0]
-  })
-]
-await DB.groupYearRelation.save(gyr)
+  const gyr = [
+    new GroupYearRelation({
+      studentGroup: studentGroup[0],
+      fee: 200,
+      relationID: 1,
+      summerFee: 300,
+      year: academicYear[0]
+    }),
+    new GroupYearRelation({
+      studentGroup: studentGroup[1],
+      fee: 201,
+      relationID: 2,
+      summerFee: 301,
+      year: academicYear[1]
+    }),
+  ]
+  await DB.academicYear.save(academicYear)
+  await DB.studentGroup.save(studentGroup)
+  await DB.faculty.save(faculty)
+  await DB.departments.save(department)
+  await DB.student.save(student)
+  await DB.course.save(course)
+  await DB.semester.save(semester)
+  await DB.courseInstance.save(courseInstance)
+  await DB.teacher.save(teacher)
+  await DB.section.save(section)
+  await DB.seniorProject.save(seniorProject)
+  await DB.study.save(study)
+  await DB.groupYearRelation.save(gyr)
+  console.log(">> semesterid1 : " + semester[0].id)
 }
 export default seed

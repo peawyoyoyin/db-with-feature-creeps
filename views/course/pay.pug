@@ -1,4 +1,23 @@
 extends ../common/layout.pug
 block content
   .container
-    h2 pay fee
+    h3 Pay Fee
+  hr
+  .container
+    form#pay
+      .form-inline
+        .form-group.mr-4
+          label.col-form-label.col(for="studentID") Student ID
+          input.form-control(type="text" name="studentID" value=studentID)
+        .form-group.mr-4
+          select.form-control(id="semester" name="semester")
+              option(value="") select semester...
+              if semesters
+                each semester in semesters
+                  option(value=semester.id) #{semester.name}
+        button.btn.btn-primary(type="submit") submit
+  hr
+  if fee
+    .container
+      h5 you have to pay #{fee}
+  

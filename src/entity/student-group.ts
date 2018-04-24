@@ -28,6 +28,6 @@ export class StudentGroup {
   @OneToMany(type => Student, student => student.studentGroup)
   students: Student[]
 
-  @ManyToOne(type => GroupYearRelation, groupYearRelation => groupYearRelation.studentGroup)
+  @OneToMany(type => GroupYearRelation, groupYearRelation => groupYearRelation.studentGroup)
   groupYearRelations: GroupYearRelation[]
 }

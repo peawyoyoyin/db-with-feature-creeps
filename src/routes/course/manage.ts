@@ -67,9 +67,7 @@ router.get('/', async (req, res) => {
   })
 })
 
-router.post('/', (req, res) => {
-  console.log(req.body)
-  res.redirect('/')
+const remove = (id: string, subject: string) => {
   db.study.query(
     `
     DELETE S FROM study S
@@ -77,9 +75,21 @@ router.post('/', (req, res) => {
     JOIN course_instance ON section.courseInstanceId = course_instance.id
     JOIN course ON course_instance.courseCourseID = course.courseID
     WHERE courseID = ? AND S.studentStudentID = ?;
-  `,
-    [2110201, 5831645895]
+    `,
+    [id, subject]
   )
+}
+
+router.post('/', (req, res) => {
+  console.log(req.body)
+  if(typeof req.body.remove === 'string') {
+    remove(req.body.studentID, req.body.remove)
+  } else if(req.body.remove instanceof Array) {
+    (<Array<string>> req.body.remove).forEach(removeSubject => {
+      remove(req.body.studentID, removeSubject)
+    })
+  }
+  res.redirect('/')
 })
 
 export default router
