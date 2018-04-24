@@ -16,6 +16,7 @@ import { Semester } from '~/entity/semester'
 import { Teacher } from '~/entity/teacher'
 import { StudentGroup } from '~/entity/student-group'
 import { Study } from '~/entity/study.relation'
+import { GroupYearRelation } from '~/entity/group-year.relation'
 
 export default class DB {
   static _connection: Connection
@@ -31,6 +32,7 @@ export default class DB {
   static studentGroup: Repository<StudentGroup>
   static study: Repository<Study>
   static section: Repository<Section>
+  static groupYearRelation: Repository<GroupYearRelation>
 
   static async init(config: ConnectionOptions) {
     DB._connection = await createConnection(config)
@@ -46,5 +48,6 @@ export default class DB {
     DB.studentGroup = DB._connection.getRepository(StudentGroup)
     DB.study = DB._connection.getRepository(Study)
     DB.section = DB._connection.getRepository(Section)
+    DB.groupYearRelation = DB._connection.getRepository(GroupYearRelation)
   }
 }
