@@ -12,7 +12,11 @@ block content
         button.btn.btn-primary(type="sutmit") submit
   hr
   .container
-    if studentData
+    if studentData == null
+      h5 Input student ID...
+    else if studentData.info.notFound
+      h5 Cannot Find Student with ID: #{studentData.info.studentID}
+    else if studentData
       h5.mb-3 #{studentData.info.studentID} - #{studentData.info.firstName} #{studentData.info.lastName}
       form(method="POST")
         input.d-none(type="text" name="studentID" value=studentData.info.studentID)
@@ -32,5 +36,3 @@ block content
                   .form-check.form-check-inline
                     input.form-check-input(type="checkbox" name="remove" value=subject.courseID)
         button.btn.btn-primary(type="submit") Submit
-    else
-      h5 Input student ID...
