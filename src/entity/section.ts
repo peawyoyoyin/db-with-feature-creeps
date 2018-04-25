@@ -35,7 +35,7 @@ export class Section {
     this.capacity = args.capacity
     this.courseInstance = args.courseInstance
     this.time = args.time || 'TDF'
-    this.teacher = this.teacher || null
+    this.teacher = args.teacher || null
     validate(this)
   }
   @PrimaryGeneratedColumn({ type: 'int' })
