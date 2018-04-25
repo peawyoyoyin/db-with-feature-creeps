@@ -15,6 +15,7 @@ import { Student } from '~/entity/student'
 import { Study } from '~/entity/study.relation'
 import { GroupYearRelation } from '~/entity/group-year.relation'
 import { EnrollmentFeePayment } from '~/entity/enrollment-fee-payment';
+import { EvaluationType } from '~/entity/evaluation-type';
 
 const seed = async () => {
   async function deleteAll<T>(repository: Repository<T>) {
@@ -367,6 +368,23 @@ const seed = async () => {
       year: academicYear[1]
     }),
   ]
+
+  const evaluationType = [
+    new EvaluationType({
+      description: 'first progress report',
+      weight: 20,
+    }),
+    new EvaluationType({
+      description: 'second progress report',
+      weight: 20,
+    }),
+    new EvaluationType({
+      description: 'final report',
+      weight: 60
+    }),
+  ]
+
+  await DB.evaluationType.save(evaluationType)
   await DB.academicYear.save(academicYear)
   await DB.studentGroup.save(studentGroup)
   await DB.faculty.save(faculty)

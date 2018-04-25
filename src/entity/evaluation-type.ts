@@ -3,7 +3,6 @@ import { Length, IsPositive } from 'class-validator'
 import { validate } from '~/utils'
 
 interface EvaluationTypeArgs {
-  typeID: number
   weight: number
   description: string
 }
@@ -12,7 +11,6 @@ interface EvaluationTypeArgs {
 export class EvaluationType {
   constructor(args: EvaluationTypeArgs) {
     if (args === undefined) return
-    this.typeID = args.typeID
     this.weight = args.weight
     this.description = args.description
     validate(this)
