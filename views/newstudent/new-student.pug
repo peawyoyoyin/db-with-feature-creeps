@@ -11,8 +11,8 @@ block content
         .col-lg-2
           label(for="year") Year
           select.form-control(id="year" name="year")
-            option(selected value=61) 61
-            each year in [60, 59, 58]
+            option(selected value='') select year...
+            each year in years
               option(value=year)= year
       .form-row
         .col
