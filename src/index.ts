@@ -22,7 +22,7 @@ import { Student } from './entity/student'
     await setTimeout(() => (0), 500)
     await require('./init')
   }
-  await db.init(config.orm)
+  await db.init({...config.orm, dropSchema: false, synchronize: false})
   console.log('DB initialization complete!')
 })()
 
