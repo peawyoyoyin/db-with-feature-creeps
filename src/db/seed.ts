@@ -14,6 +14,7 @@ import { SeniorProject } from '~/entity/senior-project'
 import { Student } from '~/entity/student'
 import { Study } from '~/entity/study.relation'
 import { GroupYearRelation } from '~/entity/group-year.relation'
+import { EnrollmentFeePayment } from '~/entity/enrollment-fee-payment';
 
 const seed = async () => {
   async function deleteAll<T>(repository: Repository<T>) {
@@ -338,6 +339,14 @@ const seed = async () => {
     })
   ]
 
+  const enrollmentFeePayment = [
+    new EnrollmentFeePayment({
+      amount: 300000    
+    })
+  ]
+  enrollmentFeePayment[0].payer = student[3]
+  enrollmentFeePayment[0].semester = semester[1]
+
   const gyr = [
     new GroupYearRelation({
       studentGroup: studentGroup[0],
@@ -367,6 +376,7 @@ const seed = async () => {
   await DB.seniorProject.save(seniorProject)
   await DB.study.save(study)
   await DB.groupYearRelation.save(gyr)
+  await DB.enrollmentFeePayment.save(enrollmentFeePayment)
   console.log(">> semesterid1 : " + semester[0].id)
 }
 export default seed

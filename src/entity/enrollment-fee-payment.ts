@@ -11,7 +11,7 @@ import { Length, IsPositive } from 'class-validator'
 import { validate } from '~/utils'
 
 interface EnrollmentFeePaymentArgs {
-  transactionID: number
+  transactionID?: number
   amount: number
 }
 
@@ -29,13 +29,9 @@ export class EnrollmentFeePayment {
   @Column({ type: 'decimal' })
   amount: number
 
-  @ManyToOne(type => Student, student => student.payments, {
-    onDelete: 'SET NULL'
-  })
+  @ManyToOne(type => Student, student => student.payments)
   payer: Student
 
-  @ManyToOne(type => Semester, semester => semester.payments, {
-    onDelete: 'SET NULL'
-  })
+  @ManyToOne(type => Semester, semester => semester.payments)
   semester: Semester
 }

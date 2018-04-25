@@ -14,7 +14,7 @@ block content
               option(value="") select semester...
               if semesters
                 each semester in semesters
-                  option(value=semester.number) #{semester.name}
+                  option(value=semester.id) #{semester.name}
         button.btn.btn-primary(type="submit") submit
   hr
   if fee
@@ -23,4 +23,14 @@ block content
   else if err
     .container
       h5 Error: #{err}
-  
+  if transactionID === null
+    .container
+      h5 Unpaid!
+      form(action="/course/pay" method="POST")
+        .form-inline
+          input.form-control.d-none(type="text" name="semesterID" value=payment.semester)
+          input.form-control.d-none(type="text" name="studentID" value=payment.studentID)
+          button.btn.btn-primary(type="submit") pay
+  else if transactionID
+    .container
+      h5 Paid! Transaction ID: #{transactionID}
