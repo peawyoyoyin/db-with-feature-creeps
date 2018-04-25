@@ -25,6 +25,9 @@ export class StudentGroup {
   @IsPositive()
   groupID: number
 
+  @Column({type: 'varchar', length: 50})
+  description: string
+
   @OneToMany(type => Student, student => student.studentGroup)
   students: Student[]
 
