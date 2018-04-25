@@ -11,7 +11,7 @@ router.get('/browse', async (req, res) => {
   if (!year) year = ''
   if (!superVisorTeacherID) superVisorTeacherID = ''
   const data = await db._connection.manager.query(`
-    SELECT * FROM registration.senior_project seniorProj
+    SELECT * FROM senior_project seniorProj
     WHERE seniorProj.projectID LIKE ? AND
     seniorProj.topic LIKE ? AND
     seniorProj.year LIKE ? AND
