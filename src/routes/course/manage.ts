@@ -24,7 +24,9 @@ async function getSectionEnrolled(studentID) {
       JOIN section ON study.sectionId = section.id
       JOIN course_instance ON section.courseInstanceId = course_instance.id
       JOIN course ON course_instance.courseCourseID = course.courseID
-      WHERE studentStudentID = ?
+      JOIN semester ON course_instance.semesterId = semester.id
+      WHERE semester.id = (SELECT id FROM semester ORDER BY semester.yearYear DESC, semester.semesterNumber DESC LIMIT 1)
+      AND studentStudentID = ?
     `,
     [studentID]
   )
