@@ -17,14 +17,16 @@ async function getStudent(studentID) {
   throw new Error('Student not found')
 }
 
-async function getSectionEnrolled() {
+async function getSectionEnrolled(studentID) {
   const sectionRows = await db.section.query(
     `
       SELECT courseID, name as courseName, sectionNumber as section FROM study
       JOIN section ON study.sectionId = section.id
       JOIN course_instance ON section.courseInstanceId = course_instance.id
       JOIN course ON course_instance.courseCourseID = course.courseID
-    `
+      WHERE studentStudentID = ?
+    `,
+    [studentID]
   )
   if (sectionRows.length === 0) {
     throw new Error('Cannot found section enrolled')
@@ -40,7 +42,7 @@ router.get('/', async (req, res) => {
     try {
       const student = await getStudent(studentID)
       console.log(student)
-      const subjects = await getSectionEnrolled()
+      const subjects = await getSectionEnrolled(studentID)
       const { firstName, lastName } = student
       studentData = {
         info: {
@@ -67,8 +69,21 @@ router.get('/', async (req, res) => {
   })
 })
 
-const remove = (id: string, subject: string) => {
-  db.study.query(
+async function handleRemove(body) {
+  let { studentID, remove } = body
+  if (remove === undefined) return []
+  if (typeof remove === 'string') {
+    remove = [remove]
+  }
+  const resultPromises = remove.map(rm => removePromise(rm, studentID))
+  const results = await resultPromises
+  const e = results.filter(r => r instanceof Error).map(e => e.map)
+  if (e.length > 0) return e
+  return []
+}
+
+function removePromise(courseID: string, studentID: string) {
+  return db.study.query(
     `
     DELETE S FROM study S
     JOIN section ON S.sectionId = section.id
@@ -76,19 +91,14 @@ const remove = (id: string, subject: string) => {
     JOIN course ON course_instance.courseCourseID = course.courseID
     WHERE courseID = ? AND S.studentStudentID = ?;
     `,
-    [id, subject]
+    [courseID, studentID]
   )
 }
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   console.log(req.body)
-  if(typeof req.body.remove === 'string') {
-    remove(req.body.studentID, req.body.remove)
-  } else if(req.body.remove instanceof Array) {
-    (<Array<string>> req.body.remove).forEach(removeSubject => {
-      remove(req.body.studentID, removeSubject)
-    })
-  }
+  const e = await handleRemove(req.body)
+  // if (e.length > 0) res.render('')
   res.redirect('/')
 })
 
