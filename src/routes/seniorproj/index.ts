@@ -10,13 +10,16 @@ router.get('/browse', async (req, res) => {
   if (!topic) topic = ''
   if (!year) year = ''
   if (!superVisorTeacherID) superVisorTeacherID = ''
-  const data = await db._connection.manager.query(`
+  const data = await db._connection.manager.query(
+    `
     SELECT * FROM senior_project seniorProj
     WHERE seniorProj.projectID LIKE ? AND
     seniorProj.topic LIKE ? AND
     seniorProj.year LIKE ? AND
     IFNULL(seniorProj.supervisorTeacherID,1) LIKE ?
-  `, [`${projectID}%`, `${topic}%`, `${year}%`, `${superVisorTeacherID}%`])
+  `,
+    [`${projectID}%`, `${topic}%`, `${year}%`, `${superVisorTeacherID}%`]
+  )
   let years = await db._connection.manager.query(`
     SELECT DISTINCT year
     FROM senior_project
@@ -35,97 +38,124 @@ router.get('/browse', async (req, res) => {
 })
 
 router.get('/register', async (req, res) => {
-  let years = await db._connection.manager.query(`SELECT DISTINCT year FROM academic_year`)
+  let years = await db._connection.manager.query(
+    `SELECT DISTINCT year FROM academic_year`
+  )
   years = years.map(i => i.year)
   console.log(years)
   res.render('seniorproj/register', {
     title: 'Register Senior Project',
     years,
-    result:[],
-    errors:[]
+    result: [],
+    errors: []
   })
 })
 
 router.post('/register', async (req, res) => {
-  let { sid, year, topic, supervisorTeacherID,projectID } = req.body
+  let { sid, year, topic, supervisorTeacherID, projectID } = req.body
   let err = []
-  let years = await db._connection.manager.query(`SELECT DISTINCT year FROM academic_year`)
-  years = years.map(i => i.year)  
+  let years = await db._connection.manager.query(
+    `SELECT DISTINCT year FROM academic_year`
+  )
+  years = years.map(i => i.year)
   try {
-    if(year !== undefined){
-      let check_year = await db._connection.manager.query(`SELECT EXISTS(
-        SELECT 1 FROM academic_year WHERE year=? LIMIT 1)`, [year])
-      console.log("check year", check_year)
-      for(let i in check_year[0]) {
-        if(check_year[0][i] === "0") err.push("You're cheating. There is no year")
+    if (year !== undefined) {
+      let check_year = await db._connection.manager.query(
+        `SELECT EXISTS(
+        SELECT 1 FROM academic_year WHERE year=? LIMIT 1)`,
+        [year]
+      )
+      console.log('check year', check_year)
+      for (let i in check_year[0]) {
+        if (check_year[0][i] === '0')
+          err.push("You're cheating. There is no year")
       }
     }
 
-    if(supervisorTeacherID !== undefined && supervisorTeacherID !== ''){
-      let check_teacher = await db._connection.manager.query(`SELECT EXISTS(
-        SELECT 1 FROM teacher WHERE teacherID=? LIMIT 1)`, [supervisorTeacherID])
-      console.log("check teacher", check_teacher)
-      if(Object.values(check_teacher[0])[0] === "0") err.push("There is no teacher")
+    if (supervisorTeacherID !== undefined && supervisorTeacherID !== '') {
+      let check_teacher = await db._connection.manager.query(
+        `SELECT EXISTS(
+        SELECT 1 FROM teacher WHERE teacherID=? LIMIT 1)`,
+        [supervisorTeacherID]
+      )
+      console.log('check teacher', check_teacher)
+      if (Object.values(check_teacher[0])[0] === '0')
+        err.push('There is no teacher')
     }
-    
-    if(sid !== undefined && sid !== ''){
-      console.log("sid ", sid)
-      let check_student = await db._connection.manager.query(`
-        SELECT * FROM student WHERE studentID=? LIMIT 1`, [sid])
+
+    if (sid !== undefined && sid !== '') {
+      console.log('sid ', sid)
+      let check_student = await db._connection.manager.query(
+        `
+        SELECT * FROM student WHERE studentID=? LIMIT 1`,
+        [sid]
+      )
       console.log(check_student)
-      if(check_student.length === 0) err.push("There is no student")
+      if (check_student.length === 0) err.push('There is no student')
       else {
         check_student = check_student[0]
-        if(check_student.seniorProjectProjectID !== null){
-          err.push("This student already have a project")
+        if (check_student.seniorProjectProjectID !== null) {
+          err.push('This student already have a project')
         }
       }
     }
 
-    if(err.length !== 0) throw err
+    if (err.length !== 0) throw err
 
     let id
     let teacher = null
-    if(projectID === undefined){
-      if(topic === '') throw ["Please fill in Topic field"]
-      let insert_project = await db._connection.manager.query(`INSERT INTO senior_project
+    if (projectID === undefined) {
+      if (topic === '') throw ['Please fill in Topic field']
+      let insert_project = await db._connection.manager.query(
+        `INSERT INTO senior_project
         (topic,year) VALUES (?,?);
-        `, [topic, year])
+        `,
+        [topic, year]
+      )
       let query_id = await db._connection.query(`SELECT LAST_INSERT_ID();`)
       id = Object.values(query_id[0])[0]
-    }else {
-      let find_project = await db._connection.manager.query(`SELECT 
+    } else {
+      let find_project = await db._connection.manager.query(
+        `SELECT 
         supervisorTeacherID FROM senior_project 
-        WHERE projectID=? LIMIT 1`,[projectID])
-      if(find_project.length === 0) throw ["There is no project"]
+        WHERE projectID=? LIMIT 1`,
+        [projectID]
+      )
+      if (find_project.length === 0) throw ['There is no project']
       id = projectID
       teacher = find_project[0].supervisorTeacherID
     }
 
-    if(supervisorTeacherID !== undefined && supervisorTeacherID !== ''){
-      if(teacher !== null) throw ["This project already has supervisor"]
-      await db._connection.manager.query(`UPDATE senior_project 
+    if (supervisorTeacherID !== undefined && supervisorTeacherID !== '') {
+      if (teacher !== null) throw ['This project already has supervisor']
+      await db._connection.manager.query(
+        `UPDATE senior_project 
       SET supervisorTeacherID=?
       WHERE projectID=?
-      `,[supervisorTeacherID,id])
+      `,
+        [supervisorTeacherID, id]
+      )
     }
-    if(sid !== undefined && sid !== ''){
-      let insert_student = await db._connection.manager.query(`UPDATE student
+    if (sid !== undefined && sid !== '') {
+      let insert_student = await db._connection.manager.query(
+        `UPDATE student
       SET seniorProjectProjectID=?
       WHERE studentID=?
-      `,[id,sid])
+      `,
+        [id, sid]
+      )
     }
-    res.render('seniorproj/register',{
+    res.render('seniorproj/register', {
       title: 'Register Senior Project',
       years,
-      result:[`Your project ID is ${id}`],
-      errors:[]
+      result: [`Your project ID is ${id}`],
+      errors: []
     })
   } catch (errors) {
     res.render('seniorproj/register', {
       title: 'Register Senior Project',
       years,
-      result:[],
+      result: [],
       errors
     })
   }
@@ -133,18 +163,28 @@ router.post('/register', async (req, res) => {
 
 router.get('/update', async (req, res) => {
   const rawTypes = await getAllEvaluationType()
-  const types = rawTypes.map(type => ({text: type.description, value: type.typeID}))
+  const types = rawTypes.map(type => ({
+    text: type.description,
+    value: type.typeID
+  }))
   res.render('seniorproj/update', {
     title: 'Update Senior Project Status',
-    grades: ["A", "B+", "B", "C+", "C", "D+", "D", "F"],
+    grades: ['A', 'B+', 'B', 'C+', 'C', 'D+', 'D', 'F'],
     types
   })
 })
 
 router.post('/update', async (req, res) => {
   console.log(req.body)
-  await getAllEvaluationType()
-  res.redirect('/seniorproj/update')
+  const { teacherID, projectID, type, grade, comment } = req.body
+  try {
+    // const rawTeacher = await getTeacher(teacherID)
+    await createEvaluation(projectID, teacherID, type, comment, grade)
+    // console.log(rawTeacher)
+    res.redirect('/seniorproj/update')
+  } catch (e) {
+    console.log(e)
+  }
 })
 
 async function getAllEvaluationType() {
@@ -152,6 +192,37 @@ async function getAllEvaluationType() {
     SELECT * FROM evaluation_type
   `)
   return rawTypes
+}
+
+async function getTeacher(teacherID) {
+  const rawTeacher = await db.teacher.query(
+    `
+    SELECT * FROM teacher
+    WHERE teacherID = ?
+  `,
+    [teacherID]
+  )
+  if (rawTeacher.length === 0) throw new Error('Cannot find teacher')
+  return rawTeacher[0]
+}
+async function createEvaluation(projectID, teacherID, typeID, comment, grade) {
+  // await db.teacher.queryRunner.startTransaction()
+  const result = await db.evaluation.query(
+    `
+    insert into evaluation(comment,grade,projectProjectID,evaluationTypeTypeID)
+    value(?, ?, ?, ?)
+  `,
+    [comment, grade, projectID, typeID]
+  )
+  const { insertId } = result
+  const result2 = await db.evaluation.query(
+    `
+      insert into evaluation_evaluators_teacher(evaluationId, teacherTeacherID)
+      value(?, ?)
+    `,
+    [insertId, teacherID]
+  )
+  console.log(result)
 }
 
 export default router

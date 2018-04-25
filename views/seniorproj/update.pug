@@ -18,9 +18,7 @@ block content
               option(value=type1.value) #{type1.text} 
         .col-lg-2
           label(for="grade") Grade
-          select.form-control(name="grade")
-            each grade in grades
-              option(value=grade) #{grade}
+          input.form-control(type="number" name="grade")
       .form-row.align-items-end
         .col-lg-12
           label(for="comment") Comment
