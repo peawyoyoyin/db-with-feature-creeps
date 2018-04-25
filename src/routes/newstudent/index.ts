@@ -1,6 +1,7 @@
 import * as express from 'express'
 import db from '~/db'
 import { Student } from '~/entity/student'
+import { AcademicYear } from '~/entity/academic-year';
 
 const router = express.Router()
 
@@ -39,6 +40,8 @@ router.post('/', async (req, res) => {
       citizenID,
       nationality,
       department,
+    })
+    newStudent.year = new AcademicYear({
       year: parseInt(year)
     })
     await db.student.save(newStudent)

@@ -68,7 +68,6 @@ const seed = async () => {
       studentID: '6156789021',
       firstName: 'Jame',
       lastName: 'Fast',
-      year: 2561,
       citizenID: '9871234560123',
       nationality: 'TH',
       department: department[0]
@@ -77,7 +76,6 @@ const seed = async () => {
       studentID: '5831645895',
       firstName: 'Un',
       lastName: 'Kim-Jong',
-      year: 2558,
       citizenID: '9876543210123',
       nationality: 'KR',
       department: department[0]
@@ -86,7 +84,6 @@ const seed = async () => {
       studentID: '5984651325',
       firstName: 'Mark',
       lastName: 'Antony',
-      year: 2559,
       citizenID: '9816483210123',
       nationality: 'IT',
       department: department[1]
@@ -95,7 +92,6 @@ const seed = async () => {
       studentID: '6012535648',
       firstName: 'Julius',
       lastName: 'Caesar',
-      year: 2560,
       citizenID: '9875846910123',
       nationality: 'IT',
       department: department[1]
@@ -104,7 +100,6 @@ const seed = async () => {
       studentID: '6154489021',
       firstName: 'Dick',
       lastName: 'Johnson',
-      year: 2561,
       citizenID: '9876541234563',
       nationality: 'US',
       department: department[1]
@@ -134,6 +129,9 @@ const seed = async () => {
 
   const academicYear = [
     new AcademicYear({
+      year: 2558
+    }),
+    new AcademicYear({
       year: 2559
     }),
     new AcademicYear({
@@ -143,6 +141,12 @@ const seed = async () => {
       year: 2561
     })
   ]
+  student[0].year = academicYear[3]
+  student[1].year = academicYear[0]
+  student[2].year = academicYear[1]
+  student[3].year = academicYear[2]
+  student[4].year = academicYear[3]
+
 
   const semester = [
     new Semester({

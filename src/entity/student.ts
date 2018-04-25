@@ -17,12 +17,12 @@ import { Department } from './department'
 import { Section } from './section'
 import { Study } from './study.relation'
 import { SeniorProject } from './senior-project'
+import { AcademicYear } from '~/entity/academic-year';
 
 interface StudentArgs {
   studentID: string
   firstName: string
   lastName: string
-  year: number
   nationality: string
   citizenID: string
   department: Department
@@ -34,7 +34,6 @@ export class Student {
     this.studentID = args.studentID
     this.firstName = args.firstName
     this.lastName = args.lastName
-    this.year = args.year
     this.nationality = args.nationality
     this.citizenID = args.citizenID
     this.department = args.department
@@ -54,9 +53,8 @@ export class Student {
   @Length(1, 30)
   lastName: string
 
-  @Column('int')
-  @Min(1)
-  year: number
+  @ManyToOne(type => AcademicYear, AcademicYear => AcademicYear.students)
+  year: AcademicYear
 
   @Column({ type: 'varchar', length: 2 })
   @Length(1, 2)
