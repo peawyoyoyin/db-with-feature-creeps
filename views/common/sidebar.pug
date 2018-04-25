@@ -1,26 +1,26 @@
 .container-fluid.p-0
-  .container
-    a(href="/")
+  .container.mb-4
+    a(href="/" style="text-decoration: none;")
       img.mx-auto.d-block.chula-logo(src="/static/logo.png")
-      h5.mx-auto.text-center reg chula
-  hr(style="margin: 1em;")
+      h3.mx-auto.text-center.text-dark.font-italic Reg Chula
+    hr.bg-primary(style="opacity: 0.1")
   .container
-    ul.sidebar-menu
-      li
-        a(href="/newstudent") new student
-      li
-        a(href="/course/enroll") enroll course
-      li
-        a(href="/course/search") search courses
-      li
-        a(href="/course/manage") manage courses
-      li
-        a(href="/course/pay") pay fee
-      li
-        a(href="/grade") view grade
-      li
-        a(href="/seniorproj/browse") browse senior projects
-      li
-        a(href="/seniorproj/register") register senior projects
-      li
-        a(href="/seniorproj/update") update senior project status
+    ul.sidebar-menu.nav.flex-column
+      li.nav-item
+        a.nav-link.pl-0.my-1.py-0(href="/newstudent") new student
+      li.nav-item
+        a.nav-link.pl-0.my-1.py-0(href="/course/enroll") enroll course
+      li.nav-item
+        a.nav-link.pl-0.my-1.py-0(href="/course/search") search courses
+      li.nav-item
+        a.nav-link.pl-0.my-1.py-0(href="/course/manage") manage courses
+      li.nav-item
+        a.nav-link.pl-0.my-1.py-0(href="/course/pay") pay fee
+      li.nav-item
+        a.nav-link.pl-0.my-1.py-0(href="/grade") view grade
+      li.nav-item
+        a.nav-link.pl-0.my-1.py-0(href="/seniorproj/browse") browse senior projects
+      li.nav-item
+        a.nav-link.pl-0.my-1.py-0(href="/seniorproj/register") register senior projects
+      li.nav-item
+        a.nav-link.pl-0.my-1.py-0(href="/seniorproj/update") update senior project status
