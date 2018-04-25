@@ -131,13 +131,27 @@ router.post('/register', async (req, res) => {
   }
 })
 
-router.get('/update', (req, res) => {
+router.get('/update', async (req, res) => {
+  const rawTypes = await getAllEvaluationType()
+  const types = rawTypes.map(type => ({text: type.description, value: type.typeID}))
   res.render('seniorproj/update', {
     title: 'Update Senior Project Status',
     grades: ["A", "B+", "B", "C+", "C", "D+", "D", "F"],
-    types: ["mid-term presentation", "final presentation", "minor update"]
+    types
   })
 })
 
+router.post('/update', async (req, res) => {
+  console.log(req.body)
+  await getAllEvaluationType()
+  res.redirect('/seniorproj/update')
+})
+
+async function getAllEvaluationType() {
+  const rawTypes = await db.evaluationType.query(`
+    SELECT * FROM evaluation_type
+  `)
+  return rawTypes
+}
 
 export default router

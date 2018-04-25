@@ -17,8 +17,9 @@ import { Teacher } from '~/entity/teacher'
 import { StudentGroup } from '~/entity/student-group'
 import { Study } from '~/entity/study.relation'
 import { GroupYearRelation } from '~/entity/group-year.relation'
-import { EnrollmentFeePayment } from '~/entity/enrollment-fee-payment'
-import { EvaluationType } from '~/entity/evaluation-type'
+import { EnrollmentFeePayment } from '~/entity/enrollment-fee-payment';
+import { EvaluationType } from '~/entity/evaluation-type';
+import { Evaluation } from '~/entity/evaluation.relation';
 
 export default class DB {
   static _connection: Connection
@@ -36,6 +37,7 @@ export default class DB {
   static section: Repository<Section>
   static groupYearRelation: Repository<GroupYearRelation>
   static enrollmentFeePayment: Repository<EnrollmentFeePayment>
+  static evaluation: Repository<Evaluation>
   static evaluationType: Repository<EvaluationType>
 
   static async init(config: ConnectionOptions) {
@@ -54,6 +56,7 @@ export default class DB {
     DB.section = DB._connection.getRepository(Section)
     DB.groupYearRelation = DB._connection.getRepository(GroupYearRelation)
     DB.enrollmentFeePayment = DB._connection.getRepository(EnrollmentFeePayment)
+    DB.evaluation = DB._connection.getRepository(Evaluation)
     DB.evaluationType = DB._connection.getRepository(EvaluationType)
   }
 }
