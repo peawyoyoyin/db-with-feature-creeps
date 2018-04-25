@@ -4,7 +4,8 @@ import {
   Column,
   ManyToOne,
   ManyToMany,
-  PrimaryGeneratedColumn
+  PrimaryGeneratedColumn,
+  JoinTable
 } from 'typeorm'
 import { SeniorProject } from './senior-project'
 import { EvaluationType } from './evaluation-type'
@@ -39,6 +40,7 @@ export class Evaluation {
   evaluationType: EvaluationType
 
   @ManyToMany(type => Teacher, teacher => teacher.projectEvaluations)
+  @JoinTable()
   evaluators: Teacher[]
 
   @Column({ type: 'varchar', length: 300 })
