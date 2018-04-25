@@ -21,7 +21,7 @@ export class AcademicYear {
   @OneToMany(type => Semester, semester => semester.year)
   semesters: Semester[]
 
-  @ManyToOne(type => GroupYearRelation, groupYearRelation => groupYearRelation.year)
+  @OneToMany(type => GroupYearRelation, groupYearRelation => groupYearRelation.year)
   groupYearRelations: GroupYearRelation[]
 
   // @OneToMany(type => SeniorProject, seniorProject => seniorProject.year)

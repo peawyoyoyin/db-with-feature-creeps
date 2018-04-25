@@ -11,19 +11,24 @@ import { validate } from '~/utils'
 import { GroupYearRelation } from '~/entity/group-year.relation';
 
 interface StudentGroupArgs {
-  groupID: number
+  groupID: number,
+  description?: string,
 }
 @Entity()
 export class StudentGroup {
   constructor(args: StudentGroupArgs) {
     if (args === undefined) return
     this.groupID = args.groupID
+    this.description = args.description || null
     validate(this)
   }
 
   @PrimaryGeneratedColumn({ type: 'int' })
   @IsPositive()
   groupID: number
+
+  @Column({type: 'varchar', length: 50})
+  description: string
 
   @OneToMany(type => Student, student => student.studentGroup)
   students: Student[]

@@ -19,5 +19,18 @@ block content
   hr
   if fee
     .container
-      h5 you have to pay #{fee}
-  
+      h5 Fee: #{fee}
+  else if err
+    .container
+      h5 Error: #{err}
+  if transactionID === null
+    .container
+      h5 Unpaid!
+      form(action="/course/pay" method="POST")
+        .form-inline
+          input.form-control.d-none(type="text" name="semesterID" value=payment.semester)
+          input.form-control.d-none(type="text" name="studentID" value=payment.studentID)
+          button.btn.btn-primary(type="submit") pay
+  else if transactionID
+    .container
+      h5 Paid! Transaction ID: #{transactionID}
