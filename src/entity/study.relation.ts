@@ -15,17 +15,17 @@ import { validate } from '~/utils'
 interface StudyArgs {
   gradeLetter: string
   student: Student
-  sectionSection: Section
-  section: CourseInstance
+  section: Section
+  instance: CourseInstance
 }
 @Entity()
-@Index("student, section", (study: Study) => [study.student, study.section], { unique: true })
+@Index("student, instance", (study: Study) => [study.student, study.instance], { unique: true })
 export class Study {
   constructor(args: StudyArgs) {
     if (args === undefined) return
     this.gradeLetter = args.gradeLetter
     this.student = args.student
-    this.sectionSection = args.sectionSection
+    this.instance = args.instance
     this.section = args.section
     validate(this)
   }
@@ -36,10 +36,10 @@ export class Study {
   student: Student
 
   @ManyToOne(type => Section, section => section.studies)
-  sectionSection: Section
+  section: Section
 
   @ManyToOne(type => CourseInstance, instance => instance.studies)
-  section: CourseInstance
+  instance: CourseInstance
 
   @Column({ type: 'varchar', length: 2 })
   @Length(1, 2)

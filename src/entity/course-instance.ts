@@ -10,7 +10,7 @@ import { Course } from './course'
 import { Semester } from './semester'
 import { Section } from './section'
 import { AcademicYear } from '~/entity/academic-year'
-import { Study } from '~/entity/study.relation';
+import { Study } from '~/entity/study.relation'
 
 interface CourseInstanceArgs {
   course: Course
@@ -18,7 +18,14 @@ interface CourseInstanceArgs {
 }
 
 @Entity()
-@Index("course, semester", (courseInstance: CourseInstance) => [courseInstance.course, courseInstance.semester], { unique: true })
+@Index(
+  'course, semester',
+  (courseInstance: CourseInstance) => [
+    courseInstance.course,
+    courseInstance.semester
+  ],
+  { unique: true }
+)
 export class CourseInstance {
   constructor(args: CourseInstanceArgs) {
     if (args === undefined) return
@@ -26,7 +33,8 @@ export class CourseInstance {
     this.semester = args.semester
   }
 
-  @PrimaryGeneratedColumn({type: 'int'}) id: number
+  @PrimaryGeneratedColumn({ type: 'int' })
+  id: number
 
   @ManyToOne(type => Course, course => course.instances, {
     onDelete: 'CASCADE'
@@ -42,6 +50,6 @@ export class CourseInstance {
   @OneToMany(type => Section, section => section.courseInstance)
   sections: Section[]
 
-  @OneToMany(type => Study, study => study.section)
+  @OneToMany(type => Study, study => study.instance)
   studies: Study
 }

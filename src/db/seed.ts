@@ -315,22 +315,22 @@ const seed = async () => {
 
   const study = [
     new Study({
-      sectionSection: section[0], 
+      section: section[0], 
       gradeLetter: 'A', 
       student: student[0],
-      section: courseInstance[0]
+      instance: courseInstance[0]
     }),
     new Study({
-      sectionSection: section[3], 
+      section: section[3], 
       gradeLetter: 'W', 
       student: student[0],
-      section: courseInstance[5]
+      instance: courseInstance[5]
     }),
     new Study({
-      sectionSection: section[1], 
+      section: section[1], 
       gradeLetter: 'C+', 
       student: student[4],
-      section: courseInstance[0]
+      instance: courseInstance[0]
     })
   ]
 
