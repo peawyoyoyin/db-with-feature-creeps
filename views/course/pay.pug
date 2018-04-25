@@ -14,10 +14,13 @@ block content
               option(value="") select semester...
               if semesters
                 each semester in semesters
-                  option(value=semester.id) #{semester.name}
+                  option(value=semester.number) #{semester.name}
         button.btn.btn-primary(type="submit") submit
   hr
   if fee
     .container
-      h5 you have to pay #{fee}
+      h5 Fee: #{fee}
+  else if err
+    .container
+      h5 Error: #{err}
   

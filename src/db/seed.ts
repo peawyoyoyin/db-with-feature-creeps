@@ -220,16 +220,20 @@ const seed = async () => {
   
   const studentGroup = [
     new StudentGroup({
-      groupID: 1
+      groupID: 1,
+      description: 'group 1',
     }),
     new StudentGroup({
-      groupID: 2
+      groupID: 2,
+      description: 'group 2',
     }),
     new StudentGroup({
-      groupID: 3
+      groupID: 3,
+      description: 'group 3'
     }),
   ]
   student[0].studentGroup = studentGroup[0]
+  student[3].studentGroup = studentGroup[1]
 
   const teacher = [
     new Teacher({

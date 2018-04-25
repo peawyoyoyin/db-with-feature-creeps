@@ -9,28 +9,39 @@ const getAllSemesters = async () => {
   `)
   return result.map(row => ({
     id: row.id,
+    number: row.semesterNumber,
     name: `${row.semesterNumber}/${row.yearYear}`
   }))
 }
 
-const getStudentFee = async (studentID, semester) => {
+const getStudentFee = async (studentID, semesterNumber) => {
   const result = await db.groupYearRelation.query(`
-    SELECT fee, studentID, year FROM student
-    JOIN group_year_relation 
+    SELECT fee, summerFee FROM student
+    JOIN group_year_relation
     ON student.studentGroupGroupID = group_year_relation.studentGroupGroupID AND student.year = group_year_relation.yearYear
-    WHERE studentID = ?
+    WHERE student.studentID = ?
   `,
   [studentID])
-  return result
+  if(!result) {
+    throw 'fee not found'
+  }
+  if(semesterNumber === 3) {
+    return result[0].summerFee
+  }
+  return result[0].fee
 }
 router.get('/', async (req, res) => {
   const semesters = await getAllSemesters()
   const { studentID, semester } = req.query
-  let fee
+  let fee, err
   if(studentID !== '' && semester !== '') {
-    fee = getStudentFee(studentID, semester)    
+    try {
+      fee = await getStudentFee(studentID, semester)
+    } catch(e) {
+      err = e
+    }
   }
-  res.render('course/pay', { title: 'Pay Fee', semesters, fee: 200 })
+  res.render('course/pay', { title: 'Pay Fee', semesters, fee, err })
 })
 
 export default router

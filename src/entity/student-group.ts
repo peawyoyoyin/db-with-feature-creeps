@@ -19,7 +19,7 @@ export class StudentGroup {
   constructor(args: StudentGroupArgs) {
     if (args === undefined) return
     this.groupID = args.groupID
-    this.description = args.description || ''
+    this.description = args.description || null
     validate(this)
   }
 
