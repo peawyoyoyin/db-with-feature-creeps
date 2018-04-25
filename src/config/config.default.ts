@@ -11,7 +11,7 @@ export = {
     password: 'password',
     database: 'db',
     entities: ['build/entity/**/*.js'],
-    synchronize: true,
+    synchronize: false,
     logging: process.env.NODE_ENV !== 'production'
   },
   autoSeed: true
