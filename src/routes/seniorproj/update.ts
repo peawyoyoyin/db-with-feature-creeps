@@ -11,7 +11,6 @@ router.get('/', async (req, res) => {
   }))
   res.render('seniorproj/update', {
     title: 'Update Senior Project Status',
-    grades: ['A', 'B+', 'B', 'C+', 'C', 'D+', 'D', 'F'],
     types
   })
 })
