@@ -3,9 +3,9 @@ block content
   .container
     h3 Search Courses
     hr
-    form(action="/course/search")
+    form.pl-4(action="/course/search")
       .form-row.align-items-end
-        .col-lg-3
+        .col-lg-2
           label(for="courseID") Course ID
           input.form-control(type="text" name="courseID" value=searchCourseID || null)
         .col-lg-4
@@ -22,7 +22,6 @@ block content
         .col-lg-2
           label(for="credits") Credits
           input.form-control(type="text" name="credits" value=searchCredits || null)
-
         .col-lg-1
           button.btn.btn-primary(type="submit") Search
     hr
@@ -44,4 +43,4 @@ block content
                 td #{course.courseName}
                 td #{course.credits}
     else
-      h5 Start Searching using the search bar!
+      h6.ml-4.text-secondary(style="user-select: none;") Start searching using the search bar!
