@@ -39,7 +39,7 @@ block content
       if searchResults.length == 0
         h3.text-center.text-danger Course Not Found
       else 
-        table.table
+        table.table.table-hover.position-relative
           thead
             tr
               th Course ID
@@ -47,11 +47,11 @@ block content
               th Credits
           tbody
             each course in searchResults
-                tr
-                    td #{course.courseID}
-                    td 
-                      a(href='/course/detail/' + course.instanceID) #{course.courseName}
-                    td #{course.credits}
+              tr
+                td
+                  a.table-row-link.text-dark(href='/course/detail/' + course.instanceID) #{course.courseID}
+                td #{course.courseName}
+                td #{course.credits}
 
     else
       h5 Start Searching using the search bar!
