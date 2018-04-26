@@ -96,6 +96,10 @@ async function insertStudyPromise(studentID, sectionID, instanceID) {
       ['X', studentID, sectionID, instanceID]
     )
   } catch (e) {
+    console.log('========', e.errno)
+    if (e.errno === 1062) {
+      return new Error('Student cannot register the same course registered')
+    }
     return e
   }
 }
