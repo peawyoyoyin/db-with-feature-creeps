@@ -1,7 +1,7 @@
 extends ../common/layout.pug
 block content
   .container
-    h3 search courses
+    h3 Search Courses
     hr
     form(action="/course/search")
       .form-row.align-items-end
@@ -33,7 +33,7 @@ block content
             input.form-control(type="text" name="credits")
 
         .col-lg-1
-          button.btn.btn-primary(type="submit") Submit
+          button.btn.btn-primary(type="submit") Search
     hr
     if searchResults
       if searchResults.length == 0
@@ -52,6 +52,5 @@ block content
                   a.table-row-link.text-dark(href='/course/detail/' + course.instanceID) #{course.courseID}
                 td #{course.courseName}
                 td #{course.credits}
-
     else
       h5 Start Searching using the search bar!
