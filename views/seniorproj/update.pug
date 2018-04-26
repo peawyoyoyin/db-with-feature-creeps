@@ -17,12 +17,20 @@ block content
             each type1 in types
               option(value=type1.value) #{type1.text} 
         .col-lg-2
-          label(for="grade") Grade
-          input.form-control(type="number" name="grade")
+          if errors.grade
+            label.text-danger(for="grade") Grade
+            input.form-control.is-invalid(type="number" name="grade")
+          else
+            label(for="grade") Grade
+            input.form-control(type="number" name="grade")
       .form-row.align-items-end
         .col-lg-12
           label(for="comment") Comment
           textarea.form-control(rows=5 name="comment")
+      each error in errors
+        .form-row
+          .col
+            .alert.alert-danger #{error}
       .form-row.mt-2.float-right
         button.btn.btn-primary submit
         
