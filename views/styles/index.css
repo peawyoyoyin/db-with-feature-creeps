@@ -34,3 +34,10 @@ ul.sidebar-menu {
   font-size: 0.9rem!important;
   text-transform: capitalize;
 }
+
+.sidebar-divider {
+  font-size: 0.75rem;
+  opacity: 0.4;
+  text-transform: capitalize;
+  user-select: none;
+}
