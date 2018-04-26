@@ -3,7 +3,7 @@ block content
   .container
     h2 update senior project status
     hr
-    form(action="/seniorproj/update")
+    form(action="/seniorproj/update" method="POST")
       .form-row.align-items-end
         .col-lg-3
           label(for="projectID") Project ID
@@ -15,12 +15,10 @@ block content
           label(for="type") Type
           select.form-control(name="type")
             each type1 in types
-              option(value=type1) #{type1} 
+              option(value=type1.value) #{type1.text} 
         .col-lg-2
           label(for="grade") Grade
-          select.form-control(name="grade")
-            each grade in grades
-              option(value=grade) #{grade}
+          input.form-control(type="number" name="grade")
       .form-row.align-items-end
         .col-lg-12
           label(for="comment") Comment
