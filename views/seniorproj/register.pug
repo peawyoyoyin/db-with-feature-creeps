@@ -1,7 +1,9 @@
 extends ../common/layout.pug
 block content
   .container
-    h2 Register senior project
+    h3 Register Senior Project
+    hr
+    h4 Register New project
     form(action="register"  method="POST")
       .form-row
         .col-lg-6
@@ -15,17 +17,15 @@ block content
       .form-row.align-items-end.mt-2
         .col-lg-6
           label(for="topic") Topic
-          input.form-control(type="text" name="topic"
-          placeholder="example: Computer")
+          input.form-control(type="text" name="topic" placeholder="")
         .col-lg-6
           label(for="supervisorTeacherID") Supervisor Teacher ID
-          input.form-control(type="text" name="supervisorTeacherID"
-          placeholder="jantaratit")
-      .form-row.mt-2.float-right
-        .col-lg-1
+          input.form-control(type="text" name="supervisorTeacherID")
+      .form-row.mt-2
+        .col.d-flex.flex-row-reverse.align-items-end
           button.btn.btn-primary(type="submit") Submit
-    hr.mt-5
-    h2.mt-2 Register to an existing Project?
+    hr.mt-4
+    h4.mt-2 Register to an existing Project
     form(action="register"  method="POST")
       .form-row
         .col-lg-4
@@ -37,8 +37,9 @@ block content
         .col-lg-4
           label(for="projectID") Project ID
           input.form-control(type="text" name="projectID")
-      .form-row.mt-2.float-right
-        button.btn.btn-primary register
+      .form-row.mt-2
+        .col.d-flex.flex-row-reverse.align-items-end
+          button.btn.btn-primary Submit
     br
     each i in result
       .form-row

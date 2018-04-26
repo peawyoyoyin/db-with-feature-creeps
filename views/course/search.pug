@@ -1,22 +1,16 @@
 extends ../common/layout.pug
 block content
   .container
-    h3 search courses
+    h3 Search Courses
     hr
-    form(action="/course/search")
+    form.pl-4(action="/course/search")
       .form-row.align-items-end
-        .col-lg-3
+        .col-lg-2
           label(for="courseID") Course ID
-          if searchCourseID
-            input.form-control(type="text" name="courseID" value=searchCourseID)
-          else
-            input.form-control(type="text" name="courseID")
+          input.form-control(type="text" name="courseID" value=searchCourseID || null)
         .col-lg-4
           label(for="courseName") Course Name
-          if searchCourseName
-            input.form-control(type="text" name="courseName" value=searchCourseName)
-          else
-            input.form-control(type="text" name="courseName")
+          input.form-control(type="text" name="courseName" value=searchCourseName || null)
         .col-lg-2
           label(for="semester") Semester
           select.form-control(name="semester")
@@ -27,19 +21,15 @@ block content
                 option(value=semester.value) #{semester.text}
         .col-lg-2
           label(for="credits") Credits
-          if searchCredits
-            input.form-control(type="text" name="credits" value=searchCredits)
-          else
-            input.form-control(type="text" name="credits")
-
+          input.form-control(type="text" name="credits" value=searchCredits || null)
         .col-lg-1
-          button.btn.btn-primary(type="submit") Submit
+          button.btn.btn-primary(type="submit") Search
     hr
     if searchResults
       if searchResults.length == 0
         h3.text-center.text-danger Course Not Found
       else 
-        table.table
+        table.table.table-hover.position-relative
           thead
             tr
               th Course ID
@@ -47,11 +37,10 @@ block content
               th Credits
           tbody
             each course in searchResults
-                tr
-                    td #{course.courseID}
-                    td 
-                      a(href='/course/detail/' + course.instanceID) #{course.courseName}
-                    td #{course.credits}
-
+              tr
+                td
+                  a.table-row-link.text-dark(href='/course/detail/' + course.instanceID) #{course.courseID}
+                td #{course.courseName}
+                td #{course.credits}
     else
-      h5 Start Searching using the search bar!
+      h6.ml-4.text-secondary(style="user-select: none;") Start searching using the search bar!

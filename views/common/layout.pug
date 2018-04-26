@@ -10,7 +10,7 @@ html
   body
     .container-fluid.root
       .row.full-height
-        .col.p-0.pt-4.d-none.d-sm-block.sidebar.border-right
+        .col.p-0.pt-4.d-none.d-sm-block.sidebar
           include sidebar.pug
-        .col-9.pt-4
+        .col-9.pt-4(style="overflow-y: scroll;")
           block content
