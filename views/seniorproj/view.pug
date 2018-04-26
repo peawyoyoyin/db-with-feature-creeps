@@ -2,4 +2,48 @@ extends ../common/layout.pug
 block content
   .container
     h3 View Senior Project Status
-    
+  hr
+  .container
+    form(action="/seniorproj/view")
+      .form-inline
+        .form-group.mr-4
+          label.col-form-label.col Student ID
+          input.form-control(type="text" name="studentID" value=studentID)
+        button.btn.btn-primary(type="submit") Submit
+  hr
+  .container
+    if studentID
+      if student
+        h4.mb-3 #{student.studentID} - #{student.firstName} #{student.lastName}
+      else
+        h4.text-danger Student Not Found
+    else
+      h4 Please search your studentID
+  if project
+    hr
+    .container
+      .row
+        .col
+          h4 #{project.topic}
+      .row
+        .col-6
+          h5 Supervisor: #{project.supervisor}
+        .col-6
+          h5 Year: #{project.year}
+  if evaluations
+    hr
+    .container
+      table.table
+        thead
+          th.lg-3 Evaluation Comment
+          th.lg-3 Grade
+          th.lg-3 Evaluated By
+          th.lg-3 Evaluation Type
+        tbody
+          each evaluation in evaluations
+            tr
+              td #{evaluation.comment}
+              td #{evaluation.grade}
+              td #{evaluation.teacherFullName}
+              td #{evaluation.type}
+      br
