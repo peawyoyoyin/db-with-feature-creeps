@@ -7,16 +7,10 @@ block content
       .form-row.align-items-end
         .col-lg-3
           label(for="courseID") Course ID
-          if searchCourseID
-            input.form-control(type="text" name="courseID" value=searchCourseID)
-          else
-            input.form-control(type="text" name="courseID")
+          input.form-control(type="text" name="courseID" value=searchCourseID || null)
         .col-lg-4
           label(for="courseName") Course Name
-          if searchCourseName
-            input.form-control(type="text" name="courseName" value=searchCourseName)
-          else
-            input.form-control(type="text" name="courseName")
+          input.form-control(type="text" name="courseName" value=searchCourseName || null)
         .col-lg-2
           label(for="semester") Semester
           select.form-control(name="semester")
@@ -27,10 +21,7 @@ block content
                 option(value=semester.value) #{semester.text}
         .col-lg-2
           label(for="credits") Credits
-          if searchCredits
-            input.form-control(type="text" name="credits" value=searchCredits)
-          else
-            input.form-control(type="text" name="credits")
+          input.form-control(type="text" name="credits" value=searchCredits || null)
 
         .col-lg-1
           button.btn.btn-primary(type="submit") Search
