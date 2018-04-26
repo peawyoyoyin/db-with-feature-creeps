@@ -4,65 +4,52 @@ import { CourseInstance } from '~/entity/course-instance'
 
 const router = express.Router()
 
+async function getCourse(courseInstanceId) {
+  const course = await db.course.query(
+    `
+    SELECT courseID, name AS courseName, credit AS credits FROM course_instance 
+    JOIN course ON course_instance.courseCourseID = course.courseID
+    WHERE course_instance.id = ?
+  `,
+    [courseInstanceId]
+  )
+  return course[0]
+}
+
+async function getSections(courseInstanceId) {
+  const sections = await db.section.query(
+    `
+    SELECT sectionNumber, capacity, firstName, lastName, abbrName, time FROM section
+    JOIN teacher ON section.teacherTeacherID = teacher.teacherID
+    WHERE courseInstanceId = ?
+    `,
+    [courseInstanceId]
+  )
+  return sections
+}
+
 router.get('/:id', async (req, res) => {
   const { id } = req.params
-  const rawCourseInstance = await db.courseInstance
-    .createQueryBuilder('instance')
-    .where('instance.id = :id', { id })
-    .leftJoinAndSelect('instance.course', 'course')
-    .leftJoinAndSelect('instance.sections', 'section')
-    .leftJoinAndSelect('section.teacher', 'teacher')
-    .orderBy('section.sectionNumber', 'ASC')
-    .getOne()
-  console.log(rawCourseInstance)
-  console.log(rawCourseInstance.sections)
-  function convertToPugInfo(instance: CourseInstance) {
-    const { course, sections: rawSections } = instance
-    const { courseID, name: courseName, credit: credits } = course
-    const sections = rawSections.map(section => {
-      const { sectionNumber, capacity, teacher: rawTeacher, time } = section
-      const { firstName, lastName, abbrName } = rawTeacher
-      const teacher = { firstName, lastName, abbrName }
-      return {
-        sectionNumber,
-        capacity,
-        teacher,
-        time
-      }
-    })
+  const rawCourse = await getCourse(id)
+  const rawSections = (await getSections(id)).map(section => {
+    const {
+      sectionNumber,
+      capacity,
+      time,
+      firstName,
+      lastName,
+      abbrName
+    } = section
+    const teacher = { firstName, lastName, abbrName }
     return {
-      courseID,
-      courseName,
-      credits,
-      sections
+      sectionNumber,
+      capacity,
+      time,
+      teacher
     }
-  }
-  const course = convertToPugInfo(rawCourseInstance)
-  // let course = {
-  //   courseID: '2110117',
-  //   courseName: 'SOME SUBJ',
-  //   credits: 3,
-  //   sections: [
-  //     {
-  //       sectionNumber: 1,
-  //       capacity: 40,
-  //       teacher: {
-  //         firstName: 'John',
-  //         lastName: 'Snoe',
-  //         abbrName: 'JSN'
-  //       }
-  //     },
-  //     {
-  //       sectionNumber: 2,
-  //       capacity: 20,
-  //       teacher: {
-  //         firstName: 'Jorn',
-  //         lastName: 'Though',
-  //         abbrName: 'JTH'
-  //       }
-  //     }
-  //   ]
-  // }
+  })
+  const course = {...rawCourse, sections: rawSections}
+  console.log(course)
 
   res.render('course/detail', {
     title: course.courseName,
