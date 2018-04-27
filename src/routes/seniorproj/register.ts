@@ -1,12 +1,11 @@
 import * as express from 'express'
 import db from '~/db'
+import * as check from './checkexist'
 
 const router = express.Router()
 
 router.get('/', async (req, res) => {
-  let years = await db._connection.manager.query(
-    `SELECT DISTINCT year FROM academic_year`
-  )
+  let years = await check.getYear()
   years = years.map(i => i.year)
   console.log(years)
   res.render('seniorproj/register', {
@@ -20,22 +19,11 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   let { sid, year, topic, supervisorTeacherID, projectID } = req.body
   let err = []
-  let years = await db._connection.manager.query(
-    `SELECT DISTINCT year FROM academic_year`
-  )
+  let years = await check.getYear()
   years = years.map(i => i.year)
   try {
     if (year !== undefined) {
-      let check_year = await db._connection.manager.query(
-        `SELECT EXISTS(
-        SELECT 1 FROM academic_year WHERE year=? LIMIT 1)`,
-        [year]
-      )
-      console.log('check year', check_year)
-      for (let i in check_year[0]) {
-        if (check_year[0][i] === '0')
-          err.push("You're cheating. There is no year")
-      }
+      err.push(check.yearExists(year))
     }
 
     if (supervisorTeacherID !== undefined && supervisorTeacherID !== '') {
