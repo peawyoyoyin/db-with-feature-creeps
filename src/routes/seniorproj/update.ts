@@ -9,12 +9,8 @@ router.get('/', async (req, res) => {
   const types = formatTypes(rawTypes)
   res.render('seniorproj/update', {
     title: 'Update Senior Project Status',
-<<<<<<< HEAD
-    types
-=======
     types,
     errors: []
->>>>>>> c7f62c60398f379221a4268a1c0d0284b21486f7
   })
 })
 
