@@ -67,6 +67,7 @@ const seed = async () => {
   const student = [
     new Student({
       studentID: '6156789021',
+      password: 'password',
       firstName: 'Jame',
       lastName: 'Fast',
       citizenID: '9871234560123',
@@ -75,6 +76,7 @@ const seed = async () => {
     }),
     new Student({
       studentID: '5831645895',
+      password: 'password',
       firstName: 'Un',
       lastName: 'Kim-Jong',
       citizenID: '9876543210123',
@@ -83,6 +85,7 @@ const seed = async () => {
     }),
     new Student({
       studentID: '5984651325',
+      password: 'password',
       firstName: 'Mark',
       lastName: 'Antony',
       citizenID: '9816483210123',
@@ -91,6 +94,7 @@ const seed = async () => {
     }),
     new Student({
       studentID: '6012535648',
+      password: 'password',
       firstName: 'Julius',
       lastName: 'Caesar',
       citizenID: '9875846910123',
@@ -99,6 +103,7 @@ const seed = async () => {
     }),
     new Student({
       studentID: '6154489021',
+      password: 'password',
       firstName: 'Dick',
       lastName: 'Johnson',
       citizenID: '9876541234563',
@@ -243,21 +248,24 @@ const seed = async () => {
 
   const teacher = [
     new Teacher({
-      teacherID: '1234567890',
+      teacherID: '1234567',
+      password: 'password',
       firstName: 'PRABHAS',
       lastName: 'CHONGSTITVATANA',
       abbrName: 'PCS',
       citizenID: '1234567890123'
     }),
     new Teacher({
-      teacherID: '0000000000',
+      teacherID: '0000000',
+      password: 'password',
       firstName: 'ATTAWITH',
       lastName: 'SUDSANG',
       abbrName: 'ATS',
       citizenID: '0000000000000'
     }),
     new Teacher({
-      teacherID: '1111111111',
+      teacherID: '1111111',
+      password: 'password',
       firstName: 'JOHN',
       lastName: 'CENA',
       abbrName: 'JCN',
