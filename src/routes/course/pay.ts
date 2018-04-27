@@ -25,11 +25,11 @@ const getStudentFee = async (studentID, semesterID) => {
   const result = await db.groupYearRelation.query(`
     SELECT fee, summerFee FROM student
     JOIN group_year_relation
-    ON student.studentGroupGroupID = group_year_relation.studentGroupGroupID AND student.year = group_year_relation.yearYear
+    ON student.studentGroupGroupID = group_year_relation.studentGroupGroupID AND student.yearYear = group_year_relation.yearYear
     WHERE student.studentID = ?
   `,
   [studentID])
-  if(!result) {
+  if(result.length === 0) {
     throw 'fee not found'
   }
   if(semesterNumber === 3) {
