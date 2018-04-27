@@ -193,38 +193,56 @@ const seed = async () => {
     new CourseInstance({
       semester: semester[2],
       course: course[0],
+      midterm: "2018-05-12 13:00-16:00",
+      final: "2018-08-12 13:00-16:00"
     }),
     new CourseInstance({
       semester: semester[1],
       course: course[0],
+      midterm: "2018-05-12 13:00-16:00",
+      final: "2018-08-12 13:00-16:00"
     }),
     new CourseInstance({
       semester: semester[3],
       course: course[0],
+      midterm: "2018-05-12 13:00-16:00",
+      final: "2018-08-12 13:00-16:00"
     }),
     new CourseInstance({
       semester: semester[0],
       course: course[1],
+      midterm: "2018-05-12 13:00-16:00",
+      final: "2018-08-12 13:00-16:00"
     }),
     new CourseInstance({
       semester: semester[1],
       course: course[1],
+      midterm: "2018-05-12 13:00-16:00",
+      final: "2018-08-12 13:00-16:00"
     }),
     new CourseInstance({
       semester: semester[2],
       course: course[1],
+      midterm: "2018-05-12 13:00-16:00",
+      final: "2018-08-12 13:00-16:00"
     }),
     new CourseInstance({
       semester: semester[3],
       course: course[1],
+      midterm: "2018-05-12 13:00-16:00",
+      final: "2018-08-12 13:00-16:00"
     }),
     new CourseInstance({
       semester: semester[2],
       course: course[2],
+      midterm: "2018-05-12 13:00-16:00",
+      final: "2018-08-12 13:00-16:00"
     }),
     new CourseInstance({
       semester: semester[3],
       course: course[2],
+      midterm: "2018-05-12 13:00-16:00",
+      final: "2018-08-12 13:00-16:00"
     }),
   ]
   console.log(courseInstance[0].semester)

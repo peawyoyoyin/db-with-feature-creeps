@@ -15,6 +15,8 @@ import { Study } from '~/entity/study.relation'
 interface CourseInstanceArgs {
   course: Course
   semester: Semester
+  midterm: string
+  final: string
 }
 
 @Entity()
@@ -35,6 +37,12 @@ export class CourseInstance {
 
   @PrimaryGeneratedColumn({ type: 'int' })
   id: number
+
+  @Column({type: 'varchar', default: 'TDF'})
+  midterm: string
+
+  @Column({type: 'varchar', default: 'TDF'})
+  final: string
 
   @ManyToOne(type => Course, course => course.instances, {
     onDelete: 'CASCADE'

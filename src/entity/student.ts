@@ -93,9 +93,6 @@ export class Student {
   @JoinColumn()
   seniorProject: SeniorProject
 
-  @ManyToMany(type => Section, section => section.students)
-  sections: Section[]
-
   @OneToMany(type => Study, study => study.student)
   studies: Study[]
 }

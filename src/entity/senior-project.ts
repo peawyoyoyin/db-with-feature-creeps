@@ -11,6 +11,7 @@ import { Student } from './student'
 import { Evaluation } from './evaluation.relation'
 import { Length, IsPositive } from 'class-validator'
 import { validate } from '~/utils'
+import { AcademicYear } from '~/entity/academic-year';
 
 interface SeniorProjectArgs {
   topic: string
@@ -32,8 +33,7 @@ export class SeniorProject {
   @Length(1, 100)
   topic: string
 
-  @Column({ type: 'int' })
-  @IsPositive()
+  @ManyToOne(type => AcademicYear, year => year.year)
   year: number
 
   @OneToOne(type => Student, student => student.seniorProject,{onDelete: 'CASCADE'})
