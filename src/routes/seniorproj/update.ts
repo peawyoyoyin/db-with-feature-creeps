@@ -24,18 +24,14 @@ router.post(
   async (req, res) => {
     console.log(req.body)
     // console.log(validationResult(req).array())
-    const { teacherID, projectID, type, grade, comment } = req.body
+    const { teacherID } = req.user
+    const { projectID, type, grade, comment } = req.body
     const errors = validationResult(req)
       .array()
       .map((e: any) => e.msg)
 
     try {
       await getProject(projectID)
-    } catch (e) {
-      errors.push(e.message)
-    }
-    try {
-      await getTeacher(teacherID)
     } catch (e) {
       errors.push(e.message)
     }

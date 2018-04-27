@@ -11,16 +11,16 @@ router.get('/', async (req, res) => {
   if (!superVisorTeacherID) superVisorTeacherID = ''
   const data = await db._connection.manager.query(
     `
-    SELECT * FROM senior_project seniorProj
+    SELECT projectID, topic, yearYear AS year, supervisorTeacherID FROM senior_project seniorProj
     WHERE seniorProj.projectID LIKE ? AND
     seniorProj.topic LIKE ? AND
-    seniorProj.year LIKE ? AND
+    seniorProj.yearYear LIKE ? AND
     IFNULL(seniorProj.supervisorTeacherID,1) LIKE ?
   `,
     [`${projectID}%`, `${topic}%`, `${year}%`, `${superVisorTeacherID}%`]
   )
   let years = await db._connection.manager.query(`
-    SELECT DISTINCT year
+    SELECT DISTINCT yearYear AS year
     FROM senior_project
   `)
   years = years.map(year => year.year)

@@ -51,11 +51,12 @@ const getPaymentTransactionID = async (studentID, semesterID) => {
   }
 }
 
-router.get('/', async (req, res) => {
+router.get('/', async (req: any, res) => {
   const semesters = await getAllSemesters()
-  const { studentID, semester } = req.query
+  const { studentID } = req.user
+  const { semester } = req.query
   let fee, err, transactionID, payment
-  if(studentID !== undefined && semester !== undefined && studentID !== '' && semester !== '') {
+  if(semester !== undefined && semester !== '') {
     try {
       fee = await getStudentFee(studentID, semester)
     } catch(e) {

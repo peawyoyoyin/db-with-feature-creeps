@@ -3,22 +3,10 @@ import db from '~/db'
 
 const router = express.Router()
 
-async function getStudent(studentID) {
-  const rawStudent = await db.student.query(
-    `
-    SELECT studentID, firstName, lastName, seniorProjectProjectID AS projectID FROM student 
-    WHERE studentID = ?
-  `,
-    [studentID]
-  )
-  if (rawStudent.length === 0) return null
-  return rawStudent[0]
-}
-
 async function getProject(queryProjectID) {
   const rawProject = await db.seniorProject.query(
     `
-    SELECT projectID, topic, year, firstName, lastName FROM senior_project S
+    SELECT projectID, topic, yearYear as year, firstName, lastName FROM senior_project S
     JOIN teacher T ON S.supervisorTeacherID = T.teacherID
     WHERE projectID = ?
   `,
@@ -45,6 +33,7 @@ async function getEvaluations(projectID) {
     `,
     [projectID]
   )
+  if (rawEvaluations.length === 0) return null
   return rawEvaluations.map(evaluation => {
     const {comment, grade, firstName, lastName, type} = evaluation
     return {
@@ -56,10 +45,10 @@ async function getEvaluations(projectID) {
   })
 }
 
-router.get('/', async (req, res) => {
-  const { studentID } = req.query
-  const student = await getStudent(studentID)
-  const project = student ? await getProject(student.projectID) : null
+router.get('/', async (req: any, res) => {
+  const student = req.user
+  const project = student ? await getProject(student.seniorProjectProjectID) : null
+  console.log(student)
   // const project = {
   //   topic: 'Machine Learning & Blockchain Innovative Disruption',
   //   supervisor: 'Attawit Sudsang',
@@ -81,7 +70,6 @@ router.get('/', async (req, res) => {
   //   }
   // ]
   res.render('seniorproj/view', {
-    studentID,
     student,
     project,
     evaluations

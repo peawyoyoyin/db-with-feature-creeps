@@ -4,14 +4,6 @@ block content
     h3 View grade
   hr
   .container
-    form(action="/grade")
-      .form-inline
-        .form-group.mr-4
-          label.col-form-label.col Student ID
-          input.form-control(type="text" name="sid" value=sid)
-        button.btn.btn-primary(type="submit") Submit
-  hr
-  .container
     if gradeData
       each semester in gradeData
         h4 #{semester.semester} 
@@ -28,7 +20,7 @@ block content
                 td #{subject.gradeLetter}
         br
     else
-      h5 Input student ID...
+      h5 grade data not found
                 
     
   
