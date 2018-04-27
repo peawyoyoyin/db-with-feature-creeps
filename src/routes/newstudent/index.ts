@@ -5,14 +5,23 @@ import { AcademicYear } from '~/entity/academic-year';
 
 const router = express.Router()
 
-router.get('/', async (req, res) => {
-  const departments = await db.departments.find({
-    relations: ['faculty']
-  })
-  const yearsRaw = await db.academicYear.query(`
-    SELECT year FROM academic_year
+async function getAllDepartments() {
+  const departments = await db.departments.query(`
+    SELECT * FROM department
   `)
-  const years = yearsRaw.map(row => row.year)
+  return departments
+}
+
+async function getAllYears() {
+  const years = await db.semester.query(`
+    SELECT year FROM academic_year ORDER BY year DESC
+  `)
+  return years.map(year => year.year)
+}
+
+router.get('/', async (req, res) => {
+  const departments = await getAllDepartments()
+  const years = await getAllYears()
   console.log(departments)
   res.render('newstudent/new-student', {
     title: 'Register New Student',
@@ -23,13 +32,8 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  const departments = await db.departments.find({
-    relations: ['faculty']
-  })
-  const yearsRaw = await db.academicYear.query(`
-    SELECT year FROM academic_year
-  `)
-  const years = yearsRaw.map(row => row.year)
+  const departments = await getAllDepartments()  
+  const years = await getAllYears()  
   const {
     studentID,
     firstName,

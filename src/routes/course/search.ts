@@ -3,71 +3,104 @@ import db from '~/db'
 
 const router = express.Router()
 
+async function getAllSemester() {
+  const semesters = await db.semester.query(`
+    SELECT id, semesterNumber, yearYear FROM semester
+    ORDER BY yearYear DESC, semesterNumber DESC
+  `)
+  return semesters
+}
+
+async function searchCourses(courseID, courseName, semesterID, credit) {
+  const queryStr = `
+    SELECT course_instance.id, abbreviate, courseID, credit FROM course_instance
+    JOIN course ON course_instance.courseCourseID = course.courseID
+    JOIN semester ON course_instance.semesterId = semester.id
+  `
+
+  const whereCourseID = courseID ? ` WHERE course.courseID LIKE ? ` : ''
+  const argCourseId = courseID ? [`${courseID}%`] : []
+
+  const delimCourseName = courseName
+    ? whereCourseID
+      ? ' AND '
+      : ' WHERE '
+    : ''
+  const whereCourseName = courseName ? ` course.name LIKE ? ` : ''
+  const argCourseName = courseName ? [`${courseName}%`] : []
+
+  const delimSemesterID = semesterID
+    ? whereCourseID || whereCourseName
+      ? ' AND '
+      : ' WHERE '
+    : ''
+  const whereSemesterID = semesterID ? ` semester.id = ? ` : ''
+  const argSemesterID = semesterID ? [semesterID] : []
+
+  const delimCredit = credit
+    ? whereCourseID || whereCourseName || whereSemesterID
+      ? ' AND '
+      : ' WHERE '
+    : ''
+  const whereCredit = credit ? ` course.credit = ? ` : ''
+  const argCredit = credit ? [credit] : []
+
+  const courseInstances = await db.courseInstance.query(
+    queryStr +
+      whereCourseID +
+      delimCourseName +
+      whereCourseName +
+      delimSemesterID +
+      whereSemesterID +
+      delimCredit +
+      whereCredit,
+    [...argCourseId, ...argCourseName, ...argSemesterID, ...argCredit]
+  )
+  return courseInstances
+}
 
 router.get('/', async (req, res) => {
   let searchResults = undefined
   const { courseID, courseName, semester, credits } = req.query
-  const rawSemester = await db.semester
-    .createQueryBuilder('semester')
-    .leftJoinAndSelect('semester.year', 'year')
-    .orderBy('year.year', 'DESC')
-    .addOrderBy('semester.semesterNumber', 'DESC')
-    .getMany()
+  const rawSemester = await getAllSemester()
+  // console.log(rawSemester)
   const semesters = rawSemester.map(semester => {
     const semesterId = semester.id
     const semesterNumber = semester.semesterNumber
-    const yearNumber = semester.year.year
+    const yearNumber = semester.yearYear
     const text = `${yearNumber}/${semesterNumber}`
     return {
       value: semesterId,
       text
     }
   })
-  // console.log(rawSemester)
+  // console.log('hello', semesters)
   if (
     courseID !== undefined ||
     courseName !== undefined ||
     semester !== undefined ||
     credits !== undefined
   ) {
-    let rawSearchResults = db.courseInstance
-      .createQueryBuilder('instance')
-      .leftJoinAndSelect('instance.course', 'course')
-      .leftJoinAndSelect('instance.semester', 'semester')
-    if (courseID !== undefined) {
-      rawSearchResults = rawSearchResults.andWhere('course.courseID like :id', {
-        id: `${courseID}%`
-      })
-    }
-    if (courseName !== undefined) {
-      rawSearchResults = rawSearchResults.andWhere('course.name like :name', {
-        name: `${courseName}%`
-      })
-    }
-    if (semester !== undefined) {
-      rawSearchResults = rawSearchResults.andWhere('semester.id = :semester', {
-        semester 
-      })
-    }
-    if (credits !== undefined && credits !== '') {
-      rawSearchResults = rawSearchResults.andWhere('course.credit = :credit', {
-        credit: credits
-      })
-    }
-
+    const searchRows = await searchCourses(
+      courseID,
+      courseName,
+      semester,
+      credits
+    )
     // console.log(rawSearchResults)
-    searchResults = (await rawSearchResults.getMany()).map(instance => {
-      console.log(instance)
+    searchResults = searchRows.map(row => {
+      // console.log(instance)
       const {
+        id: instanceID,
         abbreviate: courseName,
         courseID,
-        credit: credits,
-      } = instance.course
+        credit: credits
+      } = row
       return {
         courseID,
         courseName,
         credits,
-        instanceID: instance.id
+        instanceID
       }
     })
   }
@@ -83,4 +116,3 @@ router.get('/', async (req, res) => {
 })
 
 export default router
-
