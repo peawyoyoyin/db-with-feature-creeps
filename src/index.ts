@@ -10,6 +10,7 @@ import { Connection, createConnection } from 'typeorm'
 //this fixes path aliases
 import 'module-alias/register'
 
+import student from './routes/student'
 import login from './routes/login'
 import logout from './routes/logout'
 import course from './routes/course'
@@ -57,10 +58,11 @@ app.use(/^(?!\/login)(?!\/register).*$/, (req: any, res, next) => {
 })
 
 app.use('/login', login)
-app.use('/course', course)
+app.use('/student', student)
+// app.use('/course', course)
 app.use('/seniorproj', seniorProject)
 app.use('/newstudent', newStudent)
-app.use('/grade', grade)
+// app.use('/grade', grade)
 app.use('/logout', logout)
 
 app.get('/', (req, res) => {
