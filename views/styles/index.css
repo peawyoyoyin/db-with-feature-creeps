@@ -19,7 +19,10 @@
 
 ul.sidebar-menu {
   list-style-type: none;
-  padding: 0;
+}
+
+ul.sidebar-menu > li {
+  margin-right: 0.75em;
 }
 
 .sidebar-menu > li > * {
