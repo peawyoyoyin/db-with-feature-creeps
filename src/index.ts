@@ -3,6 +3,7 @@ import * as express from 'express'
 import * as session from 'express-session'
 import * as morgan from 'morgan'
 import * as passport from 'passport'
+import * as flash from 'connect-flash'
 import { Strategy } from 'passport-local'
 import config from './config'
 import { Connection, createConnection } from 'typeorm'
@@ -17,9 +18,9 @@ import seniorProject from './routes/seniorproj'
 import newStudent from './routes/newstudent'
 import db from './db'
 import seed from './db/seed'
+import { initPassport } from './passport'
 
 import { Student } from './entity/student'
-
 ;(async () => {
   if (config.autoSeed) {
     console.log('config.autoSeed is true, commencing seed...')
@@ -43,29 +44,12 @@ app.use(
 )
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(flash())
 
 app.use('/static', express.static('public'))
 app.use(morgan(':status :method\t:url'))
 
-passport.use(
-  new Strategy(
-    {
-      usernameField: 'id',
-      passwordField: 'password'
-    },
-    (username, password, done) => {
-      if (username === 'tip' && password === 'box')
-        return done(null, { name: 'phootip', id: username })
-      return done(null, false, { message: 'Incorrect username or password' })
-    }
-  )
-)
-passport.serializeUser((user, done) => {
-  done(null, user.id)
-})
-passport.deserializeUser((id, done) => {
-  done(null, { name: 'phootip', id: id })
-})
+initPassport()
 
 app.use(/^(?!\/login)(?!\/register).*$/, (req: any, res, next) => {
   if (!req.isAuthenticated()) res.redirect('/login')
