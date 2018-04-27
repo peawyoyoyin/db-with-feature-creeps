@@ -4,14 +4,6 @@ block content
     h3 Manage Courses
   hr
   .container
-    form#enroll
-      .form-inline
-        .form-group.mr-4
-          label.col-form-label.col(for="studentID") Student ID
-          input.form-control(type="text" name="studentID" value=studentID)
-        button.btn.btn-primary(type="sutmit") submit
-  hr
-  .container
     if studentData == null
       h5 Input student ID...
     else if studentData.info.notFound

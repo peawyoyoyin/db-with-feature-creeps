@@ -1,12 +1,24 @@
 extends ../common/layout.pug
 block content
   .container
-    .jumbotron.mx-auto
-      h1 Please login first
-    form#login
+    .jumbotron.text-center
+      h3 Please login first
+    form.p-3(action="/login" method="POST")
       .form-group
-      label(for="id") ID 
-      input.form-control(type="text" name="id")
+        .form-row
+          .col-2.offset-2
+            label(for="id") ID 
+          .col-6
+            input.form-control(type="text" name="id")
       .form-group
-      label(for="password") PASSWORD
-      input.form-control(type="password" name="password")
+        .form-row
+          .col-2.offset-2
+            label(for="password") PASSWORD
+          .col-6
+            input.form-control(type="password" name="password")
+      .form-group
+        .form-row
+          .col
+            button.btn.btn-primary.mx-auto(type="submit") Login
+      if message.error
+        .alert.alert-danger #{message.error}

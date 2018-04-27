@@ -25,11 +25,11 @@ const getStudentFee = async (studentID, semesterID) => {
   const result = await db.groupYearRelation.query(`
     SELECT fee, summerFee FROM student
     JOIN group_year_relation
-    ON student.studentGroupGroupID = group_year_relation.studentGroupGroupID AND student.year = group_year_relation.yearYear
+    ON student.studentGroupGroupID = group_year_relation.studentGroupGroupID AND student.yearYear = group_year_relation.yearYear
     WHERE student.studentID = ?
   `,
   [studentID])
-  if(!result) {
+  if(result.length === 0) {
     throw 'fee not found'
   }
   if(semesterNumber === 3) {
@@ -51,11 +51,12 @@ const getPaymentTransactionID = async (studentID, semesterID) => {
   }
 }
 
-router.get('/', async (req, res) => {
+router.get('/', async (req: any, res) => {
   const semesters = await getAllSemesters()
-  const { studentID, semester } = req.query
+  const { studentID } = req.user
+  const { semester } = req.query
   let fee, err, transactionID, payment
-  if(studentID !== undefined && semester !== undefined && studentID !== '' && semester !== '') {
+  if(semester !== undefined && semester !== '') {
     try {
       fee = await getStudentFee(studentID, semester)
     } catch(e) {

@@ -3,28 +3,35 @@
     a(href="/" style="text-decoration: none;")
       img.mx-auto.d-block.chula-logo(src="/static/logo.png")
       h3.mx-auto.text-center.text-dark.font-italic Reg Chula
-    hr.invisible
   .container
     ul.sidebar-menu.nav.flex-column
       li.nav-item.sidebar-nav-item
         a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/newstudent") new student
       li.mt-2.mb-0.sidebar-divider courses
-      li.nav-item.sidebar-nav-item
-        a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/course/enroll") enroll course
-      li.nav-item.sidebar-nav-item
-        a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/course/search") search courses
-      li.nav-item.sidebar-nav-item
-        a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/course/manage") manage courses
-      li.nav-item.sidebar-nav-item
-        a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/course/pay") pay fee
-      li.nav-item.sidebar-nav-item
-        a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/grade") view grade
+      ul.sidebar-menu.nav.pl-3.flex-column
+        li.nav-item.sidebar-nav-item
+          a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/course/enroll") enroll course
+        li.nav-item.sidebar-nav-item
+          a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/course/search") search courses
+        li.nav-item.sidebar-nav-item
+          a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/course/manage") manage courses
+        li.nav-item.sidebar-nav-item
+          a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/course/pay") pay fee
+        li.nav-item.sidebar-nav-item
+          a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/grade") view grade
       li.mt-2.mb-0.sidebar-divider senior projects
+      ul.sidebar-menu.nav.pl-3.flex-column
+        li.sidebar-divider Register
+        ul.sidebar-menu.nav.pl-3.flex-column
+          li.nav-item.sidebar-nav-item
+            a.nav-link.sidebar-nav-link.pl-0.mt-0.mb-1.py-0(href="/seniorproj/register") register new project
+          li.nav-item.sidebar-nav-item
+            a.nav-link.sidebar-nav-link.pl-0.mt-0.mb-1.py-0(href="/seniorproj/register") register to existing project
+        li.nav-item.sidebar-nav-item
+          a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/seniorproj/browse") browse senior projects
+        li.nav-item.sidebar-nav-item
+          a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/seniorproj/update") update senior project status
+        li.nav-item.sidebar-nav-item
+          a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/seniorproj/view") view senior project evaluation
       li.nav-item.sidebar-nav-item
-        a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/seniorproj/browse") browse senior projects
-      li.nav-item.sidebar-nav-item
-        a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/seniorproj/register") register senior projects
-      li.nav-item.sidebar-nav-item
-        a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/seniorproj/update") update senior project status
-      li.nav-item.sidebar-nav-item
-        a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/seniorproj/view") view senior project progress
+        a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/logout") logout

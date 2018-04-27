@@ -30,6 +30,7 @@ export class AcademicYear {
 
   @OneToMany(type => Student, student => student.year)
   students: Student[]
-  // @OneToMany(type => SeniorProject, seniorProject => seniorProject.year)
-  // seniorProjects: SeniorProject[]
+
+  @OneToMany(type => SeniorProject, seniorProject => seniorProject.year)
+  seniorProjects: SeniorProject[]
 }
