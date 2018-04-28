@@ -58,7 +58,7 @@ router.post('/', async (req, res) => {
       year: parseInt(year)
     })
     await db.student.save(newStudent)
-    res.redirect('/')
+    res.redirect('/student')
   } catch (e) {
     res.render('newstudent/new-student', {
       title: 'Register New Student',
