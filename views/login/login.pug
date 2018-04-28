@@ -1,24 +1,32 @@
-extends ../common/layout.pug
-block content
-  .container
-    .jumbotron.text-center
-      h3 Please login first
-    form.p-3(action="/login" method="POST")
-      .form-group
-        .form-row
-          .col-2.offset-2
-            label(for="id") ID 
-          .col-6
-            input.form-control(type="text" name="id")
-      .form-group
-        .form-row
-          .col-2.offset-2
-            label(for="password") PASSWORD
-          .col-6
-            input.form-control(type="password" name="password")
-      .form-group
-        .form-row
-          .col
-            button.btn.btn-primary.mx-auto(type="submit") Login
-      if message.error
-        .alert.alert-danger #{message.error}
+doctype html
+html
+  head
+    title= title
+    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css")
+    link(rel="shortcut icon" href="/static/favicon.ico")
+  body
+    .container-fluid.root
+      .col.pt-4
+        .container
+          .jumbotron.text-center.bg-transparent
+            h2 Please login first
+          form.col-4.container.py-3.d-block.border.rounded(action="/login" method="POST")
+            .form-group
+              .form-row
+                .col-2.offset-1
+                  label(for="id") ID 
+                .col-6.offset-2
+                  input.form-control(type="text" name="id")
+            .form-group
+              .form-row
+                .col-2.offset-1
+                  label(for="password") Password
+                .col-6.offset-2
+                  input.form-control(type="password" name="password")
+            .form-group.mb-0
+              .form-row
+                .col.d-flex
+                  button.btn.btn-primary.mx-auto(type="submit") Login
+            if message.error
+              .alert.alert-danger #{message.error}

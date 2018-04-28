@@ -4,7 +4,7 @@ import * as passport from 'passport'
 const router = express.Router()
 
 router.get('/', (req: any, res) => {
-  res.render('login/login', {message: req.flash()})
+  res.render('login/login', {title: 'Login', message: req.flash()})
 })
 router.post(
   '/',

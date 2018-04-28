@@ -74,7 +74,8 @@ export class Teacher {
   coursesOwned: Course[]
 
   @ManyToOne(type => Department, department => department.teachers, {
-    onDelete: 'SET NULL'
+    onDelete: 'SET NULL',
+    nullable: true,
   })
   department: Department
 
