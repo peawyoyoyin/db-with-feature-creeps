@@ -1,29 +1,71 @@
-ul.sidebar-menu.nav.flex-column
-  li.mt-2.mb-0.sidebar-divider courses
-  ul.sidebar-menu.nav.pl-3.flex-column
-    li.nav-item.sidebar-nav-item
-      a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/course/enroll") enroll course
-    li.nav-item.sidebar-nav-item
-      a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/course/search") search courses
-    li.nav-item.sidebar-nav-item
-      a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/course/manage") manage courses
-    li.nav-item.sidebar-nav-item
-      a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/course/pay") pay fee
-    li.nav-item.sidebar-nav-item
-      a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/grade") view grade
-  li.mt-2.mb-0.sidebar-divider senior projects
-  ul.sidebar-menu.nav.pl-3.flex-column
-    li.sidebar-divider Register
-    ul.sidebar-menu.nav.pl-3.flex-column
-      li.nav-item.sidebar-nav-item
-        a.nav-link.sidebar-nav-link.pl-0.mt-0.mb-1.py-0(href="/seniorproj/register") register new project
-      li.nav-item.sidebar-nav-item
-        a.nav-link.sidebar-nav-link.pl-0.mt-0.mb-1.py-0(href="/seniorproj/exist-register") register to existing project
-    li.nav-item.sidebar-nav-item
-      a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/seniorproj/browse") browse senior projects
-    li.nav-item.sidebar-nav-item
-      a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/seniorproj/update") update senior project status
-    li.nav-item.sidebar-nav-item
-      a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/seniorproj/view") view senior project evaluation
-  li.nav-item.sidebar-nav-item
-    a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/logout") logout
+-
+  var sidebarItems = [
+    {
+      type: 'category',
+      name: 'courses',
+      items: [
+        {
+          type: 'link',
+          name: 'enroll course',
+          href: '/course/enroll'
+        },
+        {
+          type: 'link',
+          name: 'search courses',
+          href: '/course/search'
+        },
+        {
+          type: 'link',
+          name: 'manage courses',
+          href: '/course/manage'
+        },
+        {
+          type: 'link',
+          name: 'pay fee',
+          href: '/course/pay'
+        },
+        {
+          type: 'link',
+          name: 'view grade',
+          href: '/grade'
+        }
+      ]
+    },
+    {
+      type: 'category',
+      name: 'senior projects',
+      items: [
+        {
+          type: 'category',
+          name: 'register',
+          items: [
+            {
+              type: 'link',
+              name: 'register new project',
+              href: '/seniorproj/register'
+            },
+            {
+              type: 'link',
+              name: 'register to existing project',
+              href: '/seniorproj/exist-register'
+            }
+          ]
+        },
+        {
+          type: 'link',
+          name: 'browse senior projects',
+          href: '/seniorproj/browse'
+        },
+        {
+          type: 'link',
+          name: 'view senior project evaluations',
+          href: '/seniorproj/view'
+        }
+      ]
+    },
+    {
+      type: 'link',
+      name: 'log out',
+      href: '/logout'
+    }
+  ]

@@ -1,17 +1,35 @@
-ul.sidebar-menu.nav.flex-column
-  li.mt-2.mb-0.sidebar-divider senior projects
-  ul.sidebar-menu.nav.pl-3.flex-column
-    li.sidebar-divider Register
-    ul.sidebar-menu.nav.pl-3.flex-column
-      li.nav-item.sidebar-nav-item
-        a.nav-link.sidebar-nav-link.pl-0.mt-0.mb-1.py-0(href="/seniorproj/register") register new project
-      li.nav-item.sidebar-nav-item
-        a.nav-link.sidebar-nav-link.pl-0.mt-0.mb-1.py-0(href="/seniorproj/exist-register") register to existing project
-    li.nav-item.sidebar-nav-item
-      a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/seniorproj/browse") browse senior projects
-    li.nav-item.sidebar-nav-item
-      a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/seniorproj/update") update senior project status
-    li.nav-item.sidebar-nav-item
-      a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/seniorproj/view") view senior project evaluation
-  li.nav-item.sidebar-nav-item
-    a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/logout") logout
+-
+  var sidebarItems = [
+    {
+      type: 'category',
+      name: 'senior projects',
+      items: [
+        {
+          type: 'category',
+          name: 'register',
+          items: [
+            {
+              type: 'link',
+              name: 'register new project',
+              href: '/seniorproj/register'
+            },
+            {
+              type: 'link',
+              name: 'register to existing project',
+              href: '/seniorproj/exist-register'
+            }
+          ]
+        },
+        {
+          type: 'link',
+          name: 'browse senior projects',
+          href: '/seniorproj/browse'
+        },
+      ]
+    },
+    {
+      type: 'link',
+      name: 'log out',
+      href: '/logout'
+    }
+  ]

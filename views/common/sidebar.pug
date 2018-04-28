@@ -1,3 +1,21 @@
+//- mixin renderSidebarItems(sidebarItems)
+//-   ul.sidebar-menu.nav.flex-column
+//-     each item, key in sidebarItems
+//-       if typeof(item) === 'string'
+//-         li.nav-item.sidebar-nav-item
+//-           a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href=item) #{key}
+//-       else if typeof(item) === 'object'
+//-         +renderSidebarItems(item)
+
+//- - 
+//-   var test = {
+//-     'new student': '/newstudent',
+//-     'hello': '/hello',
+//-     'nested': {
+//-       'nestedlink': '/nested'
+//-     }
+//-   }
+
 .container-fluid.p-0
   .container.mb-4
     a(href="/" style="text-decoration: none;")
@@ -14,3 +32,5 @@
           include sidebar-items/student.pug
         default
           include sidebar-items/student.pug
+      include sidebar-items/_render.pug
+      +renderSidebarItems(sidebarItems)
