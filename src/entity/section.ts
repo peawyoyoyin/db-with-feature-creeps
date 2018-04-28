@@ -50,10 +50,7 @@ export class Section {
   @Column({type: 'varchar', default: 'TDF'})
   time: string
 
-  @ManyToOne(
-    type => CourseInstance,
-    courseInstance => courseInstance.sections,
-    {
+  @ManyToOne(type => CourseInstance, courseInstance => courseInstance.sections,{
       onDelete: 'CASCADE',
       nullable: false
     }

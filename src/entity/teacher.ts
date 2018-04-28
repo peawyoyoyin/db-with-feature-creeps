@@ -36,7 +36,7 @@ export class Teacher {
     validate(this)
   }
 
-  @PrimaryColumn({ type: 'varchar', length: 10 })
+  @PrimaryColumn({ type: 'char', length: 7 })
   @Length(7, 7, { message: 'teacherID length must be 10 characters' })
   @IsNumberString()
   teacherID: string
