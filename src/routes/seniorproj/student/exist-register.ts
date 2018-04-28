@@ -20,7 +20,7 @@ router.post('/', async (req: any, res) => {
   let { sid, projectID } = req.body
   let err = []
   sid = req.user.studentID
-  const {renderOptions} = req
+  const { renderOptions } = req
   try {
     if (sid == undefined && sid == '') err.push('Please insert sid')
     if (err.length !== 0) throw err
