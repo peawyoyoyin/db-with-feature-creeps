@@ -47,11 +47,12 @@ router.get('/', async (req: any, res) => {
       }
     }
   }
-
+  const { renderOptions } = req
   res.render('course/manage', {
     title: 'Manage Courses',
     studentData,
-    studentID
+    studentID,
+    ...renderOptions
   })
 })
 
@@ -143,7 +144,6 @@ router.post('/', async (req, res) => {
       const e = await handleRemoveWithdraw(req.body, Mode.withdraw)
     }
   }
-  // if (e.length > 0) res.render('')
   res.redirect(req.baseUrl)
 })
 

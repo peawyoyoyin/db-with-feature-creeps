@@ -50,7 +50,7 @@ app.use(morgan(':status :method\t:url'))
 
 initPassport()
 
-app.use(/^(?!\/login)(?!\/register).*$/, (req: any, res, next) => {
+app.use(/^(?!\/login)(?!\/newstudent).*$/, (req: any, res, next) => {
   if (!req.isAuthenticated()) res.redirect('/login')
   else next()
 })

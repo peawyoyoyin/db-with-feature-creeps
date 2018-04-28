@@ -15,36 +15,42 @@ const getAllSemesters = async () => {
 }
 
 const getStudentFee = async (studentID, semesterID) => {
-  const semesterQueryResult = await db.semester.query(`
+  const semesterQueryResult = await db.semester.query(
+    `
     SELECT semesterNumber FROM semester
     WHERE semester.id = ?
   `,
-  [semesterID])
+    [semesterID]
+  )
   const semesterNumber = semesterQueryResult[0].semesterNumber
   console.log(`semesterID ${semesterID} has semesterNumber ${semesterNumber}`)
-  const result = await db.groupYearRelation.query(`
+  const result = await db.groupYearRelation.query(
+    `
     SELECT fee, summerFee FROM student
     JOIN group_year_relation
     ON student.studentGroupGroupID = group_year_relation.studentGroupGroupID AND student.yearYear = group_year_relation.yearYear
     WHERE student.studentID = ?
   `,
-  [studentID])
-  if(result.length === 0) {
+    [studentID]
+  )
+  if (result.length === 0) {
     throw 'fee not found'
   }
-  if(semesterNumber === 3) {
+  if (semesterNumber === 3) {
     return result[0].summerFee
   }
   return result[0].fee
 }
 
 const getPaymentTransactionID = async (studentID, semesterID) => {
-  const result = await db.enrollmentFeePayment.query(`
+  const result = await db.enrollmentFeePayment.query(
+    `
     SELECT enrollment_fee_payment.transactionID FROM enrollment_fee_payment
     WHERE enrollment_fee_payment.payerStudentID = ? AND enrollment_fee_payment.semesterId = ?
   `,
-  [studentID, semesterID])
-  if(result.length === 0) {
+    [studentID, semesterID]
+  )
+  if (result.length === 0) {
     return null
   } else {
     return result[0].transactionID
@@ -56,10 +62,10 @@ router.get('/', async (req: any, res) => {
   const { studentID } = req.user
   const { semester } = req.query
   let fee, err, transactionID, payment
-  if(semester !== undefined && semester !== '') {
+  if (semester !== undefined && semester !== '') {
     try {
       fee = await getStudentFee(studentID, semester)
-    } catch(e) {
+    } catch (e) {
       err = e
     }
     payment = {
@@ -68,17 +74,28 @@ router.get('/', async (req: any, res) => {
     }
     transactionID = await getPaymentTransactionID(studentID, semester)
   }
-  res.render('course/pay', { title: 'Pay Fee', semesters, fee, err, transactionID, payment })
+  const { renderOptions } = req
+  res.render('course/pay', {
+    title: 'Pay Fee',
+    semesters,
+    fee,
+    err,
+    transactionID,
+    payment,
+    ...renderOptions
+  })
 })
 
 const pay = async (studentID, semesterID, amount = 100) => {
-  await db.enrollmentFeePayment.query(`
+  await db.enrollmentFeePayment.query(
+    `
     INSERT INTO enrollment_fee_payment
     (amount, payerStudentID, semesterId)
     VALUES
     (?, ?, ?)
   `,
-  [amount, studentID, semesterID])
+    [amount, studentID, semesterID]
+  )
 }
 
 router.post('/', async (req, res) => {

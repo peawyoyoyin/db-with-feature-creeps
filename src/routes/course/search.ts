@@ -59,7 +59,7 @@ async function searchCourses(courseID, courseName, semesterID, credit) {
   return courseInstances
 }
 
-router.get('/', async (req, res) => {
+router.get('/', async (req: any, res) => {
   let searchResults = undefined
   const { courseID, courseName, semester, credits } = req.query
   const rawSemester = await getAllSemester()
@@ -104,6 +104,7 @@ router.get('/', async (req, res) => {
       }
     })
   }
+  const { renderOptions } = req
   res.render('course/search', {
     title: 'Search Courses',
     searchCourseID: courseID,
@@ -111,7 +112,8 @@ router.get('/', async (req, res) => {
     searchCredits: credits,
     searchResults,
     semesters,
-    selectedSemester: semester
+    selectedSemester: semester,
+    ...renderOptions
   })
 })
 

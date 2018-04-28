@@ -39,9 +39,8 @@ export class Evaluation {
   @ManyToOne(type => EvaluationType)
   evaluationType: EvaluationType
 
-  @ManyToMany(type => Teacher, teacher => teacher.projectEvaluations)
-  @JoinTable()
-  evaluators: Teacher[]
+  @ManyToOne(type => Teacher, teacher => teacher.projectEvaluations)
+  evaluator: Teacher
 
   @Column({ type: 'varchar', length: 300 })
   comment: string

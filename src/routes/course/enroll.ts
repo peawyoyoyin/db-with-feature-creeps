@@ -104,8 +104,13 @@ async function insertStudyPromise(studentID, sectionID, instanceID) {
   }
 }
 
-router.get('/', (req, res) => {
-  res.render('course/enroll', { title: 'Enroll Course', errors: [] })
+router.get('/', (req: any, res) => {
+  const { renderOptions } = req
+  res.render('course/enroll', {
+    title: 'Enroll Course',
+    errors: [],
+    ...renderOptions
+  })
 })
 
 router.post('/', async (req: any, res) => {
@@ -139,7 +144,12 @@ router.post('/', async (req: any, res) => {
   console.log('handleErrors', handleErrors)
   errors.splice(0, 0, ...handleErrors)
   if (errors.length > 0) {
-    res.render('course/enroll', { title: 'Enroll Course', errors })
+    const { renderOptions } = req
+    res.render('course/enroll', {
+      title: 'Enroll Course',
+      errors,
+      ...renderOptions
+    })
   } else {
     res.redirect('/student')
   }

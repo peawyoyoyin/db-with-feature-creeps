@@ -7,7 +7,7 @@ const router = express.Router()
 router.get('/', async (req: any, res) => {
   const rawTypes = await getAllEvaluationType()
   const types = formatTypes(rawTypes)
-  const {renderOptions} = req
+  const { renderOptions } = req
   res.render('seniorproj/update', {
     title: 'Update Senior Project Status',
     types,
@@ -44,10 +44,12 @@ router.post(
     } catch (e) {
       const rawTypes = await getAllEvaluationType()
       const types = formatTypes(rawTypes)
+      const { renderOptions } = req
       res.render('seniorproj/update', {
         title: 'Update Senior Project Status',
         types,
-        errors
+        errors,
+        ...renderOptions
       })
     }
   }
@@ -94,20 +96,11 @@ async function getProject(projectID) {
 async function createEvaluation(projectID, teacherID, typeID, comment, grade) {
   const result = await db.evaluation.query(
     `
-    insert into evaluation(comment,grade,projectProjectID,evaluationTypeTypeID)
+    insert into evaluation(comment,grade,projectProjectID,evaluationTypeTypeID,evaluatorTeacherID)
     value(?, ?, ?, ?)
   `,
-    [comment, grade, projectID, typeID]
+    [comment, grade, projectID, typeID, teacherID]
   )
-  const { insertId } = result
-  const result2 = await db.evaluation.query(
-    `
-      insert into evaluation_evaluators_teacher(evaluationId, teacherTeacherID)
-      value(?, ?)
-    `,
-    [insertId, teacherID]
-  )
-  // console.log(result)
 }
 
 export default router

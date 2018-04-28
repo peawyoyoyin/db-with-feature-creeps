@@ -79,6 +79,6 @@ export class Teacher {
   })
   department: Department
 
-  @ManyToMany(type => Evaluation, evaluation => evaluation.evaluators)
+  @OneToMany(type => Evaluation, evaluation => evaluation.evaluator)
   projectEvaluations: Evaluation[]
 }

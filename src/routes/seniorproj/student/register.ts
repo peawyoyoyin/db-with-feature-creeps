@@ -10,49 +10,54 @@ router.get('/', async (req: any, res) => {
   years = years.map(i => i.year)
   let id = req.user.studentID
 
+  const { renderOptions } = req
   res.render('seniorproj/student/register', {
     title: 'Register Senior Project',
     years,
     result: [],
     errors: [],
-    id
+    id,
+    ...renderOptions
   })
 })
 
 router.post('/', async (req: any, res) => {
-  let { sid, year, topic} = req.body
+  let { sid, year, topic } = req.body
   let err = []
   sid = req.user.studentID
   let years = await check.getYear()
   years = years.map(i => i.year)
+  const { renderOptions } = req
   try {
-    if(sid == undefined && sid == '') err.push("Please insert sid")
-    if(year == undefined && year == '') err.push("Please insert year")
-    if(topic == undefined && topic == '') err.push("Please insert topic")
+    if (sid == undefined && sid == '') err.push('Please insert sid')
+    if (year == undefined && year == '') err.push('Please insert year')
+    if (topic == undefined && topic == '') err.push('Please insert topic')
     if (err.length !== 0) throw err
 
     let validate = [
-    await check.yearExists(year),
-    await check.sidExists(sid),
-    await check.studentRegisted(sid)
+      await check.yearExists(year),
+      await check.sidExists(sid),
+      await check.studentRegisted(sid)
     ]
     await Promise.all(validate)
 
-    let id = await check.insertProject(topic,year)
-    await check.updateStudentProject(id,sid)
+    let id = await check.insertProject(topic, year)
+    await check.updateStudentProject(id, sid)
 
     res.render('seniorproj/student/register', {
       title: 'Register Senior Project',
       years,
       result: [`Your project ID is ${id}`],
-      errors: []
+      errors: [],
+      ...renderOptions
     })
   } catch (errors) {
     res.render('seniorproj/student/register', {
       title: 'Register Senior Project',
       years,
       result: [],
-      errors
+      errors,
+      ...renderOptions
     })
   }
 })

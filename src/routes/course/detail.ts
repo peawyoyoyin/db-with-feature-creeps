@@ -28,7 +28,7 @@ async function getSections(courseInstanceId) {
   return sections
 }
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', async (req: any, res) => {
   const { id } = req.params
   const rawCourse = await getCourse(id)
   const rawSections = (await getSections(id)).map(section => {
@@ -48,12 +48,13 @@ router.get('/:id', async (req, res) => {
       teacher
     }
   })
-  const course = {...rawCourse, sections: rawSections}
+  const course = { ...rawCourse, sections: rawSections }
   console.log(course)
-
+  const { renderOptions } = req
   res.render('course/detail', {
     title: course.courseName,
-    course
+    course,
+    ...renderOptions
   })
 })
 

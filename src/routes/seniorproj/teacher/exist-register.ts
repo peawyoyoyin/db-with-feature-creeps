@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.get('/', async (req: any, res) => {
   let id = req.user.teacherID
-  const {renderOptions} = req
+  const { renderOptions } = req
   res.render('seniorproj/teacher/exist-register', {
     title: 'Register Senior Project',
     result: [],
@@ -17,31 +17,34 @@ router.get('/', async (req: any, res) => {
 })
 
 router.post('/', async (req: any, res) => {
-  let { tid,projectID } = req.body
+  let { tid, projectID } = req.body
   let err = []
   tid = req.user.teacherID
+  const { renderOptions } = req
   try {
-    if(tid == undefined && tid == '') err.push("Please insert tid")
+    if (tid == undefined && tid == '') err.push('Please insert tid')
     if (err.length !== 0) throw err
-    
+
     let validate = [
       await check.tidExists(tid),
       await check.projectHaveTeacher(projectID)
     ]
 
     await Promise.all(validate)
-    await check.updateTeacherProject(projectID,tid)
-    
+    await check.updateTeacherProject(projectID, tid)
+
     res.render('seniorproj/teacher/exist-register', {
       title: 'Register Senior Project',
       result: [`Your project ID is ${projectID}`],
-      errors: []
+      errors: [],
+      ...renderOptions
     })
   } catch (errors) {
     res.render('seniorproj/teacher/exist-register', {
       title: 'Register Senior Project',
       result: [],
-      errors
+      errors,
+      ...renderOptions
     })
   }
 })

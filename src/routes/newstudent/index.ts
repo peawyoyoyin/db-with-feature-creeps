@@ -27,11 +27,12 @@ router.get('/', async (req, res) => {
     title: 'Register New Student',
     departments,
     errors: [],
-    years
+    years,
+    sidebarVariation: 'login'
   })
 })
 
-router.post('/', async (req, res) => {
+router.post('/', async (req: any, res) => {
   const departments = await getAllDepartments()  
   const years = await getAllYears()  
   const {
@@ -64,7 +65,8 @@ router.post('/', async (req, res) => {
       title: 'Register New Student',
       departments,
       errors: e,
-      years
+      years,
+      sidebarVariation: 'login'
     })
   }
 })

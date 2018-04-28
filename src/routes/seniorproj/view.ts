@@ -26,8 +26,7 @@ async function getEvaluations(projectID) {
   const rawEvaluations = await db.evaluation.query(
     `
       SELECT id, comment, grade, firstName, lastName, abbrName, weight, description as type FROM evaluation AS E
-      LEFT JOIN evaluation_evaluators_teacher AS ET ON E.id = ET.evaluationId
-      LEFT JOIN teacher AS T ON ET.teacherTeacherID = T.teacherID
+      LEFT JOIN teacher AS T ON E.evaluatorTeacherID = T.teacherID
       LEFT JOIN evaluation_type AS TP ON E.evaluationTypeTypeID = TP.typeID
       WHERE projectProjectID = ?
     `,
