@@ -13,6 +13,7 @@ async function getSectionEnrolled(studentID) {
       JOIN semester ON course_instance.semesterId = semester.id
       WHERE semester.id = (SELECT id FROM semester ORDER BY semester.yearYear DESC, semester.semesterNumber DESC LIMIT 1)
       AND studentStudentID = ?
+      AND study.gradeLetter != 'W'
     `,
     [studentID]
   )
@@ -54,13 +55,20 @@ router.get('/', async (req: any, res) => {
   })
 })
 
-async function handleRemove(body) {
+enum Mode {
+  remove,
+  withdraw
+}
+async function handleRemoveWithdraw(body, mode: Mode) {
   let { studentID, remove } = body
   if (remove === undefined) return []
   if (typeof remove === 'string') {
     remove = [remove]
   }
-  const resultPromises = remove.map(rm => removePromise(rm, studentID))
+  const resultPromises =
+    mode === Mode.remove
+      ? remove.map(rm => removePromise(rm, studentID))
+      : remove.map(rm => withdrawPromise(rm, studentID))
   const results = await resultPromises
   const e = results.filter(r => r instanceof Error).map(e => e.map)
   if (e.length > 0) return e
@@ -119,14 +127,21 @@ const getLastRemovalDateOfLatestSemester = async () => {
 router.post('/', async (req, res) => {
   console.log(req.body)
   if (req.query.forceRemove) {
-    const e = await handleRemove(req.body)
+    const e = await handleRemoveWithdraw(req.body, Mode.remove)
+  } else if (req.query.forceWithdraw) {
+    // withdraw
+    const e = await handleRemoveWithdraw(req.body, Mode.withdraw)
   } else {
     const lastRemovalDate = await getLastRemovalDateOfLatestSemester()
     console.log('lastremovaldate', lastRemovalDate)
     const now = new Date()
-    console.log(
-      lastRemovalDate.getTime() > now.getTime() ? 'more than' : 'less than'
-    )
+    if (lastRemovalDate.getTime() > now.getTime()) {
+      // remove
+      const e = await handleRemoveWithdraw(req.body, Mode.remove)
+    } else {
+      // withdraw
+      const e = await handleRemoveWithdraw(req.body, Mode.withdraw)
+    }
   }
   // if (e.length > 0) res.render('')
   res.redirect(req.baseUrl)

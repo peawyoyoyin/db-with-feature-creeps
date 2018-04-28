@@ -74,9 +74,9 @@ export const studentRegisted = async (sid) => {
     WHERE studentID=? LIMIT 1`,
     [sid]
   )
-  console.log(student_regis[0].seniorProjectProjectID)
-  console.log(student_regis[0].seniorProjectProjectID === null)
-  throw ["throw test"]
+  // console.log(student_regis[0].seniorProjectProjectID)
+  // console.log(student_regis[0].seniorProjectProjectID === null)
+  // throw ["throw test"]
   if(student_regis[0].seniorProjectProjectID === null) return true
   else throw ['Student already has a project']
 }
