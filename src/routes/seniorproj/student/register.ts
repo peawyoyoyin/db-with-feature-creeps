@@ -31,7 +31,8 @@ router.post('/', async (req: any, res) => {
     if(topic == undefined && topic == '') err.push("Please insert topic")
     if (err.length !== 0) throw err
 
-    let validate = [await check.yearExists(year),
+    let validate = [
+    await check.yearExists(year),
     await check.sidExists(sid),
     await check.studentRegisted(sid)
     ]
