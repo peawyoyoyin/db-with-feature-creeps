@@ -1,16 +1,13 @@
-extends ../common/layout.pug
+extends ../../common/layout.pug
 block content
   .container
     h4.mt-2 Register to an existing Senior Project
     form(action="register"  method="POST")
       .form-row
-        .col-lg-4
+        .col-lg-6
           label(for="sid") Student ID
-          input.form-control(type="text" name="sid")
-        .col-lg-4
-          label(for="supervisorTeacherID") Teacher ID
-          input.form-control(type="text" name="supervisorTeacherID")
-        .col-lg-4
+          input.form-control(type="text" name="sid" value=id disabled)
+        .col-lg-6
           label(for="projectID") Project ID
           input.form-control(type="text" name="projectID")
       .form-row.mt-2
