@@ -39,7 +39,7 @@ block content
             each course in searchResults
               tr
                 td
-                  a.table-row-link.text-dark(href='/course/detail/' + course.instanceID) #{course.courseID}
+                  a.table-row-link.text-dark(href='/student/course/detail/' + course.instanceID) #{course.courseID}
                 td #{course.courseName}
                 td #{course.credits}
     else
