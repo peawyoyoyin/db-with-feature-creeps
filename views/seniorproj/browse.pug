@@ -5,11 +5,11 @@ block content
     hr
     form
       .form-row.align-items-end
-        .col-lg-3
+        .col-lg-5
           label(for="projectID") Project ID
           input.form-control(type="text" name="projectID" 
           value=projectID placeholder="example: 4562xxx")
-        .col-lg-3
+        .col-lg-5
           label(for="topic") Topic
           input.form-control(type="text" name="topic"
           value=topic placeholder="example: Computer")
@@ -22,12 +22,17 @@ block content
                 option(value=year selected) #{y}
               else
                 option(value=y) #{y}
-        .col-lg-3
-          label(for="superVisorTeacherID") Supervisor Teacher ID
+      .form-row.align-items-end
+        .col-lg-5
+          label(for="superVisorTeacherID") Supervisor Teacher abbreviate Name
           input.form-control(type="text" name="superVisorTeacherID"
-          value=superVisorTeacherID placeholder="jantaratit")
+          value=superVisorTeacherID)
+        .col-lg-5
+          label(for="sid") Student ID
+          input.form-control(type="text" name="sid"
+          value=sid)
         
-        .col-lg-1
+        .col-lg-2
           button.btn.btn-primary(type="submit") Submit
     hr
     table.table
@@ -36,11 +41,13 @@ block content
           th Project ID
           th Topic
           th Year
-          th SupervisorTeacher ID
+          th SupervisorTeacher Name
+          th student ID
       tbody
         for i in data
           tr
             th #{i.projectID}
             td #{i.topic}
             td #{i.year}
-            td #{i.supervisorTeacherID}
+            td #{i.abbrName}
+            td #{i.studentID}
