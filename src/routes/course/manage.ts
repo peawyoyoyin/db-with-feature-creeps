@@ -27,7 +27,16 @@ router.get('/', async (req: any, res) => {
   let studentData
   const student = req.user
   const { studentID } = student
+  let [withdrawable,removable] = [false,false]
   try {
+    const lastWithdrawalDate = await getLastWithdrawalDateOfLatestSemester()
+    const lastRemovalDate = await getLastRemovalDateOfLatestSemester()
+    const now = new Date()
+    if(lastRemovalDate.getDate() < now.getDate()) removable = false
+    else removable = true
+    if(lastWithdrawalDate.getDate() < now.getDate()) withdrawable = false
+    else withdrawable = true
+
     console.log(student)
     const subjects = await getSectionEnrolled(studentID)
     const { firstName, lastName } = student
@@ -52,6 +61,8 @@ router.get('/', async (req: any, res) => {
     title: 'Manage Courses',
     studentData,
     studentID,
+    withdrawable,
+    removable,
     ...renderOptions
   })
 })
@@ -123,6 +134,14 @@ const getLastRemovalDateOfLatestSemester = async () => {
     WHERE id = (SELECT id FROM semester ORDER BY semester.yearYear DESC, semester.semesterNumber DESC LIMIT 1)
   `)
   return queryResult[0].lastSubjectRemovalDate
+}
+
+const getLastWithdrawalDateOfLatestSemester = async () => {
+  const queryResult = await db.semester.query(`
+    SELECT lastWithdrawalDate FROM semester
+    WHERE id = (SELECT id FROM semester ORDER BY semester.yearYear DESC, semester.semesterNumber DESC LIMIT 1)
+  `)
+  return queryResult[0].lastWithdrawalDate
 }
 
 router.post('/', async (req, res) => {
