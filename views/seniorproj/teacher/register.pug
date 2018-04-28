@@ -1,0 +1,33 @@
+extends ../../common/layout.pug
+block content
+  .container
+    h3 Register Senior Project
+    hr
+    h4 Register New project
+    form(action="register"  method="POST")
+      .form-row
+        .col-lg-6
+          label(for="tid") Teacher ID
+          input.form-control(type="text" name="tid" value=id readonly="readonly")
+        .col-lg-6
+          label(for="year") Year
+          select.form-control(name="year")
+            each year in years
+              option(value=year) #{year}
+      .form-row.align-items-end.mt-2
+        .col-lg-6
+          label(for="topic") Topic
+          input.form-control(type="text" name="topic" placeholder="")
+          
+      .form-row.mt-2
+        .col.d-flex.flex-row-reverse.align-items-end
+          button.btn.btn-primary(type="submit") Submit
+    each i in result
+      .form-row
+        .col
+          .alert.alert-success #{i}
+    each error in errors
+      .form-row
+          .col
+            .alert.alert-danger #{error}
+

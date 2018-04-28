@@ -1,0 +1,25 @@
+extends ../../common/layout.pug
+block content
+  .container
+    h4.mt-2 Register to an existing Senior Project
+    form(action="exist-register"  method="POST")
+      .form-row
+        .col-lg-6
+          label(for="tid") Teacher ID
+          input.form-control(type="text" name="tid" value=id readonly="readonly")
+        .col-lg-6
+          label(for="projectID") Project ID
+          input.form-control(type="text" name="projectID")
+      .form-row.mt-2
+        .col.d-flex.flex-row-reverse.align-items-end
+          button.btn.btn-primary Submit
+    br
+    each i in result
+      .form-row
+        .col
+          .alert.alert-success #{i}
+    each error in errors
+      .form-row
+          .col
+            .alert.alert-danger #{error}
+
