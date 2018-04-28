@@ -1,31 +1,27 @@
 import * as express from 'express'
 import course from './course'
 import grade from './grade'
-import {studentSenior} from './seniorproj'
+import { teacherSenior } from './seniorproj'
 
 const router = express.Router()
 
 router.use('/', (req: any, res, next) => {
-  if (!req.user.studentID) {
-    res.redirect('/teacher')
-  }
-  else {
-    req.renderOptions = {sidebarVariation: 'student'}
+  if (!req.user.teacherID) {
+    res.redirect('/student')
+  } else {
+    req.renderOptions = {sidebarVariation: 'teacher'}
     next()
   }
 })
 
 router.get('/', (req: any, res) => {
-  const {renderOptions} = req
+  const { renderOptions } = req
+  // console.log('variation', sidebarVariation)
   res.render('index', {
     ...renderOptions
   })
 })
 
-router.use('/course', course)
-
-router.use('/grade', grade)
-
-router.use('/seniorproj', studentSenior)
+router.use('/seniorproj', teacherSenior)
 
 export default router

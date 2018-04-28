@@ -11,10 +11,9 @@ import { Connection, createConnection } from 'typeorm'
 import 'module-alias/register'
 
 import student from './routes/student'
+import teacher from './routes/teacher'
 import login from './routes/login'
 import logout from './routes/logout'
-import course from './routes/course'
-import grade from './routes/grade'
 import newStudent from './routes/newstudent'
 import db from './db'
 import seed from './db/seed'
@@ -58,12 +57,9 @@ app.use(/^(?!\/login)(?!\/register).*$/, (req: any, res, next) => {
 
 app.use('/login', login)
 app.use('/student', student)
+app.use('/teacher', teacher)
 app.use('/newstudent', newStudent)
 app.use('/logout', logout)
-
-app.get('/', (req, res) => {
-  res.render('index', { title: 'DB WITH FEATURE CREEPS' })
-})
 
 app.listen(config.express.port, () => {
   console.log(`listening on port ${config.express.port}`)
