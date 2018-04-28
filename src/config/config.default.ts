@@ -14,5 +14,5 @@ export = {
     synchronize: false,
     logging: process.env.NODE_ENV !== 'production'
   },
-  autoSeed: true
+  // autoSeed: true
 }
