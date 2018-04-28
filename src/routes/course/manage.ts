@@ -108,11 +108,28 @@ async function withdrawPromise(courseID: string, studentID: string) {
   )
 }
 
+const getLastRemovalDateOfLatestSemester = async () => {
+  const queryResult = await db.semester.query(`
+    SELECT lastSubjectRemovalDate FROM semester
+    WHERE id = (SELECT id FROM semester ORDER BY semester.yearYear DESC, semester.semesterNumber DESC LIMIT 1)
+  `)
+  return queryResult[0].lastSubjectRemovalDate
+}
+
 router.post('/', async (req, res) => {
   console.log(req.body)
-  const e = await handleRemove(req.body)
+  if (req.query.forceRemove) {
+    const e = await handleRemove(req.body)
+  } else {
+    const lastRemovalDate = await getLastRemovalDateOfLatestSemester()
+    console.log('lastremovaldate', lastRemovalDate)
+    const now = new Date()
+    console.log(
+      lastRemovalDate.getTime() > now.getTime() ? 'more than' : 'less than'
+    )
+  }
   // if (e.length > 0) res.render('')
-  res.redirect('/student')
+  res.redirect(req.baseUrl)
 })
 
 export default router
