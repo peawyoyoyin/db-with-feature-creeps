@@ -67,24 +67,47 @@ async function handleRemove(body) {
   return []
 }
 
-function removePromise(courseID: string, studentID: string) {
-  return db.study.query(
+async function removePromise(courseID: string, studentID: string) {
+  const [{ id }] = await db.courseInstance.query(
+    `
+    SELECT id FROM course_instance CI
+    WHERE courseCourseID = ? 
+    AND semesterId = (SELECT id FROM semester ORDER BY semester.yearYear DESC, semester.semesterNumber DESC LIMIT 1)
+  `,
+    [courseID]
+  )
+  return await db.study.query(
     `
     DELETE S FROM study S
     JOIN section ON S.sectionId = section.id
     JOIN course_instance ON section.courseInstanceId = course_instance.id
     JOIN course ON course_instance.courseCourseID = course.courseID
-    WHERE courseID = ? AND S.studentStudentID = ?;
+    WHERE course_instance.id = ? AND S.studentStudentID = ?;
     `,
-    [courseID, studentID]
+    [id, studentID]
   )
+}
+
+const getLastRemovalDateOfLatestSemester = async () => {
+  const queryResult = await db.semester.query(`
+    SELECT lastSubjectRemovalDate FROM semester
+    WHERE id = (SELECT id FROM semester ORDER BY semester.yearYear DESC, semester.semesterNumber DESC LIMIT 1)
+  `)
+  return queryResult[0].lastSubjectRemovalDate
 }
 
 router.post('/', async (req, res) => {
   console.log(req.body)
-  const e = await handleRemove(req.body)
+  if(req.query.forceRemove) {
+    const e = await handleRemove(req.body)
+  } else {
+    const lastRemovalDate = await getLastRemovalDateOfLatestSemester()
+    console.log('lastremovaldate', lastRemovalDate)
+    const now = new Date()
+    console.log(lastRemovalDate.getTime() > now.getTime() ? 'more than' : 'less than')
+  }
   // if (e.length > 0) res.render('')
-  res.redirect('/')
+  res.redirect(req.baseUrl)
 })
 
 export default router
