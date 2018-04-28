@@ -36,6 +36,7 @@ router.post('/', async (req, res) => {
   const years = await getAllYears()  
   const {
     studentID,
+    password,
     firstName,
     lastName,
     citizenID,
@@ -46,11 +47,12 @@ router.post('/', async (req, res) => {
   try {
     const newStudent = new Student({
       studentID,
+      password,
       firstName,
       lastName,
       citizenID,
       nationality,
-      department,
+      department
     })
     newStudent.year = new AcademicYear({
       year: parseInt(year)

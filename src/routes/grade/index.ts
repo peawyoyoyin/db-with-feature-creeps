@@ -3,8 +3,8 @@ import db from '~/db'
 
 const router = express.Router()
 
-router.get('/', async (req, res) => {
-  const { sid } = req.query
+router.get('/', async (req: any, res) => {
+  const { studentID } = req.user
   let gradeData = {};
   let gradeDataRaw = await db._connection.manager.query(
     `
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
       WHERE studentStudentID = ?
       ORDER BY yearYear, semesterNumber
     `,
-    [sid]
+    [studentID]
   )
   if (gradeDataRaw.length === 0) gradeData = undefined
   else {
@@ -31,7 +31,7 @@ router.get('/', async (req, res) => {
       }
     }
   }
-  res.render('grade/grade', { gradeData, sid })
+  res.render('grade/grade', { gradeData, studentID })
   console.log(gradeData)
 })
 

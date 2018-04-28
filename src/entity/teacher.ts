@@ -17,6 +17,7 @@ import { Evaluation } from '~/entity/evaluation.relation'
 
 interface TeacherArgs {
   teacherID: string
+  password: string
   firstName: string
   lastName: string
   abbrName: string
@@ -27,6 +28,7 @@ export class Teacher {
   constructor(args: TeacherArgs) {
     if (args === undefined) return
     this.teacherID = args.teacherID
+    this.password = args.password
     this.firstName = args.firstName
     this.lastName = args.lastName
     this.abbrName = args.abbrName
@@ -35,9 +37,12 @@ export class Teacher {
   }
 
   @PrimaryColumn({ type: 'varchar', length: 10 })
-  @Length(10, 10, { message: 'teacherID length must be 10 characters' })
+  @Length(7, 7, { message: 'teacherID length must be 10 characters' })
   @IsNumberString()
   teacherID: string
+
+  @Column({ type: 'varchar', length: 20 })
+  password: string
 
   @Column({ type: 'varchar', length: 30 })
   @Length(1, 30)
@@ -51,7 +56,7 @@ export class Teacher {
   @Length(3, 3)
   abbrName: string
 
-  @Column({ type: 'varchar', length: 13 })
+  @Column({ type: 'varchar', length: 13, unique: true })
   @Length(13, 13, { message: 'citizenID length must be 13 characters' })
   @IsNumberString()
   citizenID: string

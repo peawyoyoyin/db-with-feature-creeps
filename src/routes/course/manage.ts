@@ -3,20 +3,6 @@ import db from '~/db'
 
 const router = express.Router()
 
-async function getStudent(studentID) {
-  const studentRows = await db.student.query(
-    `
-      SELECT studentID, firstName, lastName FROM student 
-      WHERE studentID = ? 
-    `,
-    [studentID]
-  )
-  if (studentRows.length === 1) {
-    return studentRows[0]
-  }
-  throw new Error('Student not found')
-}
-
 async function getSectionEnrolled(studentID) {
   const sectionRows = await db.section.query(
     `
@@ -36,30 +22,27 @@ async function getSectionEnrolled(studentID) {
   return sectionRows
 }
 
-router.get('/', async (req, res) => {
-  const { studentID } = req.query
-  let studentData = undefined
-  if (studentID === undefined || studentID === '') studentData = null
-  else {
-    try {
-      const student = await getStudent(studentID)
-      console.log(student)
-      const subjects = await getSectionEnrolled(studentID)
-      const { firstName, lastName } = student
-      studentData = {
-        info: {
-          studentID,
-          firstName,
-          lastName
-        },
-        subjects
-      }
-    } catch (e) {
-      studentData = {
-        info: {
-          studentID,
-          notFound: e.message
-        }
+router.get('/', async (req: any, res) => {
+  let studentData
+  const student = req.user
+  const { studentID } = student
+  try {
+    console.log(student)
+    const subjects = await getSectionEnrolled(studentID)
+    const { firstName, lastName } = student
+    studentData = {
+      info: {
+        studentID,
+        firstName,
+        lastName
+      },
+      subjects
+    }
+  } catch (e) {
+    studentData = {
+      info: {
+        studentID,
+        notFound: e.message
       }
     }
   }

@@ -65,9 +65,6 @@ export class Section {
   })
   teacher: Teacher
 
-  @ManyToMany(type => Student, student => student.sections)
-  students: Student
-
   @OneToMany(type => Study, study => study.section)
   studies: Study[]
 }

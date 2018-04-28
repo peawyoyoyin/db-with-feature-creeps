@@ -2,14 +2,8 @@ extends ../common/layout.pug
 block content
   .container
     h3 Enroll Courses
-    hr
   .container
     form#enroll(method="POST")
-      .form-inline
-        .form-group
-          label.col-form-label.col(for="studentID") Student ID
-          input.form-control(type="text" name="studentID")
-      br
       table.table
         thead
           tr

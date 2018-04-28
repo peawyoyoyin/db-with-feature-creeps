@@ -108,9 +108,11 @@ router.get('/', (req, res) => {
   res.render('course/enroll', { title: 'Enroll Course', errors: [] })
 })
 
-router.post('/', async (req, res) => {
-  console.log(req.body)
-  const { studentID } = req.body
+router.post('/', async (req: any, res) => {
+  // console.log(req.body)
+  // console.log('user', req.user)
+  const { studentID } = req.user
+  console.log(studentID)
   const currentSemesterRows = await db.semester.query(`
     SELECT * FROM semester
     ORDER BY semester.yearYear DESC, semester.semesterNumber DESC
@@ -131,6 +133,7 @@ router.post('/', async (req, res) => {
   }
   const handleErrors = await handleEnrolls({
     ...req.body,
+    ...req.user,
     semesterId: currentSemesterID
   })
   console.log('handleErrors', handleErrors)
