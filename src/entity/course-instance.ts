@@ -45,7 +45,8 @@ export class CourseInstance {
   final: string
 
   @ManyToOne(type => Course, course => course.instances, {
-    onDelete: 'CASCADE'
+    onDelete: 'CASCADE',
+    nullable: false,
   })
   course: Course
 
