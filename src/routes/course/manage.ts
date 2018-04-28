@@ -67,7 +67,7 @@ async function handleRemove(body) {
   return []
 }
 
-async function removePromise(courseID: string, studentID: string) {
+async function getCurrentInstanceId(courseID) {
   const [{ id }] = await db.courseInstance.query(
     `
     SELECT id FROM course_instance CI
@@ -76,12 +76,32 @@ async function removePromise(courseID: string, studentID: string) {
   `,
     [courseID]
   )
+  return id
+}
+
+async function removePromise(courseID: string, studentID: string) {
+  const id = await getCurrentInstanceId(courseID)
   return await db.study.query(
     `
     DELETE S FROM study S
     JOIN section ON S.sectionId = section.id
     JOIN course_instance ON section.courseInstanceId = course_instance.id
     JOIN course ON course_instance.courseCourseID = course.courseID
+    WHERE course_instance.id = ? AND S.studentStudentID = ?;
+    `,
+    [id, studentID]
+  )
+}
+
+async function withdrawPromise(courseID: string, studentID: string) {
+  const id = await getCurrentInstanceId(courseID)
+  return await db.study.query(
+    `
+    UPDATE study S
+    JOIN section ON S.sectionId = section.id
+    JOIN course_instance ON section.courseInstanceId = course_instance.id
+    JOIN course ON course_instance.courseCourseID = course.courseID
+    SET S.gradeLetter = 'W'
     WHERE course_instance.id = ? AND S.studentStudentID = ?;
     `,
     [id, studentID]
