@@ -28,7 +28,8 @@ export class Department {
   name: string
 
   @ManyToOne(type => Faculty, faculty => faculty.departments, {
-    onDelete: 'CASCADE'
+    onDelete: 'CASCADE',
+    nullable: false,
   })
   faculty: Faculty
 

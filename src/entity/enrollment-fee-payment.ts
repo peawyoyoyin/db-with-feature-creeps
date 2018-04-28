@@ -29,9 +29,9 @@ export class EnrollmentFeePayment {
   @Column({ type: 'decimal' })
   amount: number
 
-  @ManyToOne(type => Student, student => student.payments)
+  @ManyToOne(type => Student, student => student.payments, { nullable: false })
   payer: Student
 
-  @ManyToOne(type => Semester, semester => semester.payments)
+  @ManyToOne(type => Semester, semester => semester.payments, { nullable: false })
   semester: Semester
 }
