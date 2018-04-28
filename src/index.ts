@@ -64,7 +64,7 @@ app.use('/grade', grade)
 app.use('/logout', logout)
 
 app.get('/', (req, res) => {
-  res.render('index', { title: 'DB WITH FEATURE CREEPS' })
+  res.render('index', { title: 'DB WITH FEATURE CREEPS', sidebarVariation: 'teacher' })
 })
 
 app.listen(config.express.port, () => {
