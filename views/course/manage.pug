@@ -16,15 +16,19 @@ block content
           thead
             th SubjectID
             th Subject Name
-            th Section
-            th Remove
+            th Section 
+            if removable
+              th Remove
+            else if withdrawable
+              th Withdraw
           tbody
             each subject in studentData.subjects
               tr
                 td #{subject.courseID}
                 td #{subject.courseName}
                 td #{subject.section}
-                td
-                  .form-check.form-check-inline
-                    input.form-check-input(type="checkbox" name="remove" value=subject.courseID)
+                if removable || withdrawable
+                  td
+                    .form-check.form-check-inline
+                      input.form-check-input(type="checkbox" name="remove" value=subject.courseID)
         button.btn.btn-primary(type="submit") Submit
