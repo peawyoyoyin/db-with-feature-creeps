@@ -19,28 +19,14 @@ block content
           label(for="topic") Topic
           input.form-control(type="text" name="topic" placeholder="")
         .col-lg-6
+        if user.status == 'teacher'
           label(for="supervisorTeacherID") Supervisor Teacher ID
           input.form-control(type="text" name="supervisorTeacherID")
+        else
+          
       .form-row.mt-2
         .col.d-flex.flex-row-reverse.align-items-end
           button.btn.btn-primary(type="submit") Submit
-    hr.mt-4
-    h4.mt-2 Register to an existing Project
-    form(action="register"  method="POST")
-      .form-row
-        .col-lg-4
-          label(for="sid") Student ID
-          input.form-control(type="text" name="sid")
-        .col-lg-4
-          label(for="supervisorTeacherID") Teacher ID
-          input.form-control(type="text" name="supervisorTeacherID")
-        .col-lg-4
-          label(for="projectID") Project ID
-          input.form-control(type="text" name="projectID")
-      .form-row.mt-2
-        .col.d-flex.flex-row-reverse.align-items-end
-          button.btn.btn-primary Submit
-    br
     each i in result
       .form-row
         .col
