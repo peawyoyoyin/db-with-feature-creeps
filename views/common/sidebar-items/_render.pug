@@ -1,9 +1,9 @@
 mixin renderSidebarItems(sidebarItems)
   ul.sidebar-menu.nav.flex-column.mb-1
     each item in sidebarItems
-      if item.type === 'link'
+      if item.href
         li.nav-item.sidebar-nav-item
           a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href=item.href) #{item.name}
-      else if item.type === 'category'
+      else if item.items
         li.sidebar-divider #{item.name}
         +renderSidebarItems(item.items)
