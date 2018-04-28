@@ -410,16 +410,18 @@ const seed = async () => {
     }),
   ]
 
+  student.forEach(student => student.supervisor = teacher[0])
+
   await DB.evaluationType.save(evaluationType)
   await DB.academicYear.save(academicYear)
   await DB.studentGroup.save(studentGroup)
   await DB.faculty.save(faculty)
   await DB.departments.save(department)
+  await DB.teacher.save(teacher)
   await DB.student.save(student)
   await DB.course.save(course)
   await DB.semester.save(semester)
   await DB.courseInstance.save(courseInstance)
-  await DB.teacher.save(teacher)
   await DB.section.save(section)
   await DB.seniorProject.save(seniorProject)
   await DB.study.save(study)
