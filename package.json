@@ -13,7 +13,10 @@
     "build-ts": "tsc",
     "watch-ts": "tsc -w",
     "preseed": "npm run build-ts",
-    "seed": "node build/init.js"
+    "seed": "node build/init.js",
+    "preinit-db:clean": "npm run build-ts",
+    "init-db:clean": "node build/init-clean.js",
+    "init-db:seed": "npm run seed"
   },
   "author": "",
   "license": "UNLICENSED",
