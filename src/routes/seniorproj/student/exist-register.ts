@@ -14,30 +14,31 @@ router.get('/', async (req: any, res) => {
   })
 })
 
-router.post('/', async (req, res) => {
+router.post('/', async (req: any, res) => {
   let { sid, projectID } = req.body
   let err = []
-  let years = await check.getYear()
-  years = years.map(i => i.year)
+  sid = req.user.studentID
   try {
     if(sid == undefined && sid == '') err.push("Please insert sid")
     if (err.length !== 0) throw err
     
-    err.push(check.sidExists(sid))
-    if (err.length !== 0) throw err
+    let validate = [
+      await check.sidExists(sid),
+      await check.projectExists(projectID),
+      await check.studentRegisted(sid)
+    ]
+
+    await Promise.all(validate)
+    await check.updateStudentProject(projectID,sid)
     
-    check.projectExists(projectID)
-    check.updateStudentProject(projectID,sid)
-    res.render('seniorproj/student/register', {
+    res.render('seniorproj/student/exist-register', {
       title: 'Register Senior Project',
-      years,
       result: [`Your project ID is ${projectID}`],
       errors: []
     })
   } catch (errors) {
     res.render('seniorproj/student/exist-register', {
       title: 'Register Senior Project',
-      years,
       result: [],
       errors
     })
