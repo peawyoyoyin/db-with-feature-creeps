@@ -7,7 +7,6 @@ const router = express.Router()
 router.get('/', async (req, res) => {
   res.render('seniorproj/exist-register', {
     title: 'Register Senior Project',
-    years,
     result: [],
     errors: []
   })
