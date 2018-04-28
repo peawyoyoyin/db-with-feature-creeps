@@ -24,9 +24,9 @@ block content
                 option(value=y) #{y}
       .form-row.align-items-end
         .col-lg-5
-          label(for="superVisorTeacherID") Supervisor Teacher abbreviate Name
-          input.form-control(type="text" name="superVisorTeacherID"
-          value=superVisorTeacherID)
+          label(for="superVisorName") Supervisor Teacher abbreviate Name
+          input.form-control(type="text" name="superVisorName"
+          value=superVisorName)
         .col-lg-5
           label(for="sid") Student ID
           input.form-control(type="text" name="sid"
@@ -41,7 +41,7 @@ block content
           th Project ID
           th Topic
           th Year
-          th SupervisorTeacher Name
+          th Supervisor Name
           th student ID
       tbody
         for i in data

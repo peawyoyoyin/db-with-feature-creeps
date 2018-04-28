@@ -38,9 +38,10 @@ router.post(
       errors.push(e.message)
     }
     try {
-      if (errors.length === 0) res.redirect('/')
-      else throw new Error()
-      await createEvaluation(projectID, teacherID, type, comment, grade)
+      if (errors.length === 0) {
+        await createEvaluation(projectID, teacherID, type, comment, grade)
+        res.redirect('/student')
+      } else throw new Error()
     } catch (e) {
       const rawTypes = await getAllEvaluationType()
       const types = formatTypes(rawTypes)
@@ -97,7 +98,7 @@ async function createEvaluation(projectID, teacherID, typeID, comment, grade) {
   const result = await db.evaluation.query(
     `
     insert into evaluation(comment,grade,projectProjectID,evaluationTypeTypeID,evaluatorTeacherID)
-    value(?, ?, ?, ?)
+    value(?, ?, ?, ?, ?)
   `,
     [comment, grade, projectID, typeID, teacherID]
   )

@@ -4,11 +4,11 @@ import db from '~/db'
 const router = express.Router()
 
 router.get('/', async (req: any, res) => {
-  let { projectID, topic, year, superVisorTeacherID, sid } = req.query
+  let { projectID, topic, year, superVisorName, sid } = req.query
   if (!projectID) projectID = ''
   if (!topic) topic = ''
   if (!year) year = ''
-  if (!superVisorTeacherID) superVisorTeacherID = ''
+  if (!superVisorName) superVisorName = ''
   if (!sid) sid = ''
   const data = await db._connection.manager.query(
     `
@@ -21,7 +21,7 @@ router.get('/', async (req: any, res) => {
     IFNULL(t.abbrName,1) LIKE ? AND
     IFNULL(s.studentID,1) LIKE ?
   `,
-    [`${projectID}%`, `${topic}%`, `${year}%`, `${superVisorTeacherID}%`,`${sid}%`]
+    [`${projectID}%`, `${topic}%`, `${year}%`, `${superVisorName}%`,`${sid}%`]
   )
   let years = await db._connection.manager.query(`
     SELECT DISTINCT yearYear AS year
@@ -36,7 +36,7 @@ router.get('/', async (req: any, res) => {
     topic: topic,
     year: year,
     years: years,
-    superVisorTeacherID: superVisorTeacherID,
+    superVisorName: superVisorName,
     sid,
     data: data,
     ...renderOptions
