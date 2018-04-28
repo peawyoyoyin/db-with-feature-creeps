@@ -100,11 +100,17 @@ router.post('/', async (req, res) => {
   console.log(req.body)
   if(req.query.forceRemove) {
     const e = await handleRemove(req.body)
+  } else if(req.query.forceWithdraw) {
+    // withdraw
   } else {
     const lastRemovalDate = await getLastRemovalDateOfLatestSemester()
     console.log('lastremovaldate', lastRemovalDate)
     const now = new Date()
-    console.log(lastRemovalDate.getTime() > now.getTime() ? 'more than' : 'less than')
+    if(lastRemovalDate.getTime() > now.getTime()) {
+      // remove
+    } else {
+      // withdraw
+    }
   }
   // if (e.length > 0) res.render('')
   res.redirect(req.baseUrl)
