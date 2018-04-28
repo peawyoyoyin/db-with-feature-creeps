@@ -24,13 +24,14 @@ router.get('/', async (req: any, res) => {
       status : 'teacher'
     }
   }
-
+  const {renderOptions} = req
   res.render('seniorproj/register', {
     title: 'Register Senior Project',
     years,
     result: [],
     errors: [],
-    user
+    user,
+    ...renderOptions
   })
   passport.deserializeUser(id => {
     console.log(id)

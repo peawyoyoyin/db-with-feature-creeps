@@ -4,13 +4,15 @@ import db from '~/db'
 
 const router = express.Router()
 
-router.get('/', async (req, res) => {
+router.get('/', async (req: any, res) => {
   const rawTypes = await getAllEvaluationType()
   const types = formatTypes(rawTypes)
+  const {renderOptions} = req
   res.render('seniorproj/update', {
     title: 'Update Senior Project Status',
     types,
-    errors: []
+    errors: [],
+    ...renderOptions
   })
 })
 

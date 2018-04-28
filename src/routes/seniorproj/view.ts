@@ -69,10 +69,12 @@ router.get('/', async (req: any, res) => {
   //     type: 'Final Presentation'
   //   }
   // ]
+  const {renderOptions} = req
   res.render('seniorproj/view', {
     student,
     project,
-    evaluations
+    evaluations,
+    ...renderOptions
   })
 })
 

@@ -3,7 +3,7 @@ import db from '~/db'
 
 const router = express.Router()
 
-router.get('/', async (req, res) => {
+router.get('/', async (req: any, res) => {
   let { projectID, topic, year, superVisorTeacherID } = req.query
   if (!projectID) projectID = ''
   if (!topic) topic = ''
@@ -25,6 +25,7 @@ router.get('/', async (req, res) => {
   `)
   years = years.map(year => year.year)
   console.log(data)
+  const {renderOptions} = req
   res.render('seniorproj/browse', {
     title: 'Browse Senior Projects',
     projectID: projectID,
@@ -32,7 +33,8 @@ router.get('/', async (req, res) => {
     year: year,
     years: years,
     superVisorTeacherID: superVisorTeacherID,
-    data: data
+    data: data,
+    ...renderOptions
   })
 })
 
