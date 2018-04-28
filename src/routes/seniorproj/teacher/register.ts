@@ -21,9 +21,9 @@ router.get('/', async (req: any, res) => {
 })
 
 router.post('/', async (req: any, res) => {
-  let { tid, year, topic } = req.body
-  let err = []
-  tid = req.user.teacherID
+  const { year, topic } = req.body
+  const err = []
+  const tid = req.user.teacherID
   let years = await check.getYear()
   years = years.map(i => i.year)
   const { renderOptions } = req
@@ -43,6 +43,7 @@ router.post('/', async (req: any, res) => {
       years,
       result: [`Your project ID is ${id}`],
       errors: [],
+      id: tid,
       ...renderOptions
     })
   } catch (errors) {
@@ -51,6 +52,7 @@ router.post('/', async (req: any, res) => {
       years,
       result: [],
       errors,
+      id: tid,
       ...renderOptions
     })
   }

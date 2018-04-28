@@ -22,9 +22,9 @@ router.get('/', async (req: any, res) => {
 })
 
 router.post('/', async (req: any, res) => {
-  let { sid, year, topic } = req.body
-  let err = []
-  sid = req.user.studentID
+  const { year, topic } = req.body
+  const err = []
+  const sid = req.user.studentID
   let years = await check.getYear()
   years = years.map(i => i.year)
   const { renderOptions } = req
@@ -47,6 +47,7 @@ router.post('/', async (req: any, res) => {
     res.render('seniorproj/student/register', {
       title: 'Register Senior Project',
       years,
+      id: sid,
       result: [`Your project ID is ${id}`],
       errors: [],
       ...renderOptions
@@ -55,6 +56,7 @@ router.post('/', async (req: any, res) => {
     res.render('seniorproj/student/register', {
       title: 'Register Senior Project',
       years,
+      id: sid,
       result: [],
       errors,
       ...renderOptions

@@ -17,9 +17,9 @@ router.get('/', async (req: any, res) => {
 })
 
 router.post('/', async (req: any, res) => {
-  let { sid, projectID } = req.body
-  let err = []
-  sid = req.user.studentID
+  const { projectID } = req.body
+  const err = []
+  const sid = req.user.studentID
   const { renderOptions } = req
   try {
     if (sid == undefined && sid == '') err.push('Please insert sid')
@@ -38,6 +38,7 @@ router.post('/', async (req: any, res) => {
       title: 'Register Senior Project',
       result: [`Your project ID is ${projectID}`],
       errors: [],
+      id: sid,
       ...renderOptions
     })
   } catch (errors) {
@@ -45,6 +46,7 @@ router.post('/', async (req: any, res) => {
       title: 'Register Senior Project',
       result: [],
       errors,
+      id: sid,
       ...renderOptions
     })
   }
