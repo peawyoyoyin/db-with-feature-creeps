@@ -3,19 +3,35 @@ import db from '~/db'
 import browse from './browse'
 import update from './update'
 import view from './view'
-import student from './student'
-import teacher from './teacher'
+import studentRegister from './student/register'
+import studentExistRegister from './student/exist-register'
+import teacherRegister from './teacher/register'
+import teacherExistRegister from './teacher/exist-register'
 
-const router = express.Router()
+const router1 = express.Router()
 
-router.use('/browse', browse)
+router1.use('/browse', browse)
 
-router.use('/update', update)
+router1.use('/register', studentRegister)
 
-router.use('/view', view)
+router1.use('/view', view)
 
-router.use('/student',student)
+router1.use('/exist-register', studentExistRegister)
 
-router.use('/teacher',teacher)
+export const studentSenior = router1
 
-export default router
+const router2 = express.Router()
+
+router2.get('/', (req, res) => {
+  res.send('hello')
+})
+router2.use('/browse', browse)
+
+router2.use('/register', teacherRegister)
+
+router2.use('/exist-register', teacherExistRegister)
+
+router2.use('/update', update)
+
+
+export const teacherSenior = router2

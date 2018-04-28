@@ -71,18 +71,18 @@ router.get('/', async (req: any, res) => {
   res.render('course/pay', { title: 'Pay Fee', semesters, fee, err, transactionID, payment })
 })
 
-const pay = async (studentID, semesterID) => {
+const pay = async (studentID, semesterID, amount = 100) => {
   await db.enrollmentFeePayment.query(`
     INSERT INTO enrollment_fee_payment
     (amount, payerStudentID, semesterId)
     VALUES
-    (100, ?, ?)
+    (?, ?, ?)
   `,
-  [studentID, semesterID])
+  [amount, studentID, semesterID])
 }
 
 router.post('/', async (req, res) => {
-  await pay(req.body.studentID, req.body.semesterID)
+  await pay(req.body.studentID, req.body.semesterID, req.body.amount)
   res.redirect('pay')
 })
 

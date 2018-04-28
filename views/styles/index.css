@@ -20,6 +20,7 @@
 
 ul.sidebar-menu {
   list-style-type: none;
+  padding-left: 0.75rem;
 }
 
 ul.sidebar-menu > li {

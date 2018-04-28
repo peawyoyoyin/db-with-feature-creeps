@@ -4,11 +4,13 @@ import * as check from '../checkexist'
 
 const router = express.Router()
 
-router.get('/', async (req, res) => {
+router.get('/', async (req: any, res) => {
+  const {renderOptions} = req
   res.render('seniorproj/teacher/exist-register', {
     title: 'Register Senior Project',
     result: [],
-    errors: []
+    errors: [],
+    ...renderOptions
   })
 })
 
