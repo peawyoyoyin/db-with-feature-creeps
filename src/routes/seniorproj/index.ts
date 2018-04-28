@@ -1,20 +1,22 @@
 import * as express from 'express'
 import db from '~/db'
 import browse from './browse'
-import register from './register'
 import update from './update'
 import view from './view'
-import existRegister from './exist-register'
+import studentRegister from './student/register'
+import studentExistRegister from './student/exist-register'
+import teacherRegister from './teacher/register'
+import teacherExistRegister from './teacher/exist-register'
 
 const router1 = express.Router()
 
 router1.use('/browse', browse)
 
-router1.use('/register', register)
+router1.use('/register', studentRegister)
 
 router1.use('/view', view)
 
-router1.use('/exist-register', existRegister)
+router1.use('/exist-register', studentExistRegister)
 
 export const studentSenior = router1
 
@@ -25,9 +27,9 @@ router2.get('/', (req, res) => {
 })
 router2.use('/browse', browse)
 
-router2.use('/register', register)
+router2.use('/register', teacherRegister)
 
-router2.use('/exist-register', existRegister)
+router2.use('/exist-register', teacherExistRegister)
 
 router2.use('/update', update)
 

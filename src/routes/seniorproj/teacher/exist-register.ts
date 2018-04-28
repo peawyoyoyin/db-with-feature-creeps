@@ -1,40 +1,16 @@
 import * as express from 'express'
 import db from '~/db'
-import * as check from './checkexist'
-import * as passport from 'passport'
+import * as check from '../checkexist'
 
 const router = express.Router()
 
 router.get('/', async (req: any, res) => {
-  let years = await check.getYear()
-  years = years.map(i => i.year)
-  // console.log(years)
-  console.log(typeof req.user)
-  console.log(req.user)
-  let user = req.user
-  if(req.user.studentID) {
-    user = {
-      id: user.studentID,
-      status: 'student'
-    }
-  }
-  else if(req.user.teacherID) {
-    user = {
-      id: user.teacherID,
-      status : 'teacher'
-    }
-  }
   const {renderOptions} = req
-  res.render('seniorproj/register', {
+  res.render('seniorproj/teacher/exist-register', {
     title: 'Register Senior Project',
-    years,
     result: [],
     errors: [],
-    user,
     ...renderOptions
-  })
-  passport.deserializeUser(id => {
-    console.log(id)
   })
 })
 
@@ -121,14 +97,14 @@ router.post('/', async (req, res) => {
         [id, sid]
       )
     }
-    res.render('seniorproj/register', {
+    res.render('seniorproj/teacher/register', {
       title: 'Register Senior Project',
       years,
       result: [`Your project ID is ${id}`],
       errors: []
     })
   } catch (errors) {
-    res.render('seniorproj/register', {
+    res.render('seniorproj/teacher/exist-register', {
       title: 'Register Senior Project',
       years,
       result: [],
