@@ -56,3 +56,14 @@ export const updateStudentProject = async (projectID,sid) => {
     [projectID, sid]
   )
 }
+
+export const projectExists = async (projectID) => {
+  let find_project = await db._connection.manager.query(
+    `SELECT 
+    supervisorTeacherID FROM senior_project 
+    WHERE projectID=? LIMIT 1`,
+    [projectID]
+  )
+  if (find_project.length === 0) throw ['There is no project']
+  return true
+}
