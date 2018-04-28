@@ -147,11 +147,11 @@ const seed = async () => {
       year: 2561
     })
   ]
-  student[0].year = academicYear[3]
+  student[0].year = academicYear[2]
   student[1].year = academicYear[0]
-  student[2].year = academicYear[1]
-  student[3].year = academicYear[2]
-  student[4].year = academicYear[3]
+  student[2].year = academicYear[0]
+  student[3].year = academicYear[1]
+  student[4].year = academicYear[2]
 
 
   const semester = [
