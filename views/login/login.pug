@@ -1,9 +1,19 @@
 extends ../common/layout
 block content
-  .col.pt-4
+  .col
+    .container.text-center.mb-4
+      h1.lead(style="font-size: 2rem;") Reg Chula 
+        span.lead with senior projects
+      h1.lead(style="font-size: 1.5rem;") Authors
+      .align-items-center.lead
+        ol.text-left.d-inline-block
+          li Piriyapong Laopongsit
+          li Wattanai Thangsrijrojkul
+          li Sivakorn Chanpitayanukulkij
+          li Phootip Tulayavorases
+          li Thad Benjaponpitak
     .container
-      .jumbotron.text-center.bg-transparent
-        h2 Please login first
+      h6.text-center.mt-0 Log In
       form.col-6.container.py-3.d-block.border.rounded(action="/login" method="POST")
         .form-group
           .form-row
@@ -20,7 +30,7 @@ block content
         .form-group.mb-0
           .form-row
             .col.d-flex
-              button.btn.btn-primary.mx-auto(type="submit") Login
+              button.btn.btn-primary.mx-auto(type="submit") Log in
         if message.error
           .alert.alert-danger #{message.error}
 
@@ -28,4 +38,3 @@ block sidebar_items
   ul.sidebar-menu.nav.flex-column
     li.nav-item.sidebar-nav-item
       a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/newstudent") new student
-
