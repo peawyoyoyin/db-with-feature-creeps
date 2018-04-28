@@ -141,7 +141,7 @@ router.post('/', async (req: any, res) => {
   if (errors.length > 0) {
     res.render('course/enroll', { title: 'Enroll Course', errors })
   } else {
-    res.redirect('/')
+    res.redirect('/student')
   }
 })
 

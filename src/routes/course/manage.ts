@@ -67,8 +67,13 @@ async function handleRemove(body) {
   return []
 }
 
-function removePromise(courseID: string, studentID: string) {
-  return db.study.query(
+async function removePromise(courseID: string, studentID: string) {
+  const { id } = await db.courseInstance.query(`
+    SELECT id FROM course_instance CI
+    WHERE courseCourseID = ? 
+    AND semesterId = (SELECT id FROM semester ORDER BY semester.yearYear DESC, semester.semesterNumber DESC LIMIT 1)
+  `, [courseID])
+  return await db.study.query(
     `
     DELETE S FROM study S
     JOIN section ON S.sectionId = section.id
@@ -76,7 +81,7 @@ function removePromise(courseID: string, studentID: string) {
     JOIN course ON course_instance.courseCourseID = course.courseID
     WHERE courseID = ? AND S.studentStudentID = ?;
     `,
-    [courseID, studentID]
+    [id, studentID]
   )
 }
 
@@ -84,7 +89,7 @@ router.post('/', async (req, res) => {
   console.log(req.body)
   const e = await handleRemove(req.body)
   // if (e.length > 0) res.render('')
-  res.redirect('/')
+  res.redirect('/student')
 })
 
 export default router
