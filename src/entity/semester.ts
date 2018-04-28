@@ -42,16 +42,16 @@ export class Semester {
   @Column({ type: 'int' })
   semesterNumber: number
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'date' })
   startDate: Date
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'date' })
   endDate: Date
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'date' })
   lastSubjectRemovalDate: Date
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'date' })
   lastWithdrawalDate: Date
 
   @ManyToOne(type => AcademicYear, academicYear => academicYear.semesters, {
