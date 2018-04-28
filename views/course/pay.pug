@@ -23,10 +23,11 @@ block content
   if transactionID === null
     .container
       h5 Unpaid!
-      form(action="/course/pay" method="POST")
+      form(action="/student/course/pay" method="POST")
         .form-inline
           input.form-control.d-none(type="text" name="semesterID" value=payment.semester)
           input.form-control.d-none(type="text" name="studentID" value=payment.studentID)
+          input.form-control.d-none(type="text" name="amount" value=fee)
           button.btn.btn-primary(type="submit") pay
   else if transactionID
     .container
