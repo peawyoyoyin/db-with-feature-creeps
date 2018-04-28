@@ -1,6 +1,7 @@
 import * as express from 'express'
 import course from './course'
 import grade from './grade'
+import {studentSenior} from './seniorproj'
 
 const router = express.Router()
 
@@ -12,5 +13,7 @@ router.use('/', (req: any, res, next) => {
 router.use('/course', course)
 
 router.use('/grade', grade)
+
+router.use('/seniorproj', studentSenior)
 
 export default router

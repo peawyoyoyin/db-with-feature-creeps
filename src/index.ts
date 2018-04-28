@@ -15,7 +15,6 @@ import login from './routes/login'
 import logout from './routes/logout'
 import course from './routes/course'
 import grade from './routes/grade'
-import seniorProject from './routes/seniorproj'
 import newStudent from './routes/newstudent'
 import db from './db'
 import seed from './db/seed'
@@ -59,10 +58,7 @@ app.use(/^(?!\/login)(?!\/register).*$/, (req: any, res, next) => {
 
 app.use('/login', login)
 app.use('/student', student)
-// app.use('/course', course)
-app.use('/seniorproj', seniorProject)
 app.use('/newstudent', newStudent)
-// app.use('/grade', grade)
 app.use('/logout', logout)
 
 app.get('/', (req, res) => {

@@ -6,16 +6,26 @@ import update from './update'
 import view from './view'
 import existRegister from './exist-register'
 
-const router = express.Router()
+const router1 = express.Router()
 
-router.use('/browse', browse)
+router1.use('/browse', browse)
 
-router.use('/register', register)
+router1.use('/register', register)
 
-router.use('/update', update)
+router1.use('/view', view)
 
-router.use('/view', view)
+router1.use('/exist-register',existRegister)
 
-router.use('/exist-register',existRegister)
+export const studentSenior = router1
 
-export default router
+const router2 = express.Router()
+
+router2.use('/browse', browse)
+
+router2.use('/register', register)
+
+router2.use('/view', view)
+
+router2.use('/exist-register',existRegister)
+
+export const teacherSenior = router2
