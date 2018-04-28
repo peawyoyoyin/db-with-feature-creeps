@@ -79,7 +79,6 @@ export class Student {
   studentGroup: StudentGroup
 
   @ManyToOne(type => Teacher, teacher => teacher.studentsUnderSupervision, {
-    onDelete: 'SET NULL',
     nullable: false,
   })
   supervisor: Teacher

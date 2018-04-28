@@ -2,6 +2,7 @@
   background-color: #BCFBFF;
   height: 100%;
   background: linear-gradient(140deg, #b2e1ff 0%,#66b6fc 100%);
+  overflow-y: scroll;
 }
 
 .full-height {

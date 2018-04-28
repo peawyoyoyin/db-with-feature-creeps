@@ -1,32 +1,40 @@
-doctype html
-html
-  head
-    title= title
-    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
-    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css")
-    link(rel="shortcut icon" href="/static/favicon.ico")
-  body
-    .container-fluid.root
-      .col.pt-4
-        .container
-          .jumbotron.text-center.bg-transparent
-            h2 Please login first
-          form.col-4.container.py-3.d-block.border.rounded(action="/login" method="POST")
-            .form-group
-              .form-row
-                .col-2.offset-1
-                  label(for="id") ID 
-                .col-6.offset-2
-                  input.form-control(type="text" name="id")
-            .form-group
-              .form-row
-                .col-2.offset-1
-                  label(for="password") Password
-                .col-6.offset-2
-                  input.form-control(type="password" name="password")
-            .form-group.mb-0
-              .form-row
-                .col.d-flex
-                  button.btn.btn-primary.mx-auto(type="submit") Login
-            if message.error
-              .alert.alert-danger #{message.error}
+extends ../common/layout
+block content
+  .col
+    .container.text-center.mb-4
+      h1.lead(style="font-size: 2rem;") Reg Chula 
+        span.lead with senior projects
+      h1.lead(style="font-size: 1.5rem;") Authors
+      .align-items-center.lead
+        ol.text-left.d-inline-block
+          li Piriyapong Laopongsit
+          li Wattanai Thangsrijrojkul
+          li Sivakorn Chanpitayanukulkij
+          li Phootip Tulayavorases
+          li Thad Benjaponpitak
+    .container
+      h6.text-center.mt-0 Log In
+      form.col-6.container.py-3.d-block.border.rounded(action="/login" method="POST")
+        .form-group
+          .form-row
+            .col-2.offset-1
+              label(for="id") ID 
+            .col-6.offset-2
+              input.form-control(type="text" name="id")
+        .form-group
+          .form-row
+            .col-2.offset-1
+              label(for="password") Password
+            .col-6.offset-2
+              input.form-control(type="password" name="password")
+        .form-group.mb-0
+          .form-row
+            .col.d-flex
+              button.btn.btn-primary.mx-auto(type="submit") Log in
+        if message.error
+          .alert.alert-danger #{message.error}
+
+block sidebar_items
+  ul.sidebar-menu.nav.flex-column
+    li.nav-item.sidebar-nav-item
+      a.nav-link.sidebar-nav-link.pl-0.my-1.py-0(href="/newstudent") new student

@@ -10,7 +10,14 @@ html
   body
     .container-fluid.root
       .row.full-height
-        .col.p-0.pt-4.d-none.d-sm-block.sidebar
-          include sidebar.pug
+        .col.p-0.pt-4.pb-3.d-none.d-sm-block.sidebar
+          block sidebar
+            case sidebarVariation 
+              when 'teacher'
+                include sidebar.teacher.pug
+              when 'login'
+                include sidebar.login.pug
+              default
+                include sidebar.student.pug
         .col-9.pt-4(style="overflow-y: scroll;")
           block content
