@@ -1,4 +1,4 @@
-import { validateSync, } from 'class-validator'
+import { validateSync } from 'class-validator'
 export function validate(obj) {
   const errors = validateSync(obj)
   if (errors.length > 0) {

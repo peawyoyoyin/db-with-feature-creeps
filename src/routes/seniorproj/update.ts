@@ -12,7 +12,7 @@ router.get('/', async (req: any, res) => {
     title: 'Update Senior Project Status',
     types,
     errors: [],
-    ...renderOptions
+    ...renderOptions,
   })
 })
 
@@ -50,7 +50,7 @@ router.post(
         title: 'Update Senior Project Status',
         types,
         errors,
-        ...renderOptions
+        ...renderOptions,
       })
     }
   }
@@ -59,7 +59,7 @@ router.post(
 function formatTypes(types) {
   return types.map(type => ({
     text: type.description,
-    value: type.typeID
+    value: type.typeID,
   }))
 }
 
@@ -75,7 +75,7 @@ async function getTeacher(teacherID) {
     `
     SELECT * FROM teacher
     WHERE teacherID = ?
-  `,
+    `,
     [teacherID]
   )
   if (rawTeacher.length === 0) throw new Error('Cannot find teacher')
@@ -99,7 +99,7 @@ async function createEvaluation(projectID, teacherID, typeID, comment, grade) {
     `
     insert into evaluation(comment,grade,projectProjectID,evaluationTypeTypeID,evaluatorTeacherID)
     value(?, ?, ?, ?, ?)
-  `,
+    `,
     [comment, grade, projectID, typeID, teacherID]
   )
 }

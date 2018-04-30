@@ -109,7 +109,7 @@ router.get('/', (req: any, res) => {
   res.render('course/enroll', {
     title: 'Enroll Course',
     errors: [],
-    ...renderOptions
+    ...renderOptions,
   })
 })
 
@@ -139,7 +139,7 @@ router.post('/', async (req: any, res) => {
   const handleErrors = await handleEnrolls({
     ...req.body,
     ...req.user,
-    semesterId: currentSemesterID
+    semesterId: currentSemesterID,
   })
   console.log('handleErrors', handleErrors)
   errors.splice(0, 0, ...handleErrors)
@@ -148,7 +148,7 @@ router.post('/', async (req: any, res) => {
     res.render('course/enroll', {
       title: 'Enroll Course',
       errors,
-      ...renderOptions
+      ...renderOptions,
     })
   } else {
     res.redirect('/student')

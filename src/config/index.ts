@@ -8,7 +8,7 @@ export interface ExpressConfig {
 export interface ProjectConfig {
   express: ExpressConfig,
   orm: ConnectionOptions,
-  autoSeed: boolean
+  autoSeed: boolean,
 }
 
 const config: ProjectConfig = (() => {
@@ -16,7 +16,7 @@ const config: ProjectConfig = (() => {
     const config = require('./config')
     const defaults = require('./config.default')
     return extend(true, defaults, config)
-  } catch(error) {
+  } catch (error) {
     console.log('unable to find "src/config/config.ts", falling back to "src/config/config.default.ts"')
     return require('./config.default')
   }

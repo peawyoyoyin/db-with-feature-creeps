@@ -12,7 +12,7 @@ router.get('/', async (req: any, res) => {
   if (!sid) sid = ''
   const data = await db._connection.manager.query(
     `
-    SELECT seniorProj.projectID, seniorProj.topic, seniorProj.yearYear AS year, t.abbrName,s.studentID FROM senior_project seniorProj
+    SELECT seniorProj.projectID, seniorProj.topic, seniorProj.yearYear AS year, t.abbrName, s.studentID FROM senior_project seniorProj
     LEFT JOIN student s ON s.seniorProjectProjectID = seniorProj.projectID
     LEFT JOIN teacher t ON t.teacherID = seniorProj.supervisorTeacherID
     WHERE seniorProj.projectID LIKE ? AND
@@ -20,7 +20,7 @@ router.get('/', async (req: any, res) => {
     seniorProj.yearYear LIKE ? AND
     IFNULL(t.abbrName,1) LIKE ? AND
     IFNULL(s.studentID,1) LIKE ?
-  `,
+    `,
     [`${projectID}%`, `${topic}%`, `${year}%`, `${superVisorName}%`,`${sid}%`]
   )
   let years = await db._connection.manager.query(`
@@ -29,7 +29,7 @@ router.get('/', async (req: any, res) => {
   `)
   years = years.map(year => year.year)
   console.log(data)
-  const {renderOptions} = req
+  const { renderOptions } = req
   res.render('seniorproj/browse', {
     title: 'Browse Senior Projects',
     projectID: projectID,
@@ -39,7 +39,7 @@ router.get('/', async (req: any, res) => {
     superVisorName: superVisorName,
     sid,
     data: data,
-    ...renderOptions
+    ...renderOptions,
   })
 })
 

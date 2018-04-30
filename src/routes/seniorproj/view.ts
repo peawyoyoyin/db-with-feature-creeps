@@ -9,7 +9,7 @@ async function getProject(queryProjectID) {
     SELECT projectID, topic, yearYear as year, firstName, lastName FROM senior_project S
     JOIN teacher T ON S.supervisorTeacherID = T.teacherID
     WHERE projectID = ?
-  `,
+    `,
     [queryProjectID]
   )
   if (rawProject.length === 0) return null
@@ -18,7 +18,7 @@ async function getProject(queryProjectID) {
     projectID,
     topic,
     year,
-    supervisor: `${firstName} ${lastName}`
+    supervisor: `${firstName} ${lastName}`,
   }
 }
 
@@ -39,7 +39,7 @@ async function getEvaluations(projectID) {
       comment,
       grade,
       type,
-      teacherFullName: `${firstName} ${lastName}`
+      teacherFullName: `${firstName} ${lastName}`,
     }
   })
 }
@@ -48,32 +48,13 @@ router.get('/', async (req: any, res) => {
   const student = req.user
   const project = student ? await getProject(student.seniorProjectProjectID) : null
   console.log(student)
-  // const project = {
-  //   topic: 'Machine Learning & Blockchain Innovative Disruption',
-  //   supervisor: 'Attawit Sudsang',
-  //   year: '2561'
-  // }
   const evaluations = project ? await getEvaluations(project.projectID) : null
-  // const evaluations = [
-  //   {
-  //     comment: 'Good',
-  //     grade: 80,
-  //     teacherFullName: 'Attawit Sudsang',
-  //     type: 'Midterm Presentation'
-  //   },
-  //   {
-  //     comment: 'Ok',
-  //     grade: 70,
-  //     teacherFullName: 'Attawit Sudsang',
-  //     type: 'Final Presentation'
-  //   }
-  // ]
-  const {renderOptions} = req
+  const { renderOptions } = req
   res.render('seniorproj/view', {
     student,
     project,
     evaluations,
-    ...renderOptions
+    ...renderOptions,
   })
 })
 

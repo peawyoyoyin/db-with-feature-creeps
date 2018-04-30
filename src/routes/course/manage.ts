@@ -27,14 +27,14 @@ router.get('/', async (req: any, res) => {
   let studentData
   const student = req.user
   const { studentID } = student
-  let [withdrawable,removable] = [false,false]
+  let [withdrawable, removable] = [false, false]
   try {
     const lastWithdrawalDate = await getLastWithdrawalDateOfLatestSemester()
     const lastRemovalDate = await getLastRemovalDateOfLatestSemester()
     const now = new Date()
-    if(lastRemovalDate.getDate() < now.getDate()) removable = false
+    if (lastRemovalDate.getDate() < now.getDate()) removable = false
     else removable = true
-    if(lastWithdrawalDate.getDate() < now.getDate()) withdrawable = false
+    if (lastWithdrawalDate.getDate() < now.getDate()) withdrawable = false
     else withdrawable = true
 
     console.log(student)
@@ -44,15 +44,15 @@ router.get('/', async (req: any, res) => {
       info: {
         studentID,
         firstName,
-        lastName
+        lastName,
       },
-      subjects
+      subjects,
     }
   } catch (e) {
     studentData = {
       info: {
         studentID,
-        notFound: e.message
+        notFound: e.message,
       }
     }
   }
@@ -63,13 +63,13 @@ router.get('/', async (req: any, res) => {
     studentID,
     withdrawable,
     removable,
-    ...renderOptions
+    ...renderOptions,
   })
 })
 
 enum Mode {
   remove,
-  withdraw
+  withdraw,
 }
 async function handleRemoveWithdraw(body, mode: Mode) {
   let { studentID, remove } = body
@@ -91,7 +91,7 @@ async function getCurrentInstanceId(courseID) {
   const [{ id }] = await db.courseInstance.query(
     `
     SELECT id FROM course_instance CI
-    WHERE courseCourseID = ? 
+    WHERE courseCourseID = ?
     AND semesterId = (SELECT id FROM semester ORDER BY semester.yearYear DESC, semester.semesterNumber DESC LIMIT 1)
   `,
     [courseID]

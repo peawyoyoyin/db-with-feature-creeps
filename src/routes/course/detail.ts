@@ -7,7 +7,7 @@ const router = express.Router()
 async function getCourse(courseInstanceId) {
   const course = await db.course.query(
     `
-    SELECT courseID, name AS courseName, credit AS credits FROM course_instance 
+    SELECT courseID, name AS courseName, credit AS credits FROM course_instance
     JOIN course ON course_instance.courseCourseID = course.courseID
     WHERE course_instance.id = ?
   `,
@@ -38,14 +38,14 @@ router.get('/:id', async (req: any, res) => {
       time,
       firstName,
       lastName,
-      abbrName
+      abbrName,
     } = section
     const teacher = { firstName, lastName, abbrName }
     return {
       sectionNumber,
       capacity,
       time,
-      teacher
+      teacher,
     }
   })
   const course = { ...rawCourse, sections: rawSections }
@@ -54,7 +54,7 @@ router.get('/:id', async (req: any, res) => {
   res.render('course/detail', {
     title: course.courseName,
     course,
-    ...renderOptions
+    ...renderOptions,
   })
 })
 

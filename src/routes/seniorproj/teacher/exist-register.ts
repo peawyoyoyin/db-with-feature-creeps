@@ -12,7 +12,7 @@ router.get('/', async (req: any, res) => {
     result: [],
     errors: [],
     id,
-    ...renderOptions
+    ...renderOptions,
   })
 })
 
@@ -27,7 +27,7 @@ router.post('/', async (req: any, res) => {
 
     let validate = [
       await check.tidExists(tid),
-      await check.projectHaveTeacher(projectID)
+      await check.projectHaveTeacher(projectID),
     ]
 
     await Promise.all(validate)
@@ -38,7 +38,7 @@ router.post('/', async (req: any, res) => {
       result: [`Your project ID is ${projectID}`],
       errors: [],
       id: tid,
-      ...renderOptions
+      ...renderOptions,
     })
   } catch (errors) {
     res.render('seniorproj/teacher/exist-register', {
@@ -46,7 +46,7 @@ router.post('/', async (req: any, res) => {
       result: [],
       errors,
       id: tid,
-      ...renderOptions
+      ...renderOptions,
     })
   }
 })

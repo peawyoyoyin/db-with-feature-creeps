@@ -1,7 +1,7 @@
 import * as express from 'express'
 import course from './course'
 import grade from './grade'
-import {studentSenior} from './seniorproj'
+import { studentSenior } from './seniorproj'
 
 const router = express.Router()
 
@@ -10,15 +10,15 @@ router.use('/', (req: any, res, next) => {
     res.redirect('/teacher')
   }
   else {
-    req.renderOptions = {sidebarVariation: 'student'}
+    req.renderOptions = { sidebarVariation: 'student' }
     next()
   }
 })
 
 router.get('/', (req: any, res) => {
-  const {renderOptions} = req
+  const { renderOptions } = req
   res.render('index', {
-    ...renderOptions
+    ...renderOptions,
   })
 })
 

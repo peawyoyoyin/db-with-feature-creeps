@@ -16,7 +16,7 @@ router.get('/', async (req: any, res) => {
     result: [],
     errors: [],
     id,
-    ...renderOptions
+    ...renderOptions,
   })
 })
 
@@ -44,7 +44,7 @@ router.post('/', async (req: any, res) => {
       result: [`Your project ID is ${id}`],
       errors: [],
       id: tid,
-      ...renderOptions
+      ...renderOptions,
     })
   } catch (errors) {
     res.render('seniorproj/teacher/register', {
@@ -53,7 +53,7 @@ router.post('/', async (req: any, res) => {
       result: [],
       errors,
       id: tid,
-      ...renderOptions
+      ...renderOptions,
     })
   }
 })

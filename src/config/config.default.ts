@@ -12,7 +12,7 @@ export = {
     database: 'db',
     entities: ['build/entity/**/*.js'],
     synchronize: false,
-    logging: process.env.NODE_ENV !== 'production'
+    logging: process.env.NODE_ENV !== 'production',
   },
   // autoSeed: true
 }

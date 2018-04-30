@@ -9,7 +9,7 @@ router.use('/', (req: any, res, next) => {
   if (!req.user.teacherID) {
     res.redirect('/student')
   } else {
-    req.renderOptions = {sidebarVariation: 'teacher'}
+    req.renderOptions = { sidebarVariation: 'teacher' }
     next()
   }
 })
@@ -18,7 +18,7 @@ router.get('/', (req: any, res) => {
   const { renderOptions } = req
   // console.log('variation', sidebarVariation)
   res.render('index', {
-    ...renderOptions
+    ...renderOptions,
   })
 })
 

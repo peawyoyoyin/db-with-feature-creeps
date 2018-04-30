@@ -71,7 +71,7 @@ router.get('/', async (req: any, res) => {
     const text = `${yearNumber}/${semesterNumber}`
     return {
       value: semesterId,
-      text
+      text,
     }
   })
   // console.log('hello', semesters)
@@ -94,13 +94,13 @@ router.get('/', async (req: any, res) => {
         id: instanceID,
         abbreviate: courseName,
         courseID,
-        credit: credits
+        credit: credits,
       } = row
       return {
         courseID,
         courseName,
         credits,
-        instanceID
+        instanceID,
       }
     })
   }
@@ -113,7 +113,7 @@ router.get('/', async (req: any, res) => {
     searchResults,
     semesters,
     selectedSemester: semester,
-    ...renderOptions
+    ...renderOptions,
   })
 })
 

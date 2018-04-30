@@ -10,7 +10,7 @@ const getAllSemesters = async () => {
   return result.map(row => ({
     id: row.id,
     number: row.semesterNumber,
-    name: `${row.semesterNumber}/${row.yearYear}`
+    name: `${row.semesterNumber}/${row.yearYear}`,
   }))
 }
 
@@ -19,7 +19,7 @@ const getStudentFee = async (studentID, semesterID) => {
     `
     SELECT semesterNumber FROM semester
     WHERE semester.id = ?
-  `,
+    `,
     [semesterID]
   )
   const semesterNumber = semesterQueryResult[0].semesterNumber
@@ -30,7 +30,7 @@ const getStudentFee = async (studentID, semesterID) => {
     JOIN group_year_relation
     ON student.studentGroupGroupID = group_year_relation.studentGroupGroupID AND student.yearYear = group_year_relation.yearYear
     WHERE student.studentID = ?
-  `,
+    `,
     [studentID]
   )
   if (result.length === 0) {
@@ -47,7 +47,7 @@ const getPaymentTransactionID = async (studentID, semesterID) => {
     `
     SELECT enrollment_fee_payment.transactionID FROM enrollment_fee_payment
     WHERE enrollment_fee_payment.payerStudentID = ? AND enrollment_fee_payment.semesterId = ?
-  `,
+    `,
     [studentID, semesterID]
   )
   if (result.length === 0) {
@@ -70,7 +70,7 @@ router.get('/', async (req: any, res) => {
     }
     payment = {
       semester,
-      studentID
+      studentID,
     }
     transactionID = await getPaymentTransactionID(studentID, semester)
   }
@@ -82,7 +82,7 @@ router.get('/', async (req: any, res) => {
     err,
     transactionID,
     payment,
-    ...renderOptions
+    ...renderOptions,
   })
 })
 
@@ -93,7 +93,7 @@ const pay = async (studentID, semesterID, amount = 100) => {
     (amount, payerStudentID, semesterId)
     VALUES
     (?, ?, ?)
-  `,
+    `,
     [amount, studentID, semesterID]
   )
 }

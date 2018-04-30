@@ -38,7 +38,7 @@ app.use(
   session({
     secret: 'verysecret',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
   })
 )
 app.use(passport.initialize())

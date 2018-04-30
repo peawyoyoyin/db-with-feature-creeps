@@ -1,7 +1,7 @@
 import * as express from 'express'
 import db from '~/db'
 import { Student } from '~/entity/student'
-import { AcademicYear } from '~/entity/academic-year';
+import { AcademicYear } from '~/entity/academic-year'
 
 const router = express.Router()
 
@@ -28,13 +28,13 @@ router.get('/', async (req, res) => {
     departments,
     errors: [],
     years,
-    sidebarVariation: 'login'
+    sidebarVariation: 'login',
   })
 })
 
 router.post('/', async (req: any, res) => {
-  const departments = await getAllDepartments()  
-  const years = await getAllYears()  
+  const departments = await getAllDepartments()
+  const years = await getAllYears()
   const {
     studentID,
     password,
@@ -43,7 +43,7 @@ router.post('/', async (req: any, res) => {
     citizenID,
     countryCode: nationality,
     year,
-    department
+    department,
   } = req.body
   try {
     const newStudent = new Student({
@@ -53,7 +53,7 @@ router.post('/', async (req: any, res) => {
       lastName,
       citizenID,
       nationality,
-      department
+      department,
     })
     newStudent.year = new AcademicYear({
       year: parseInt(year)
@@ -66,7 +66,7 @@ router.post('/', async (req: any, res) => {
       departments,
       errors: e,
       years,
-      sidebarVariation: 'login'
+      sidebarVariation: 'login',
     })
   }
 })
