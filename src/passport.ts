@@ -7,7 +7,7 @@ async function getUserById(id) {
     `
     SELECT * FROM student
     WHERE studentID = ?
-  `,
+    `,
     [id]
   )
   if (rawStudent.length === 1) return rawStudent[0]
@@ -27,7 +27,7 @@ export function initPassport() {
     new Strategy(
       {
         usernameField: 'id',
-        passwordField: 'password'
+        passwordField: 'password',
       },
       (id, password, done) => {
         getUserById(id)

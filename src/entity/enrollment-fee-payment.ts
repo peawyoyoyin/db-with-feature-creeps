@@ -4,7 +4,7 @@ import {
   Column,
   ManyToOne,
   OneToOne,
-  Index
+  Index,
 } from 'typeorm'
 import { Student } from './student'
 import { Semester } from './semester'
@@ -39,7 +39,7 @@ export class EnrollmentFeePayment {
   payer: Student
 
   @ManyToOne(type => Semester, semester => semester.payments, {
-    nullable: false
+    nullable: false,
   })
   semester: Semester
 }
