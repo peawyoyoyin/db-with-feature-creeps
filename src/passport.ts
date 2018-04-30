@@ -2,26 +2,6 @@ import * as passport from 'passport'
 import { Strategy } from 'passport-local'
 import db from '~/db'
 
-async function getUser(id, password) {
-  const rawStudent = await db.student.query(
-    `
-    SELECT * FROM student
-    WHERE studentID = ? AND password = ?
-  `,
-    [id, password]
-  )
-  if (rawStudent.length === 1) return rawStudent[0]
-  const rawTeacher = await db.teacher.query(
-    `
-    SELECT * FROM teacher
-    WHERE teacherID = ? AND password = ?
-    `,
-    [id, password]
-  )
-  if (rawTeacher.length === 1) return rawTeacher[0]
-  throw new Error('Incorrect ID or password')
-}
-
 async function getUserById(id) {
   const rawStudent = await db.student.query(
     `
@@ -39,7 +19,7 @@ async function getUserById(id) {
     [id]
   )
   if (rawTeacher.length === 1) return rawTeacher[0]
-  throw new Error('Cannot find user')
+  throw new Error('Incorrect ID')
 }
 
 export function initPassport() {
@@ -50,8 +30,13 @@ export function initPassport() {
         passwordField: 'password'
       },
       (id, password, done) => {
-        getUser(id, password)
-          .then(user => done(null, user))
+        getUserById(id)
+          .then(
+            user =>
+              user.password === password
+                ? done(null, user)
+                : done(null, false, { message: 'Incorrect Password' })
+          )
           .catch(err => done(null, false, { message: err.message }))
       }
     )
